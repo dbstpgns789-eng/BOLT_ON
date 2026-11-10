@@ -23,7 +23,7 @@ const plainTone = variant === 'alt' ? 'grey' : 'navy';
     <ul class="cards">
       {services.map((s, i) => (
         <li class={`card card--${tone(i)}`}>
-          <a class="card-link" href="#services">
+          <a class="card-link" href={`/services/${s.slug}/`}>
             <span class="card-text">
               <span class="card-title">{s.name}</span>
               <span class="card-line">{s.tasks.slice(0, 2).join(', ')}</span>

@@ -422,3 +422,8 @@ p { word-break: keep-all; }
 
 /* after the footer-info rules above, so it wins */
 @media (max-width: 75rem) { .footer-info { grid-template-columns: minmax(0, 1fr); } }
+
+/* three sub-tasks sit in one row instead of 2 + 1 */
+.tasks-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tasks-grid--3 li { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+@media (max-width: 60rem) { .tasks-grid--3 { grid-template-columns: minmax(0, 1fr); } .tasks-grid--3 li { grid-template-columns: 64px minmax(0, 1fr); } }

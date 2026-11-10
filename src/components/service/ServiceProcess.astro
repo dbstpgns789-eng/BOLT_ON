@@ -6,12 +6,13 @@ import { ownerLabel, type ServicePage } from '../../data/service-pages';
 
 interface Props { page: ServicePage; variant?: 'arrows' | 'owners' | 'photos'; photos?: (ImageMetadata | undefined)[] }
 const { page, variant = 'owners', photos = [] } = Astro.props;
+const mine = page.process.filter((s) => s.owner === 'customer').map((s) => s.name);
 ---
 <section class={`section svc-process svc-process--${variant}`} aria-labelledby="process-title">
   <div class="container">
     <div class="head">
       <h2 id="process-title">진행 순서</h2>
-      {variant === 'owners' && <p>단계마다 누가 하는지 적었습니다. 고객님이 직접 하실 일은 한 가지뿐입니다.</p>}
+      {variant === 'owners' && <p>단계마다 누가 하는지 적었습니다.{mine.length > 0 && ` 고객님이 직접 하실 일은 ${mine.join(', ')}입니다.`}</p>}
     </div>
     {variant === 'arrows' && (
       <ol class="chevrons chevrons--6">

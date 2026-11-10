@@ -9,7 +9,7 @@ const { slug } = Astro.props;
     <div class="head"><h2 id="others-title">다른 사업분야</h2></div>
     <ul class="others">
       {services.filter((s) => s.slug !== slug).map((s) => (
-        <li><a href={`#${s.slug}`}><span class="others-name">{s.name}</span><span class="others-line">{s.tasks.slice(0, 2).join(', ')}</span></a></li>
+        <li><a href={`/services/${s.slug}/`}><span class="others-name">{s.name}</span><span class="others-line">{s.tasks.slice(0, 2).join(', ')}</span></a></li>
       ))}
     </ul>
   </div>

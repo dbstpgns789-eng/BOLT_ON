@@ -19,7 +19,7 @@ const current = services.find((s) => s.slug === slug)!;
   <div class="container">
     <ul>
       {services.map((s) => (
-        <li><a href={`#${s.slug}`} aria-current={s.slug === slug ? 'page' : undefined}>{s.name.replace(/ (공사|전기공사)$/, '')}</a></li>
+        <li><a href={`/services/${s.slug}/`} aria-current={s.slug === slug ? 'page' : undefined}>{s.name.replace(/ (공사|전기공사)$/, '')}</a></li>
       ))}
     </ul>
   </div>
