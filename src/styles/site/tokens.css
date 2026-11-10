@@ -17,4 +17,5 @@
   --tracking-display: -0.02em;
   --color-brand-navy: oklch(22% 0.038 256); --color-brand-amber: oklch(81.5% 0.167 85); --color-brand-slate: oklch(40.5% 0.040 257); --color-brand-on-dark: oklch(97% 0.005 250);
   --font-logo: "Archivo", "Pretendard Variable", ui-sans-serif, sans-serif;
+  --color-footer-slate: oklch(28% 0.018 255); --color-footer-grey: oklch(31% 0.004 260); --color-on-dark-2: oklch(80% 0.01 255);
 }
