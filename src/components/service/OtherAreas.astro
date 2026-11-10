@@ -1,0 +1,16 @@
+---
+// The other four areas (edison "다른 서비스도 확인해보세요").
+import { services, type ServiceSlug } from '../../data/services';
+interface Props { slug: ServiceSlug }
+const { slug } = Astro.props;
+---
+<section class="section svc-others" aria-labelledby="others-title">
+  <div class="container">
+    <div class="head"><h2 id="others-title">다른 사업분야</h2></div>
+    <ul class="others">
+      {services.filter((s) => s.slug !== slug).map((s) => (
+        <li><a href={`#${s.slug}`}><span class="others-name">{s.name}</span><span class="others-line">{s.tasks.slice(0, 2).join(', ')}</span></a></li>
+      ))}
+    </ul>
+  </div>
+</section>

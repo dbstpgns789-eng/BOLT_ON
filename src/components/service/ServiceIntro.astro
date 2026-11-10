@@ -1,0 +1,20 @@
+---
+// Area introduction + one term box ("계약전력이란?", wooilenc footnote / sinrok "~이란?").
+import type { ServicePage } from '../../data/service-pages';
+interface Props { page: ServicePage; heading?: string }
+const { page, heading } = Astro.props;
+---
+<section class="section svc-intro" aria-label="분야 소개">
+  <div class="container svc-intro-row">
+    <div>
+      {heading && <h2>{heading}</h2>}
+      <p class="svc-lead">{page.lead}</p>
+    </div>
+    {page.term && (
+      <aside class="term" aria-label={`${page.term.word}이란?`}>
+        <p class="term-word">{page.term.word}이란?</p>
+        <p>{page.term.meaning}</p>
+      </aside>
+    )}
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+// Sub-tasks with line icons in navy circles (wooilenc 한전계약전력 page: 증설·승압·신설·모자분리·구좌분할·임시전력).
+import type { ServicePage } from '../../data/service-pages';
+interface Props { page: ServicePage }
+const { page } = Astro.props;
+const paths: Record<string, string> = {
+  up: 'M12 19V5m0 0-6 6m6-6 6 6',
+  phase: 'M4 7h16M4 12h16M4 17h16',
+  plus: 'M12 5v14M5 12h14',
+  split: 'M12 4v6m0 0-6 6v4m6-10 6 6v4',
+  divide: 'M5 5h14v14H5zM12 5v14M5 12h14',
+  clock: 'M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+};
+---
+{page.tasks && (
+  <section class="section svc-tasks" aria-labelledby="tasks-title">
+    <div class="container">
+      <div class="head"><h2 id="tasks-title">세부 업무</h2></div>
+      <ul class="tasks-grid">
+        {page.tasks.map((t) => (
+          <li>
+            <span class="task-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d={paths[t.icon]} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+            <div><h3>{t.name}</h3><p>{t.line}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

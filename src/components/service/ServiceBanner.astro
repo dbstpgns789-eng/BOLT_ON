@@ -1,0 +1,26 @@
+---
+// Page banner with the five area tabs (wooilenc and sinrok sub-page pattern).
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { services, type ServiceSlug } from '../../data/services';
+
+interface Props { slug: ServiceSlug; photo: ImageMetadata }
+const { slug, photo } = Astro.props;
+const current = services.find((s) => s.slug === slug)!;
+---
+<section class="svc-banner" aria-labelledby="svc-title">
+  <Image class="svc-banner-img" src={photo} alt="" widths={[800, 1440, 2000]} sizes="100vw" loading="eager" />
+  <div class="container svc-banner-text">
+    <p class="svc-crumb"><a href="/">홈</a> <span aria-hidden="true">/</span> <a href="/#services">사업분야</a></p>
+    <h1 id="svc-title">{current.name}</h1>
+  </div>
+</section>
+<nav class="svc-tabs" aria-label="사업분야">
+  <div class="container">
+    <ul>
+      {services.map((s) => (
+        <li><a href={`#${s.slug}`} aria-current={s.slug === slug ? 'page' : undefined}>{s.name.replace(/ (공사|전기공사)$/, '')}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>

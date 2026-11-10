@@ -1,0 +1,18 @@
+---
+// "이런 경우 필요합니다" beside "작업 범위" (edison checklist + included items, gesung item lists).
+import type { ServicePage } from '../../data/service-pages';
+interface Props { page: ServicePage }
+const { page } = Astro.props;
+---
+<section class="section section--tint svc-needs" aria-label="필요한 경우와 작업 범위">
+  <div class="container svc-two">
+    <div>
+      <h2>이런 경우 필요합니다</h2>
+      <ul class="needs">{page.needs.map((n) => <li>{n}</li>)}</ul>
+    </div>
+    <div>
+      <h2>저희가 하는 일</h2>
+      <ul class="scope">{page.scope.map((s) => <li>{s}</li>)}</ul>
+    </div>
+  </div>
+</section>

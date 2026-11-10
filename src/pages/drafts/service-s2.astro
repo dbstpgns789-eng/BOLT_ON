@@ -1,0 +1,35 @@
+---
+// 사업분야 시안 S2 에디슨형: needs/scope, steps with owners, FAQ, other areas (research/industry/SERVICE-PAGE.md). Area: 전기 증설·승압.
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import ServiceBanner from '../../components/service/ServiceBanner.astro';
+import ServiceIntro from '../../components/service/ServiceIntro.astro';
+import ServiceTasks from '../../components/service/ServiceTasks.astro';
+import NeedsScope from '../../components/service/NeedsScope.astro';
+import ServiceProcess from '../../components/service/ServiceProcess.astro';
+import ServiceCases from '../../components/service/ServiceCases.astro';
+import ServiceFaq from '../../components/service/ServiceFaq.astro';
+import CallBand from '../../components/service/CallBand.astro';
+import OtherAreas from '../../components/service/OtherAreas.astro';
+import { servicePages } from '../../data/service-pages';
+import banner from '../../assets/stock/distribution-panel.jpg';
+import before from '../../assets/cases/dongdaemun-kindergarten/01-before.jpg';
+import after from '../../assets/cases/dongdaemun-kindergarten/03-after.jpg';
+
+const page = servicePages.capacity!;
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <ServiceBanner slug="capacity" photo={banner} />
+    <ServiceIntro page={page} />
+    <NeedsScope page={page} />
+    <ServiceProcess page={page} variant="owners" />
+    <ServiceCases slug="capacity" variant="cards" />
+    <ServiceFaq page={page} />
+    <CallBand />
+    <OtherAreas slug="capacity" />
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>

@@ -1,0 +1,45 @@
+---
+// variant: arrows (wooilenc chevrons) | owners (edison: each step says who does it) | photos (sinrok: a real photo per step where one exists)
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { ownerLabel, type ServicePage } from '../../data/service-pages';
+
+interface Props { page: ServicePage; variant?: 'arrows' | 'owners' | 'photos'; photos?: (ImageMetadata | undefined)[] }
+const { page, variant = 'owners', photos = [] } = Astro.props;
+---
+<section class={`section svc-process svc-process--${variant}`} aria-labelledby="process-title">
+  <div class="container">
+    <div class="head">
+      <h2 id="process-title">진행 순서</h2>
+      {variant === 'owners' && <p>단계마다 누가 하는지 적었습니다. 고객님이 직접 하실 일은 한 가지뿐입니다.</p>}
+    </div>
+    {variant === 'arrows' && (
+      <ol class="chevrons chevrons--6">
+        {page.process.map((s, i) => <li><span class="c-num">{i + 1}</span><h3>{s.name}</h3><p>{s.line}</p></li>)}
+      </ol>
+    )}
+    {variant === 'owners' && (
+      <ol class="owner-steps">
+        {page.process.map((s, i) => (
+          <li class={`owner-step owner-step--${s.owner}`}>
+            <span class="os-num">{String(i + 1).padStart(2, '0')}</span>
+            <div class="os-body"><h3>{s.name}</h3><p>{s.line}</p></div>
+            <span class="os-owner">{ownerLabel[s.owner]}</span>
+          </li>
+        ))}
+      </ol>
+    )}
+    {variant === 'photos' && (
+      <ol class="photo-steps photo-steps--6">
+        {page.process.map((s, i) => (
+          <li>
+            {photos[i] ? <Image src={photos[i]!} alt="" widths={[320, 480]} sizes="(max-width: 60rem) 50vw, 220px" /> : <span class="ps-blank" aria-hidden="true">{i + 1}</span>}
+            <span class="c-num">{i + 1}</span>
+            <h3>{s.name}</h3>
+            <p>{s.line}</p>
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</section>
