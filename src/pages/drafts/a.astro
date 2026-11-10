@@ -1,0 +1,185 @@
+---
+// 시안 A · Studio(도면형). Hallmark theme Studio, brand-tinted (navy ink, amber signal).
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import '../../styles/a/page.css';
+import Logo from '../../components/Logo.astro';
+import CallBar from '../../components/CallBar.astro';
+import { company, telHref } from '../../config/company';
+import { services, steps, hero } from '../../data/services';
+import { ym, stageKo } from '../../lib/format';
+
+const cases = (await getCollection('cases')).sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
+const featured = cases.slice(0, 2);
+const proof = cases.find((c) => c.id === 'dongdaemun-kindergarten')!;
+const before = proof.data.photos.find((p) => p.stage === 'before')!;
+const after = proof.data.photos.find((p) => p.stage === 'after')!;
+const serviceName = Object.fromEntries(services.map((s) => [s.slug, s.name]));
+const info = [
+  ['상호', `${company.nameKo} (${company.nameEn})`],
+  ['법인명', company.legalName],
+  ['대표', company.ceo],
+  ['사업자등록번호', company.bizNumber],
+  ['전기공사업 등록번호', company.licenseNumber],
+  ['주소', company.address],
+  ['상담 시간', company.hours],
+].filter(([, v]) => v);
+---
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{company.nameKo} | 전기 증설·고압 수변전설비 전기공사</title>
+  <meta name="description" content={hero.sentence} />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Geist:wght@400;500&family=Archivo:wght@500;800&family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+</head>
+<body>
+  <header class="nav proof">
+    <div class="container nav-row">
+      <a class="nav-brand" href="#top" aria-label={`${company.nameKo} 처음으로`}><Logo variant="horizontal" class="nav-logo" /></a>
+      <nav class="nav-links" aria-label="주요 메뉴">
+        <a href="#services">사업분야</a>
+        <a href="#cases">시공사례</a>
+        <a href="#kepco">한전 신청 안내</a>
+        <a href="#company">회사소개</a>
+      </nav>
+      <a class="btn nav-call" href={telHref}>{company.phone}</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero proof" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1 id="hero-title">{hero.headline}</h1>
+          <p class="lead">{hero.sentence}</p>
+          <div class="actions">
+            <a class="btn btn--primary" href={telHref}>전화 상담</a>
+            <a class="btn" href="#cases">시공사례 보기</a>
+          </div>
+        </div>
+        <figure class="sheet crop">
+          <div class="sheet-pair">
+            <div class="sheet-shot">
+              <Image src={before.src} alt="증설 전 낡은 분전반" widths={[360, 560]} sizes="(max-width: 60rem) 45vw, 280px" loading="eager" />
+              <span class="readout">공사 전</span>
+            </div>
+            <div class="redline" aria-hidden="true"><span></span></div>
+            <div class="sheet-shot">
+              <Image src={after.src} alt="증설 후 새로 교체한 분전반" widths={[360, 560]} sizes="(max-width: 60rem) 45vw, 280px" loading="eager" />
+              <span class="readout">공사 후</span>
+            </div>
+          </div>
+          <figcaption>{proof.data.site} 분전반, {ym(proof.data.completed)} 증설. 공사 기간 {proof.data.duration}.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="container split">
+        <div class="split-head">
+          <h2 id="services-title">하는 일</h2>
+          <p>고압 설비부터 건물 안 배선까지, 다섯 가지 공사를 직접 맡습니다.</p>
+        </div>
+        <ol class="set services">
+          {services.map((s, i) => (
+            <li>
+              <span class="num figure">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{s.name}</h3>
+                <p>{s.short}</p>
+              </div>
+              <ul class="tasks">{s.tasks.map((t) => <li>{t}</li>)}</ul>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--paper2" aria-labelledby="steps-title">
+      <div class="container">
+        <h2 id="steps-title">상담부터 준공까지, 한 번에</h2>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li>
+              <span class="guide" aria-hidden="true"></span>
+              <span class="figure step-num">{i + 1}</span>
+              <h3>{s.name}</h3>
+              <p>{s.line}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="cases" aria-labelledby="cases-title">
+      <div class="container">
+        <div class="split-head split-head--row">
+          <h2 id="cases-title">시공사례</h2>
+          <a class="text-link" href="#cases">전체 시공사례 보기</a>
+        </div>
+        <div class="cases">
+          {featured.map((c) => {
+            const cover = c.data.photos.find((p) => p.stage === 'after') ?? c.data.photos[0];
+            return (
+              <article class="case">
+                <figure class="crop case-photo">
+                  <Image src={cover.src} alt={cover.caption} widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 640px" />
+                </figure>
+                <h3>{c.data.title}</h3>
+                <dl class="meta">
+                  <div><dt>분야</dt><dd>{serviceName[c.data.service]}</dd></div>
+                  <div><dt>지역</dt><dd>{c.data.region}</dd></div>
+                  <div><dt>완공</dt><dd>{ym(c.data.completed)}</dd></div>
+                  {c.data.duration && <div><dt>기간</dt><dd>{c.data.duration}</dd></div>}
+                </dl>
+                <p class="stages">{c.data.photos.length}장의 현장 사진: {[...new Set(c.data.photos.map((p) => stageKo[p.stage]))].join(', ')}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="kepco" aria-labelledby="kepco-title">
+      <div class="container band-row">
+        <h2 id="kepco-title">한전 신청, 어디서부터 해야 할지 모르겠다면</h2>
+        <div>
+          <p>증설, 승압, 임시전력, 모자분리까지 신청 절차와 준비 서류를 정리했습니다. 서류는 저희가 함께 준비합니다.</p>
+          <a class="btn btn--on-ink" href="#kepco">한전 신청 안내 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="company" aria-labelledby="company-title">
+      <div class="container split">
+        <div class="split-head">
+          <h2 id="company-title">회사 정보</h2>
+          <p>궁금한 점은 전화 한 통이면 됩니다. 현장 상황을 듣고 방문 일정을 잡아 드립니다.</p>
+          <div class="actions">
+            <a class="btn btn--primary" href={telHref}>{company.phone}</a>
+            <a class="btn" href={`mailto:${company.email}`}>이메일 보내기</a>
+          </div>
+        </div>
+        <dl class="set info">
+          {info.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer proof">
+    <div class="container footer-row">
+      <Logo variant="horizontal" class="footer-logo" />
+      <p>{company.nameKo}. 대표 {company.ceo}. {company.address}. 전화 {company.phone}, 이메일 {company.email}.{company.bizNumber && ` 사업자등록번호 ${company.bizNumber}.`}{company.licenseNumber && ` 전기공사업 ${company.licenseNumber}.`}</p>
+      <p class="muted">© 2026 {company.nameEn}</p>
+    </div>
+  </footer>
+  <CallBar />
+</body>
+</html>

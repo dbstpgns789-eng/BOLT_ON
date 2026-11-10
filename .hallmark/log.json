@@ -1,0 +1,62 @@
+[
+ {
+  "shape": "brief order",
+  "theme": "formwork",
+  "axes": "mid/display-condensed/warm",
+  "hero": "Index",
+  "nav": "banner",
+  "footer": "colophon block",
+  "imagery": "photographs bw",
+  "photos": [
+   "client"
+  ],
+  "entry": "none",
+  "sections": [
+   "hero",
+   "services",
+   "pour steps",
+   "cases",
+   "ink band",
+   "company"
+  ],
+  "signature": "site board plate",
+  "waived": [
+   "44c",
+   "79",
+   "46a-steps"
+  ],
+  "prompt": "volton draft B",
+  "date": "2026-11-10",
+  "mode": "build"
+ },
+ {
+  "shape": "brief order",
+  "theme": "studio",
+  "axes": "light/roman-serif/warm",
+  "hero": "Stage",
+  "nav": "edge-aligned",
+  "footer": "colophon block",
+  "imagery": "photographs",
+  "photos": [
+   "client"
+  ],
+  "entry": "none",
+  "sections": [
+   "hero",
+   "services index",
+   "steps",
+   "cases",
+   "kepco band",
+   "company"
+  ],
+  "signature": "before/after panel proof sheet",
+  "waived": [
+   "44c",
+   "79",
+   "46a-steps"
+  ],
+  "prompt": "volton draft A",
+  "date": "2026-11-10",
+  "mode": "build"
+ }
+]
