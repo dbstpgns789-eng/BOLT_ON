@@ -14,7 +14,7 @@ export const company = {
   email: 'wkdjj2003@naver.com',
   hours: '평일 09:00–18:00',
   kakaoChannelUrl: '', // after the 법인 channel is opened
-  domain: 'volton.co.kr',
+  domain: 'voltonenc.com',
 };
 
 export const telHref = `tel:${company.phone.replace(/-/g, '')}`;

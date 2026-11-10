@@ -1,6 +1,6 @@
 ---
 import Logo from '../Logo.astro';
-import { company, telHref } from '../../config/company';
+import { company } from '../../config/company';
 import { menu } from '../../data/menu';
 ---
 <header class="nav">
@@ -17,7 +17,6 @@ import { menu } from '../../data/menu';
       </ul>
       <div class="gnb-panel" aria-hidden="true"></div>
     </nav>
-    <a class="nav-call" href={telHref}><span class="nav-call-label">전화 상담</span> {company.phone}</a>
     <details class="mnav">
       <summary aria-label="메뉴 열기">메뉴</summary>
       <div class="mnav-body">
