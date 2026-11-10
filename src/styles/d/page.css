@@ -8,17 +8,19 @@
 
 /* dropdown nav: hover or keyboard focus opens every section's sub-links at once (wooilenc and sinrok pattern) */
 .gnb { position: static; margin-left: auto; }
-.gnb-list { display: flex; gap: var(--space-xl); margin: 0; padding: 0; list-style: none; }
-.gnb-item { position: relative; }
-.gnb-link { display: block; padding-block: var(--space-lg); font-weight: 600; color: var(--color-ink); text-decoration: none; border-bottom: 2px solid transparent; }
+.gnb-list { display: flex; gap: 0; margin: 0; padding: 0; list-style: none; }
+.gnb-item { position: relative; width: 11rem; }
+.gnb-item + .gnb-item { border-left: var(--rule-hair) solid transparent; }
+.gnb:hover .gnb-item + .gnb-item, .gnb:focus-within .gnb-item + .gnb-item { border-left-color: var(--color-rule); }
+.gnb-link { display: block; padding: var(--space-lg) var(--space-md); font-weight: 600; color: var(--color-ink); text-decoration: none; border-bottom: 2px solid transparent; }
 .gnb-item:hover .gnb-link, .gnb-link:focus-visible { border-bottom-color: var(--color-accent); }
-.gnb-sub { position: absolute; left: 0; top: 100%; z-index: 2; min-width: 11rem; margin: 0; padding: var(--space-md) 0 0; list-style: none; display: grid; gap: var(--space-xs); opacity: 0; visibility: hidden; transition: opacity var(--dur-short) var(--ease-out), visibility var(--dur-short); }
-.gnb-sub a { color: var(--color-ink-2); text-decoration: none; font-size: var(--text-sm); }
+.gnb-sub { position: absolute; left: 0; right: 0; top: 100%; z-index: 2; margin: 0; padding: var(--space-md) var(--space-md) 0; list-style: none; display: grid; gap: var(--space-xs); opacity: 0; visibility: hidden; transition: opacity var(--dur-short) var(--ease-out), visibility var(--dur-short); }
+.gnb-sub a { display: block; color: var(--color-ink-2); text-decoration: none; font-size: var(--text-sm); line-height: 1.4; word-break: keep-all; }
 .gnb-sub a:hover { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-accent); }
 .gnb-sub a:focus-visible, .gnb-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; transition: none; }
 .gnb-panel { position: absolute; left: 0; right: 0; top: 100%; height: 0; background: var(--color-paper); border-bottom: var(--rule-hair) solid var(--color-rule); opacity: 0; transition: opacity var(--dur-short) var(--ease-out); pointer-events: none; }
 .gnb:hover .gnb-sub, .gnb:focus-within .gnb-sub { opacity: 1; visibility: visible; }
-.gnb:hover .gnb-panel, .gnb:focus-within .gnb-panel { height: 13rem; opacity: 1; }
+.gnb:hover .gnb-panel, .gnb:focus-within .gnb-panel { height: 12.5rem; opacity: 1; }
 .nav { position: sticky; }
 .nav-row { position: static; }
 .mnav { display: none; }
