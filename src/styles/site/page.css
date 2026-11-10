@@ -383,5 +383,42 @@ p { word-break: keep-all; }
   .os-owner { grid-column: 2; justify-self: start; }
 }
 
+/* ---- S4: intro with photo, callback form ---- */
+.svc-intro--photo .svc-intro-row { align-items: center; }
+.svc-intro-side { position: relative; }
+.svc-intro--photo .svc-intro-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.svc-intro--photo .term { position: relative; margin: calc(-1 * var(--space-2xl)) 0 0 var(--space-xl); background: var(--color-paper); box-shadow: 0 var(--space-xs) var(--space-lg) color-mix(in oklab, var(--color-ink) 12%, transparent); }
+
+.consult-row { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-2xl); align-items: start; }
+.consult-head h2 { font-size: var(--text-section); margin-bottom: var(--space-md); }
+.consult-head p { color: var(--color-ink-2); }
+.consult-hours { margin-top: var(--space-md); font-weight: 600; color: var(--color-ink); }
+.consult-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); padding: var(--space-xl); background: var(--color-paper); border: var(--rule-hair) solid var(--color-rule); }
+.field { display: grid; gap: var(--space-xs); min-width: 0; margin: 0; padding: 0; border: 0; }
+.field--wide, .field--time { grid-column: 1 / -1; }
+.field > label, .field legend { font-weight: 600; }
+.optional { font-weight: 400; color: var(--color-muted); }
+.field input[type="text"], .field input[type="tel"], .field textarea { width: 100%; min-height: 48px; padding: var(--space-sm) var(--space-md); border: var(--rule-hair) solid var(--color-muted); background: var(--color-paper); color: var(--color-ink); font: inherit; transition: border-color var(--dur-short) var(--ease-out); }
+.field textarea { resize: vertical; }
+.field input:hover, .field textarea:hover { border-color: var(--color-ink); }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; border-color: var(--color-ink); transition: none; }
+.field input:user-invalid, .field textarea:user-invalid { border-color: var(--color-error); }
+.field--time { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-xl); }
+.field--time legend { width: 100%; margin-bottom: var(--space-xs); }
+.field--time label, .consent label { display: inline-flex; align-items: center; gap: var(--space-xs); cursor: pointer; }
+.field input[type="radio"], .field input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--color-ink); }
+.field input[type="radio"]:focus-visible, .field input[type="checkbox"]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.consent p { font-size: var(--text-sm); color: var(--color-ink-2); }
+.consent a { color: var(--color-ink); }
+.consult-submit { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-lg); }
+.consult-submit .btn { border: 0; cursor: pointer; }
+.consult-submit .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-status { color: var(--color-ink); font-weight: 600; }
+@media (max-width: 60rem) {
+  .consult-row { grid-template-columns: minmax(0, 1fr); }
+  .svc-intro--photo .term { margin: calc(-1 * var(--space-xl)) var(--space-md) 0; }
+}
+@media (max-width: 40rem) { .consult-form { grid-template-columns: minmax(0, 1fr); padding: var(--space-lg); } }
+
 /* after the footer-info rules above, so it wins */
 @media (max-width: 75rem) { .footer-info { grid-template-columns: minmax(0, 1fr); } }

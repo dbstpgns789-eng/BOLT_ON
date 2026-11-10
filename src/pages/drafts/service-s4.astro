@@ -1,0 +1,32 @@
+---
+// 사업분야 시안 S4 = 1 S3 intro (with photo) · 2 S1 sub-tasks · 3 S2 steps with owners · 4 S2/S3 case cards
+// · 5 callback request form (option A, replaces the call band that repeated the footer phone) · 6 no FAQ · 7 S2 other areas.
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import ServiceBanner from '../../components/service/ServiceBanner.astro';
+import ServiceIntro from '../../components/service/ServiceIntro.astro';
+import ServiceTasks from '../../components/service/ServiceTasks.astro';
+import ServiceProcess from '../../components/service/ServiceProcess.astro';
+import ServiceCases from '../../components/service/ServiceCases.astro';
+import ConsultForm from '../../components/service/ConsultForm.astro';
+import OtherAreas from '../../components/service/OtherAreas.astro';
+import { servicePages } from '../../data/service-pages';
+import banner from '../../assets/stock/distribution-panel.jpg';
+import after from '../../assets/cases/dongdaemun-kindergarten/03-after.jpg';
+
+const page = servicePages.capacity!;
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <ServiceBanner slug="capacity" photo={banner} />
+    <ServiceIntro page={page} heading="전기 증설·승압이란?" photo={after} photoAlt="증설 공사를 마친 유치원 분전반" />
+    <ServiceTasks page={page} />
+    <ServiceProcess page={page} variant="owners" />
+    <ServiceCases slug="capacity" variant="cards" />
+    <ConsultForm slug="capacity" />
+    <OtherAreas slug="capacity" />
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>

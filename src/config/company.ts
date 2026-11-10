@@ -15,6 +15,10 @@ export const company = {
   hours: '평일 09:00–18:00',
   kakaoChannelUrl: '', // after the 법인 channel is opened
   domain: 'voltonenc.com',
+  // Callback-request form: Web3Forms access key issued to the company email (free). Empty = form shows a 'not connected' notice.
+  formAccessKey: '',
+  // CHECK with the client before launch (also goes into the privacy policy page)
+  formRetention: '상담이 끝난 뒤 1년',
 };
 
 export const telHref = `tel:${company.phone.replace(/-/g, '')}`;
