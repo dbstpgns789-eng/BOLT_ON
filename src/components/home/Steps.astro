@@ -1,0 +1,40 @@
+---
+// variant: chevrons (navy arrows, after the wooilenc KEPCO diagram) | photos (each step over a real site photo, after sinrok's process strip)
+import { Image } from 'astro:assets';
+import { steps } from '../../data/services';
+import s1 from '../../assets/cases/dongdaemun-kindergarten/01-before.jpg';
+import s2 from '../../assets/cases/cheongju-substation/02-foundation-pour.jpg';
+import s3 from '../../assets/cases/seodaemun-prison/06-panel-work.jpg';
+import s4 from '../../assets/cases/cheongju-substation/05-wiring.jpg';
+import s5 from '../../assets/cases/cheongju-substation/01-substation.jpg';
+
+interface Props { variant?: 'chevrons' | 'photos' }
+const { variant = 'chevrons' } = Astro.props;
+const pics = [s1, s2, s3, s4, s5];
+---
+<section class={`section section--tint steps steps--${variant}`} aria-labelledby="steps-title" data-reveal>
+  <div class="container">
+    <div class="head">
+      <h2 id="steps-title">진행 순서</h2>
+      <p>한전 신청 서류는 공사와 함께 준비합니다.</p>
+    </div>
+    {variant === 'chevrons' ? (
+      <ol class="chevrons">
+        {steps.map((s, i) => (
+          <li><span class="c-num">{i + 1}</span><h3>{s.name}</h3><p>{s.line}</p></li>
+        ))}
+      </ol>
+    ) : (
+      <ol class="photo-steps">
+        {steps.map((s, i) => (
+          <li>
+            <Image src={pics[i]} alt="" widths={[320, 480]} sizes="(max-width: 60rem) 50vw, 240px" />
+            <span class="c-num">{i + 1}</span>
+            <h3>{s.name}</h3>
+            <p>{s.line}</p>
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</section>

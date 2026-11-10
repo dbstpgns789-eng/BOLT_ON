@@ -1,0 +1,25 @@
+---
+// full: the company facts live in the footer and the page has no company section (wooilenc pattern).
+import Logo from '../Logo.astro';
+import { company, telHref } from '../../config/company';
+import { menu } from '../../data/menu';
+import { companyRows } from '../../lib/company-rows';
+
+interface Props { full?: boolean }
+const { full = false } = Astro.props;
+---
+<footer class={`footer${full ? ' footer--full' : ''}`} id={full ? 'company' : undefined}>
+  <div class="container footer-row">
+    <div>
+      <Logo variant="horizontal" onDark class="footer-logo" />
+      {full && <a class="btn btn--primary footer-call" href={telHref}>전화 상담 {company.phone}</a>}
+      <p class="footer-small">© 2026 {company.nameEn}</p>
+    </div>
+    {full ? (
+      <dl class="footer-info">{companyRows().map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    ) : (
+      <p>{company.nameKo}, 대표 {company.ceo}<br />{company.address}<br />전화 {company.phone}, 이메일 {company.email}{company.bizNumber && <><br />사업자등록번호 {company.bizNumber}</>}{company.licenseNumber && <><br />전기공사업 {company.licenseNumber}</>}</p>
+    )}
+    <nav class="footer-links" aria-label="바닥글 메뉴">{menu.map((m) => <a href={m.href}>{m.label}</a>)}</nav>
+  </div>
+</footer>

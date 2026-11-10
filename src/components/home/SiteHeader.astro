@@ -1,0 +1,33 @@
+---
+import Logo from '../Logo.astro';
+import { company, telHref } from '../../config/company';
+import { menu } from '../../data/menu';
+---
+<header class="nav">
+  <div class="container nav-row">
+    <a class="brand" href="#top" aria-label={`${company.nameKo} 처음으로`}><Logo variant="horizontal" class="brand-logo" /></a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <ul class="gnb-list">
+        {menu.map((m) => (
+          <li class="gnb-item">
+            <a class="gnb-link" href={m.href}>{m.label}</a>
+            <ul class="gnb-sub">{m.sub.map(([t, h]) => <li><a href={h}>{t}</a></li>)}</ul>
+          </li>
+        ))}
+      </ul>
+      <div class="gnb-panel" aria-hidden="true"></div>
+    </nav>
+    <a class="nav-call" href={telHref}><span class="nav-call-label">전화 상담</span> {company.phone}</a>
+    <details class="mnav">
+      <summary aria-label="메뉴 열기">메뉴</summary>
+      <div class="mnav-body">
+        {menu.map((m) => (
+          <div class="mnav-group">
+            <a class="mnav-head" href={m.href}>{m.label}</a>
+            {m.sub.map(([t, h]) => <a href={h}>{t}</a>)}
+          </div>
+        ))}
+      </div>
+    </details>
+  </div>
+</header>

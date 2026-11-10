@@ -43,6 +43,13 @@ export const steps = [
   { name: '완료', line: '검사를 마치고 전기를 켠 뒤에도 A/S를 책임집니다.' },
 ] as const;
 
+// Hero slides, unfolded from the CEO's own three sentences (요청서 3-2).
+export const slidesCopy = [
+  { head: '수변전설비부터 증설·승압까지', line: '볼트온이엔씨는 증설·승압, 수변전설비, 리모델링, 신·증축 전기공사를 전문으로 합니다.' },
+  { head: '현장을 먼저 보고 시공합니다', line: '필요한 용량과 공사 범위를 설명드린 뒤 시작하고, 한전 신청 서류도 함께 준비합니다.' },
+  { head: '고객님의 전기가 끊김 없이 켜져 있도록', line: '정직한 견적, 안전한 시공, 공사 후 책임 있는 A/S.' },
+];
+
 export const hero = {
   headline: '현장을 먼저 보고, 필요한 만큼 시공합니다',
   sentence: '전기 증설부터 고압 수변전설비까지, 한전 신청 서류도 함께 준비합니다.',

@@ -1,0 +1,14 @@
+---
+import { company, telHref } from '../../config/company';
+import { companyRows } from '../../lib/company-rows';
+---
+<section class="section" id="company" aria-labelledby="company-title" data-reveal>
+  <div class="container company">
+    <div class="head">
+      <h2 id="company-title">회사 정보</h2>
+      <p>현장 상황을 듣고 방문 일정을 바로 잡아 드립니다.</p>
+      <a class="btn btn--primary" href={telHref}>{company.phone}</a>
+    </div>
+    <table class="info"><tbody>{companyRows().map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table>
+  </div>
+</section>

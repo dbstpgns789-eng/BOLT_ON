@@ -1,0 +1,47 @@
+---
+// variant: fade (photo fades in from the right) | navy (all navy panels, after wooilenc) | alt (navy and grey alternating, after sinrok)
+import { Image } from 'astro:assets';
+import { services } from '../../data/services';
+import substation from '../../assets/stock/substation-transformer.jpg';
+import insulators from '../../assets/stock/transformer-insulators.jpg';
+import panel from '../../assets/stock/distribution-panel.jpg';
+import studs from '../../assets/stock/remodeling-studs.jpg';
+import gimhaeFacade from '../../assets/cases/gimhae-museum/01-facade.jpg';
+
+interface Props { variant?: 'fade' | 'navy' | 'alt'; intro?: string }
+const { variant = 'fade', intro } = Astro.props;
+const img = { substation, capacity: panel, transformer: insulators, wiring: studs, newbuild: gimhaeFacade } as const;
+const tone = (i: number) => (variant === 'navy' ? 'navy' : variant === 'alt' ? (i < 2 ? 'navy' : 'grey') : 'grey');
+const plainTone = variant === 'alt' ? 'grey' : 'navy';
+---
+<section class={`section services services--${variant}`} id="services" aria-labelledby="services-title" data-reveal>
+  <div class="container">
+    <div class="head">
+      <h2 id="services-title">사업분야</h2>
+      {intro && <p>{intro}</p>}
+    </div>
+    <ul class="cards">
+      {services.map((s, i) => (
+        <li class={`card card--${tone(i)}`}>
+          <a class="card-link" href="#services">
+            <span class="card-text">
+              <span class="card-title">{s.name}</span>
+              <span class="card-line">{s.tasks.slice(0, 2).join(', ')}</span>
+              <span class="card-go">자세히 보기</span>
+            </span>
+            <Image class="card-img" src={img[s.slug]} alt="" widths={[400, 640]} sizes="(max-width: 60rem) 60vw, 280px" />
+          </a>
+        </li>
+      ))}
+      <li class={`card card--${plainTone} card--plain`}>
+        <a class="card-link" href="#kepco">
+          <span class="card-text">
+            <span class="card-title">한전 신청 대행</span>
+            <span class="card-line">증설·승압·임시전력 신청 서류</span>
+            <span class="card-go">자세히 보기</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
