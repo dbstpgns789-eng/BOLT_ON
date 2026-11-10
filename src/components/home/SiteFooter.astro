@@ -8,8 +8,8 @@ import { company, telHref } from '../../config/company';
 import { menu } from '../../data/menu';
 import { companyRows } from '../../lib/company-rows';
 
-interface Props { full?: boolean; variant?: 'default' | 'full' | 'woil' | 'sinrok' | 'haeun' }
-const { full = false, variant = full ? 'full' : 'default' } = Astro.props;
+interface Props { full?: boolean; variant?: 'default' | 'full' | 'woil' | 'sinrok' | 'haeun'; dark?: boolean }
+const { full = false, variant = full ? 'full' : 'default', dark = false } = Astro.props;
 const facts = companyRows().filter(([k]) => !['전화', '이메일', '상담 시간'].includes(k));
 const copy = `© 2026 ${company.nameEn}. All rights reserved.`;
 ---
@@ -49,11 +49,11 @@ const copy = `© 2026 ${company.nameEn}. All rights reserved.`;
     </div>
   </footer>
 ) : variant === 'haeun' ? (
-  <footer class="footer footer--haeun" id="company">
+  <footer class={`footer footer--haeun${dark ? ' footer--slate' : ''}`} id="company">
     <div class="container">
       <div class="footer-row">
         <div class="f-col f-col--facts">
-          <Logo variant="horizontal" class="footer-logo" />
+          <Logo variant="horizontal" onDark={dark} class="footer-logo" />
           {facts.map(([k, v]) => <p class="f-line"><span class="f-k">{k}</span> {v}</p>)}
         </div>
         <div class="f-col">

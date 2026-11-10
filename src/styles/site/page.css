@@ -272,6 +272,12 @@ p { word-break: keep-all; }
 .footer--haeun .f-phone { display: block; margin-bottom: var(--space-xs); font: 800 var(--text-2xl)/1.2 var(--font-display); color: var(--color-ink); text-decoration: none; font-variant-numeric: tabular-nums; }
 .footer--haeun .f-copy { padding-top: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); color: var(--color-muted); }
 
+/* F3 layout in the F1 colours (client pick) */
+.footer--slate { background: var(--color-footer-slate); color: var(--color-on-dark-2); border-top: 0; }
+.footer--slate .f-title, .footer--slate .f-phone, .footer--slate .f-links a { color: var(--color-on-navy); }
+.footer--slate .f-k { color: color-mix(in oklab, var(--color-on-dark-2) 70%, transparent); }
+.footer--slate .f-copy { color: var(--color-on-dark-2); border-top-color: color-mix(in oklab, var(--color-on-navy) 15%, transparent); }
+
 @media (max-width: 60rem) {
   .footer--woil .footer-row, .footer--haeun .footer-row, .footer--sinrok .f-top { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
   .footer--woil .f-col + .f-col { border-left: 0; padding-left: 0; }
