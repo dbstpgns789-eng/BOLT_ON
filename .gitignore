@@ -1,0 +1,8 @@
+# client originals (photos contain GPS EXIF) and receipts
+_client/
+# raw reference-site captures (third-party code/text, analysis only)
+research/_raw/
+# build
+node_modules/
+dist/
+.astro/
