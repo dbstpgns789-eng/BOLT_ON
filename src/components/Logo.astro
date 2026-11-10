@@ -17,7 +17,7 @@ const { variant = 'horizontal', class: cls = '', onDark = false } = Astro.props;
     <text x="34" y="72" class="logo-on">ON</text>
     <circle cx="163" cy="55" r="43" fill="var(--color-brand-navy)" />
     <path d="M171 20 147 60h14l-8 31 27-43h-15l8-28Z" fill="var(--color-brand-amber)" />
-    <text x="246" y="74" class="logo-word" fill={onDark ? 'var(--color-brand-on-dark)' : 'var(--color-brand-navy)'}>VOLT ON<tspan fill={onDark ? 'var(--color-brand-amber)' : 'var(--color-brand-slate)'}> E&amp;C</tspan></text>
+    <text x="246" y="74" class="logo-word" fill={onDark ? 'var(--color-brand-on-dark)' : 'var(--color-brand-navy)'}>VOLT ON<tspan class="logo-ec" fill={onDark ? 'var(--color-brand-amber)' : 'var(--color-brand-slate)'}> E&amp;C</tspan></text>
   </svg>
 ) : (
   <svg class={`logo ${cls}`} viewBox="0 0 440 250" role="img" aria-label="VOLT ON E&C, Engineering & Construction">
@@ -27,13 +27,14 @@ const { variant = 'horizontal', class: cls = '', onDark = false } = Astro.props;
       <circle cx="163" cy="55" r="43" fill="var(--color-brand-navy)" />
       <path d="M171 20 147 60h14l-8 31 27-43h-15l8-28Z" fill="var(--color-brand-amber)" />
     </g>
-    <text x="220" y="196" text-anchor="middle" class="logo-word" fill="var(--color-brand-navy)">VOLT ON<tspan fill="var(--color-brand-slate)"> E&amp;C</tspan></text>
+    <text x="220" y="196" text-anchor="middle" class="logo-word" fill="var(--color-brand-navy)">VOLT ON<tspan class="logo-ec" fill="var(--color-brand-slate)"> E&amp;C</tspan></text>
     <text x="220" y="236" text-anchor="middle" class="logo-tag" fill="var(--color-brand-slate)">ENGINEERING &amp; CONSTRUCTION</text>
   </svg>
 )}
 <style>
   .logo { display: block; height: auto; }
   .logo-on { font: 800 44px/1 var(--font-logo); fill: var(--color-brand-navy); }
-  .logo-word { font: 800 68px/1 var(--font-logo); letter-spacing: -0.01em; }
+  .logo-word { font: 700 68px/1 var(--font-logo); font-stretch: 88%; letter-spacing: -0.005em; }
+  .logo-ec { font-weight: 500; }
   .logo-tag { font: 500 15px/1 var(--font-logo); letter-spacing: 0.32em; }
 </style>
