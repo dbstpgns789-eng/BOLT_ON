@@ -6,7 +6,7 @@ Source originals stay in _client/ (git-ignored).
 import os
 from PIL import Image, ImageOps
 
-MAX = 1800
+MAX = 2400
 # (source file, case slug, output name)
 PICKS = [
     ("_client/김해미술관/김해 미술관.jpg", "gimhae-museum", "01-facade"),
@@ -33,8 +33,16 @@ PICKS = [
     ("_client/2차/신동아유치원/증설 후2.jpg", "dongdaemun-kindergarten", "04-after"),
 ]
 
-for src, slug, name in PICKS:
-    out_dir = os.path.join("src", "assets", "cases", slug)
+# Licensed stock (Unsplash License, free commercial use). Sources: docs/photo-credits.md
+STOCK = [
+    ("_client/3차/stock/unsplash-VuR4oHZ3ucc.jpg", "stock", "substation-transformer"),
+    ("_client/3차/stock/unsplash-dR3Fb6dBEc0.jpg", "stock", "transformer-insulators"),
+    ("_client/3차/stock/markus-spiske-kK7uPfb2YWU-unsplash.jpg", "stock", "distribution-panel"),
+    ("_client/3차/stock/olek-buzunov-nwgp-Rijilk-unsplash.jpg", "stock", "remodeling-studs"),
+]
+
+for src, slug, name in [(s, "cases/" + g, n) for s, g, n in PICKS] + STOCK:
+    out_dir = os.path.join("src", "assets", *slug.split("/"))
     os.makedirs(out_dir, exist_ok=True)
     with Image.open(src) as im:
         im = ImageOps.exif_transpose(im).convert("RGB")

@@ -120,7 +120,7 @@ const info = [
         </div>
         <div class="cases">
           {featured.map((c) => {
-            const shots = c.data.photos.filter((p) => p.stage !== 'during').slice(0, 2);
+            const shots = [...c.data.photos.filter((p) => p.stage !== 'during'), ...c.data.photos.filter((p) => p.stage === 'during')].slice(0, 2);
             return (
               <article class="case">
                 <div class="case-shots">
