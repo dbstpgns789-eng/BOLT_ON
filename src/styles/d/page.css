@@ -24,6 +24,8 @@
 .nav { position: sticky; }
 .nav-row { position: static; }
 .mnav { display: none; }
+.nav-call { white-space: nowrap; flex: none; }
+@media (max-width: 75rem) { .gnb-item { width: 8.5rem; } .nav-call-label { display: none; } }
 
 /* hero carousel */
 .hero { display: block; min-height: 0; padding: 0; position: relative; overflow: clip; }
