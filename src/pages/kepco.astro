@@ -1,5 +1,5 @@
 ---
-// 한전 신청 안내 (고객지원). Sections after wooilenc 한전서류 절차: kinds → steps (flow chart, 4 × 2, owner chip per box) → documents → temporary power.
+// 한전 신청 안내 (고객지원). Sections after wooilenc 한전서류 절차: kinds → steps (swimlane: a row per owner) → documents → temporary power.
 // Copy and lists in src/data/kepco.ts (steps and documents from web research, client to confirm).
 import DraftLayout from '../layouts/DraftLayout.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
@@ -7,7 +7,7 @@ import SiteFooter from '../components/home/SiteFooter.astro';
 import PageBanner from '../components/PageBanner.astro';
 import SupportTabs from '../components/support/SupportTabs.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { ownerLabel } from '../data/service-pages';
+import ProcessFlow from '../components/ProcessFlow.astro';
 import { kinds, steps, docs, common } from '../data/kepco';
 import photo from '../assets/stock/substation-transformer.jpg';
 ---
@@ -33,18 +33,9 @@ import photo from '../assets/stock/substation-transformer.jpg';
       <div class="container">
         <div class="head">
           <h2 id="steps-title">진행 순서</h2>
-          <p>고객님이 직접 하실 일은 서류 준비 하나입니다. 나머지는 저희가 진행합니다.</p>
+          <p>왼쪽에서 오른쪽 순서로 진행합니다. 고객님이 직접 하실 일은 노란 줄의 서류 준비 하나입니다.</p>
         </div>
-        <ol class="flow">
-          {steps.map((s, i) => (
-            <li class={`flow-step flow-step--${s.owner}`}>
-              <span class="flow-num">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{s.name}</h3>
-              <p>{s.line}</p>
-              <span class="os-owner">{ownerLabel[s.owner]}</span>
-            </li>
-          ))}
-        </ol>
+        <ProcessFlow steps={steps} variant="lanes" />
       </div>
     </section>
 

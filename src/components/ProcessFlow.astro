@@ -8,6 +8,8 @@ const { steps, variant = 'boxes' } = Astro.props;
 const cols = steps.length > 6 ? 4 : 3;
 const lanes: Owner[] = ['volton', 'customer', 'kepco'];
 const num = (i: number) => String(i + 1).padStart(2, '0');
+// Below 75rem a long process (7+ steps) is drawn as two diagrams of four, so each box keeps a readable width.
+const parts = steps.length > 6 ? [steps.slice(0, 4), steps.slice(4)] : [steps];
 ---
 {variant === 'boxes' && (
   <ol class={`flow flow--${cols}`}>
@@ -37,15 +39,19 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
   </>
 )}
 {variant === 'lanes' && (
-  <ol class="lanes" style={`--ln-n: ${steps.length}`}>
-    {lanes.map((o, r) => <li class={`ln-band ln-band--${o}`} style={`grid-row: ${r + 1}`} aria-hidden="true"><span class="ln-label">{ownerLabel[o]}</span></li>)}
-    {steps.map((s, i) => (
-      <li class={`ln-step ln-step--${s.owner}`} style={`grid-column: ${i + 2}; grid-row: ${lanes.indexOf(s.owner) + 1}`}>
-        <span class="flow-num">{num(i)}</span>
-        <h3>{s.name}</h3>
-        <p>{s.line}</p>
-        <span class="ln-owner">{ownerLabel[s.owner]}</span>
-      </li>
+  <div class={`lanes-wrap${parts.length > 1 ? ' lanes-wrap--split' : ''}`}>
+    {[{ cls: 'lanes--full', from: 0, list: steps }, ...(parts.length > 1 ? parts.map((list, k) => ({ cls: 'lanes--part', from: k * 4, list })) : [])].map(({ cls, from, list }) => (
+      <ol class={`lanes ${cls}`} style={`--ln-n: ${list.length}`} start={from + 1}>
+        {lanes.map((o, r) => <li class={`ln-band ln-band--${o}`} style={`grid-row: ${r + 1}`} aria-hidden="true"><span class="ln-label">{ownerLabel[o]}</span></li>)}
+        {list.map((s, j) => (
+          <li class={`ln-step ln-step--${s.owner}`} style={`grid-column: ${j + 2}; grid-row: ${lanes.indexOf(s.owner) + 1}`}>
+            <span class="flow-num">{num(from + j)}</span>
+            <h3>{s.name}</h3>
+            <p>{s.line}</p>
+            <span class="ln-owner">{ownerLabel[s.owner]}</span>
+          </li>
+        ))}
+      </ol>
     ))}
-  </ol>
+  </div>
 )}
