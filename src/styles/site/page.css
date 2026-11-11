@@ -642,10 +642,51 @@ aaa
 .flow-step--customer .os-owner { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-accent-ink); }
 .flow-step--kepco .os-owner { border-style: dashed; }
 .flow-step::after { content: ""; position: absolute; top: 50%; right: calc(var(--flow-gap) / -2 - 5px); width: 10px; height: 10px; border-top: 2px solid var(--color-ink); border-right: 2px solid var(--color-ink); transform: translateY(-50%) rotate(45deg); }
-.flow-step:nth-child(4n)::after, .flow-step:last-child::after { display: none; }
+.flow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.flow-step:last-child::after, .flow:not(.flow--3) .flow-step:nth-child(4n)::after, .flow--3 .flow-step:nth-child(3n)::after { display: none; }
 @media (max-width: 60rem) {
-  .flow { --flow-gap: var(--space-lg); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flow, .flow--3 { --flow-gap: var(--space-lg); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .flow-step { padding: var(--space-md); }
-  .flow-step:nth-child(4n)::after { display: block; }
-  .flow-step:nth-child(2n)::after { display: none; }
+  .flow .flow-step:nth-child(n)::after { display: block; }
+  .flow .flow-step:nth-child(2n)::after, .flow .flow-step:last-child::after { display: none; }
 }
+
+/* ProcessFlow timeline: dots on one line; colour says who does the step. Vertical line on narrow screens. */
+.pf-legend { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin: 0 0 var(--space-xl); padding: 0; list-style: none; font-size: var(--text-sm); font-weight: 600; }
+.pf-legend li { display: flex; align-items: center; gap: var(--space-xs); }
+.tl { --dot: 2.75rem; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(var(--tl-n), minmax(0, 1fr)); gap: var(--space-lg); }
+.tl-step { position: relative; display: grid; align-content: start; gap: var(--space-xs); padding-top: calc(var(--dot) + var(--space-md)); }
+.tl-step::before { content: ""; position: absolute; top: calc(var(--dot) / 2 - 1px); left: var(--dot); right: calc(var(--space-lg) * -1); height: 2px; background: var(--color-ink); }
+.tl-step:last-child::before { display: none; }
+.tl-step h3 { font-size: var(--text-lg); }
+.tl-step p { color: var(--color-ink-2); font-size: var(--text-sm); }
+.tl-owner { font-size: var(--text-xs); font-weight: 600; color: var(--color-muted); }
+.tl-dot { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: var(--dot); height: var(--dot); border-radius: 50%; font: 800 var(--text-md)/1 var(--font-display); background: var(--color-ink); color: var(--color-on-navy); border: 2px solid var(--color-ink); }
+.tl-dot--customer { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-accent-ink); }
+.tl-dot--kepco { background: var(--color-paper); color: var(--color-ink); border-style: dashed; }
+.tl-dot--key { position: static; width: 1rem; height: 1rem; }
+@media (max-width: 60rem) {
+  .tl { grid-template-columns: minmax(0, 1fr); }
+  .tl-step { padding-top: 0; padding-left: calc(var(--dot) + var(--space-md)); min-height: var(--dot); }
+  .tl-step::before { top: var(--dot); bottom: calc(var(--space-lg) * -1); left: calc(var(--dot) / 2 - 1px); right: auto; width: 2px; height: auto; }
+}
+
+/* ProcessFlow lanes: one band per owner; each step sits in its owner's band; order runs left to right. */
+.lanes { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 7.5rem repeat(var(--ln-n), minmax(0, 1fr)); column-gap: var(--space-sm); border-top: 3px solid var(--color-ink); }
+.ln-band { grid-column: 1 / -1; display: flex; align-items: center; min-height: 6rem; border-bottom: var(--rule-hair) solid var(--color-rule); }
+.ln-band--customer { background: color-mix(in oklab, var(--color-accent) 14%, var(--color-paper)); }
+.ln-label { width: 7.5rem; padding-inline: var(--space-sm); font-size: var(--text-sm); font-weight: 700; }
+.ln-step { position: relative; z-index: 1; display: grid; align-content: start; gap: var(--space-2xs); margin-block: var(--space-sm); padding: var(--space-sm); background: var(--color-paper); border: var(--rule-hair) solid var(--color-ink); }
+.ln-step--customer { border-color: var(--color-accent); border-width: 2px; }
+.ln-step--kepco { border-style: dashed; }
+.ln-step h3 { font-size: var(--text-md); }
+.ln-step p { color: var(--color-ink-2); font-size: var(--text-xs); }
+.ln-step .flow-num { font-size: var(--text-md); color: var(--color-ink); }
+.ln-owner { display: none; }
+@media (max-width: 60rem) {
+  .lanes { grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); border-top: 0; }
+  .ln-band { display: none; }
+  .ln-step { grid-column: 1 !important; grid-row: auto !important; margin: 0; }
+  .ln-owner { display: block; font-size: var(--text-xs); font-weight: 600; color: var(--color-muted); }
+}
+.pv-sub { margin: var(--space-2xl) 0 var(--space-lg); font-size: var(--text-lg); color: var(--color-ink-2); }
