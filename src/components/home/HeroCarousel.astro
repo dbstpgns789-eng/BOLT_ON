@@ -1,5 +1,6 @@
 ---
 // Full-bleed photo carousel under the nav (client pick from sinrok.co.kr).
+// No prev/next buttons (client, 2026-11-11): slides change every 5 s, pausing while hovered or focused.
 // variant: overlay (text left on a navy fade) | woil (big 01 / 03 counter and arrows, after wooilenc.com) | center (one centred line, sinrok-like) | short (60vh, leaves room for the case strip)
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -7,7 +8,6 @@ import type { ImageMetadata } from 'astro';
 interface Slide { img: ImageMetadata; alt: string; head: string; line: string; pos?: string }
 interface Props { slides: Slide[]; variant?: 'overlay' | 'woil' | 'center' | 'short' }
 const { slides, variant = 'overlay' } = Astro.props;
-const pad = (n: number) => String(n).padStart(2, '0');
 ---
 <section class={`hero hero--${variant}`} aria-roledescription="carousel" aria-label="볼트온이엔씨 소개">
   <div class="slides">
@@ -25,30 +25,19 @@ const pad = (n: number) => String(n).padStart(2, '0');
       </div>
     ))}
   </div>
-  <div class="container slide-controls">
-    {variant === 'woil' && <span class="slide-big"><span data-current-pad>01</span><span class="slide-of"> / {pad(slides.length)}</span></span>}
-    <button class="slide-btn" type="button" data-dir="-1" aria-label="이전 슬라이드">이전</button>
-    {variant !== 'woil' && <span class="slide-count" aria-live="polite"><span data-current>1</span> / {slides.length}</span>}
-    <button class="slide-btn" type="button" data-dir="1" aria-label="다음 슬라이드">다음</button>
-  </div>
 </section>
 <script>
   const root = document.querySelector('.hero');
   const slides = [...document.querySelectorAll('.slide')];
-  const cur = document.querySelector('[data-current]');
-  const curPad = document.querySelector('[data-current-pad]');
   let i = 0;
   let timer: number | undefined;
   const show = (n: number) => {
     i = (n + slides.length) % slides.length;
     slides.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.setAttribute('aria-hidden', String(k !== i)); s.toggleAttribute('inert', k !== i); });
-    if (cur) cur.textContent = String(i + 1);
-    if (curPad) curPad.textContent = String(i + 1).padStart(2, '0');
   };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stop = () => { if (timer) window.clearInterval(timer); };
-  const start = () => { if (!reduce) { stop(); timer = window.setInterval(() => show(i + 1), 6000); } };
-  document.querySelectorAll<HTMLButtonElement>('.slide-btn').forEach((b) => b.addEventListener('click', () => { show(i + Number(b.dataset.dir)); start(); }));
+  const start = () => { if (!reduce) { stop(); timer = window.setInterval(() => show(i + 1), 5000); } };
   root?.addEventListener('mouseenter', stop);
   root?.addEventListener('mouseleave', start);
   root?.addEventListener('focusin', stop);
