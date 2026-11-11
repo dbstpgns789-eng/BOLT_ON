@@ -1,0 +1,20 @@
+---
+// Photo page head with a navy veil (same look as the business-area banner). Replaces the plain grey heads.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props { photo: ImageMetadata; title: string; crumbs: [string, string?][]; lead?: string; pos?: string }
+const { photo, title, crumbs, lead, pos = '50% 50%' } = Astro.props;
+---
+<section class="svc-banner" aria-labelledby="page-title">
+  <Image class="svc-banner-img" src={photo} alt="" widths={[800, 1440, 2000]} sizes="100vw" loading="eager" style={`object-position: ${pos}`} />
+  <div class="container svc-banner-text">
+    <p class="svc-crumb">
+      {crumbs.map(([label, href], i) => (
+        <>{i > 0 && <span aria-hidden="true"> / </span>}{href ? <a href={href}>{label}</a> : label}</>
+      ))}
+    </p>
+    <h1 id="page-title">{title}</h1>
+    {lead && <p class="svc-banner-lead">{lead}</p>}
+  </div>
+</section>

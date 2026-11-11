@@ -1,0 +1,17 @@
+---
+// Booking page (edison /consult): the callback form on its own, reached from the CTA bands.
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import ConsultForm from '../../components/service/ConsultForm.astro';
+import photo from '../../assets/stock/panel-testing.jpg';
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <PageBanner photo={photo} title="상담 예약" lead="번호와 편한 시간을 남겨 주시면 먼저 연락드립니다." crumbs={[['홈', '/'], ['상담 예약']]} />
+    <ConsultForm />
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>

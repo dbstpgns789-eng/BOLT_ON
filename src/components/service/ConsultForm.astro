@@ -5,9 +5,9 @@
 import { company } from '../../config/company';
 import { services, type ServiceSlug } from '../../data/services';
 
-interface Props { slug: ServiceSlug }
+interface Props { slug?: ServiceSlug }
 const { slug } = Astro.props;
-const area = services.find((s) => s.slug === slug)!.name;
+const area = slug ? services.find((s) => s.slug === slug)!.name : '';
 ---
 <section class="section section--tint consult" id="consult" aria-labelledby="consult-title">
   <div class="container consult-row">
@@ -18,8 +18,17 @@ const area = services.find((s) => s.slug === slug)!.name;
     </div>
     <form class="consult-form" method="post" action="https://api.web3forms.com/submit" data-key={company.formAccessKey}>
       <input type="hidden" name="access_key" value={company.formAccessKey} />
-      <input type="hidden" name="subject" value={`[홈페이지] ${area} 상담 예약`} />
-      <input type="hidden" name="분야" value={area} />
+      <input type="hidden" name="subject" value={`[홈페이지] ${area || '전기공사'} 상담 예약`} />
+      {area ? <input type="hidden" name="분야" value={area} /> : (
+        <div class="field field--wide">
+          <label for="cf-area">관심 분야 <span class="optional">(선택)</span></label>
+          <select id="cf-area" name="분야">
+            <option value="">잘 모르겠음</option>
+            {services.map((s) => <option value={s.name}>{s.name}</option>)}
+            <option value="한전 신청 대행">한전 신청 대행</option>
+          </select>
+        </div>
+      )}
       <div class="field">
         <label for="cf-name">이름</label>
         <input id="cf-name" name="이름" type="text" autocomplete="name" required />

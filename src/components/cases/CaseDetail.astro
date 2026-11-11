@@ -25,8 +25,9 @@ const stages = variant === 'brief' || variant === 'final'
 const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as keyof typeof stageKo]);
 ---
 <article class={`cd cd--${variant}`}>
-  <header class="cd-head">
-    <div class="container">
+  <header class="cd-head cd-head--photo">
+    <Image class="cd-head-img" src={cover.src} alt="" widths={[800, 1440, 2000]} sizes="100vw" loading="eager" />
+    <div class="container cd-head-text">
       <p class="cd-crumb"><a href="/">홈</a> <span aria-hidden="true">/</span> <a href={listHref}>시공사례</a></p>
       <p class="cd-area"><a href={`/services/${d.service}/`}>{service.name}</a></p>
       <h1>{d.title}</h1>

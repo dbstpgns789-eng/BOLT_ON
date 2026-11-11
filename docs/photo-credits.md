@@ -12,5 +12,9 @@
 | transformer-insulators.jpg | https://unsplash.com/photos/dR3Fb6dBEc0 | 직접 검색 |
 | distribution-panel.jpg | https://unsplash.com/photos/kK7uPfb2YWU (Markus Spiske) | 클라이언트 제공 |
 | remodeling-studs.jpg | https://unsplash.com/photos/nwgp-Rijilk (Olek Buzunov) | 클라이언트 제공 |
+| electrician-helmet.jpg | https://unsplash.com/photos/_2AlIm-F6pw | 직접 검색 (회사소개 배너) |
+| panel-testing.jpg | https://unsplash.com/photos/PkHf7BUWbtk | 직접 검색 (시공사례 목록 배너) |
+| tower-cranes.jpg | https://unsplash.com/photos/VoI2jd75M6Q | 직접 검색 (신·증축 배너) |
+| apartment-construction.jpg | https://unsplash.com/photos/91AQt9p4Mo8 | 직접 검색 (신·증축 소개) |
 
-후보로 받았지만 쓰지 않은 것: sF4IFKDa3Tg, 1NkGDSpQJok(흑백), u719UbWj0us(어두움), U3GiK1u5j24.
+2026-11-11 추가분도 같은 방식으로 라이선스를 확인했다. 후보로 받았지만 쓰지 않은 것: X1P1_EDNnok, pb2rODOfXz8, sF4IFKDa3Tg, 1NkGDSpQJok(흑백), u719UbWj0us(어두움), U3GiK1u5j24.

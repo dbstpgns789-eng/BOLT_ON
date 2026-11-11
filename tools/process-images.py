@@ -39,6 +39,10 @@ STOCK = [
     ("_client/3차/stock/unsplash-dR3Fb6dBEc0.jpg", "stock", "transformer-insulators"),
     ("_client/3차/stock/markus-spiske-kK7uPfb2YWU-unsplash.jpg", "stock", "distribution-panel"),
     ("_client/3차/stock/olek-buzunov-nwgp-Rijilk-unsplash.jpg", "stock", "remodeling-studs"),
+    ("_client/3차/stock/unsplash-_2AlIm-F6pw.jpg", "stock", "electrician-helmet"),
+    ("_client/3차/stock/unsplash-PkHf7BUWbtk.jpg", "stock", "panel-testing"),
+    ("_client/3차/stock/unsplash-VoI2jd75M6Q.jpg", "stock", "tower-cranes"),
+    ("_client/3차/stock/unsplash-91AQt9p4Mo8.jpg", "stock", "apartment-construction"),
 ]
 
 for src, slug, name in [(s, "cases/" + g, n) for s, g, n in PICKS] + STOCK:

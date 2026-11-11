@@ -1,19 +1,17 @@
 ---
 // 회사개요, decorated (2026-11-11), every element from real material:
-// photo collage intro (wooilenc 인사말 collage: photo + navy and amber blocks) · statement band in the CEO's words + the ON toggle (edison vision band)
-// · how we work, with site photos (gesung three points + sinrok photo steps) · timeline from finished cases (sinrok/haeun 연혁; founding date added when issued)
+// photo collage intro (wooilenc 인사말 collage: photo + navy and amber blocks)
+// · how we work, with site photos (gesung three points + sinrok photo steps)
 // · company facts table (wooilenc 회사개요) · license (edison, shown once issued) · areas. No CEO greeting: client declined (요청서 3-4).
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import DraftLayout from '../../layouts/DraftLayout.astro';
 import SiteHeader from '../../components/home/SiteHeader.astro';
 import SiteFooter from '../../components/home/SiteFooter.astro';
 import CompanyHead from '../../components/company/CompanyHead.astro';
-import Logo from '../../components/Logo.astro';
-import { company, telHref } from '../../config/company';
+import CtaBand from '../../components/CtaBand.astro';
+import { company } from '../../config/company';
 import { companyRows } from '../../lib/company-rows';
 import { services } from '../../data/services';
-import { ym } from '../../lib/format';
 import collageMain from '../../assets/cases/cheongju-substation/01-substation.jpg';
 import collageSub from '../../assets/cases/seodaemun-prison/01-led-ceiling.jpg';
 import wayPhoto1 from '../../assets/cases/dongdaemun-kindergarten/01-before.jpg';
@@ -26,11 +24,6 @@ const ways = [
   { n: '02', title: '한전 서류까지 함께', line: '한전 신청 서류도 함께 준비해, 처음 상담부터 준공까지 한 번에 진행합니다.', img: wayPhoto2, alt: '수배전반 결선 작업' },
   { n: '03', title: '끝난 뒤까지 책임집니다', line: '정직한 견적과 안전한 시공, 공사 후 책임 있는 A/S로 끝까지 책임집니다.', img: wayPhoto3, alt: '공사를 마친 분전반' },
 ];
-const cases = (await getCollection('cases')).sort((a, b) => b.data.completed.localeCompare(a.data.completed));
-const timeline = [
-  ...(company.founded ? [{ when: company.founded, what: `${company.legalName || company.nameKo} 설립`, href: '' }] : []),
-  ...cases.map((c) => ({ when: ym(c.data.completed), what: c.data.title, href: `/cases/${c.id}/` })),
-];
 ---
 <DraftLayout variant="svc">
   <SiteHeader />
@@ -42,7 +35,6 @@ const timeline = [
         <div class="about-hero-text">
           <h2 id="about-title">전기 증설과 수변전설비를 전문으로 하는 전기공사 업체</h2>
           <p class="svc-lead">볼트온이엔씨는 전기 증설과 승압, 수변전설비, 리모델링, 신·증축 전기공사를 전문으로 합니다.</p>
-          <a class="btn btn--primary" href={telHref}>전화 상담 {company.phone}</a>
         </div>
         <div class="collage" aria-hidden="false">
           <span class="collage-navy" aria-hidden="true"></span>
@@ -53,12 +45,6 @@ const timeline = [
       </div>
     </section>
 
-    <section class="statement" aria-label="회사가 지키는 약속">
-      <div class="container statement-row">
-        <Logo variant="mark" class="statement-mark" />
-        <p class="statement-text">고객님의 전기가<br />끊김 없이 켜져 있도록</p>
-      </div>
-    </section>
 
     <section class="section section--tint" aria-labelledby="ways-title">
       <div class="container">
@@ -74,22 +60,6 @@ const timeline = [
       </div>
     </section>
 
-    <section class="section" aria-labelledby="history-title">
-      <div class="container history-row">
-        <div class="head">
-          <h2 id="history-title">주요 연혁</h2>
-          <p>최근 직접 시공한 현장입니다.</p>
-        </div>
-        <ol class="timeline">
-          {timeline.map((t) => (
-            <li>
-              <span class="tl-when">{t.when}</span>
-              {t.href ? <a class="tl-what" href={t.href}>{t.what}</a> : <span class="tl-what">{t.what}</span>}
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
 
     <section class="section section--tint" aria-labelledby="facts-title">
       <div class="container company">
@@ -118,6 +88,7 @@ const timeline = [
         </ul>
       </div>
     </section>
+    <CtaBand />
   </main>
   <SiteFooter variant="haeun" dark />
 </DraftLayout>

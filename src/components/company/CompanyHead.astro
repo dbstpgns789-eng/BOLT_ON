@@ -1,16 +1,14 @@
 ---
-// Page head + the two company tabs (wooilenc 회사소개 sub-menu pattern; 인사말 left out: client declined it, 요청서 3-4).
+// Company banner (one photo shared by both sub-pages, as wooilenc does) + the two company tabs.
+// 인사말 left out: the client declined it (요청서 3-4).
+import PageBanner from '../PageBanner.astro';
+import photo from '../../assets/stock/electrician-helmet.jpg';
+
 interface Props { current: 'overview' | 'location'; title: string; lead?: string }
 const { current, title, lead } = Astro.props;
 const tabs = [['overview', '회사개요', '/company/'], ['location', '오시는 길', '/company/location/']] as const;
 ---
-<section class="page-head">
-  <div class="container">
-    <p class="svc-crumb"><a href="/">홈</a> <span aria-hidden="true">/</span> 회사소개</p>
-    <h1>{title}</h1>
-    {lead && <p>{lead}</p>}
-  </div>
-</section>
+<PageBanner photo={photo} title={title} lead={lead} crumbs={[['홈', '/'], ['회사소개']]} pos="40% 35%" />
 <nav class="svc-tabs" aria-label="회사소개">
   <div class="container">
     <ul>{tabs.map(([k, label, href]) => <li><a href={href} aria-current={k === current ? 'page' : undefined}>{label}</a></li>)}</ul>

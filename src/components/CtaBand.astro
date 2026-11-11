@@ -1,0 +1,18 @@
+---
+// Closing call to action (edison "전기공사가 필요하신가요?" band → /consult). One button to the booking page;
+// no promises the client has not made (edison's "30분 내 연락" is left out).
+interface Props { title?: string; line?: string; href?: string; label?: string }
+const {
+  title = '전기공사가 필요하신가요?',
+  line = '번호와 편한 시간을 남겨 주시면, 확인하고 먼저 연락드립니다.',
+  href = '/consult/',
+  label = '상담 예약하기',
+} = Astro.props;
+---
+<section class="cta-band" aria-labelledby="cta-title">
+  <div class="container cta-band-inner">
+    <h2 id="cta-title">{title}</h2>
+    <p>{line}</p>
+    <a class="btn btn--primary cta-band-btn" href={href}>{label}</a>
+  </div>
+</section>
