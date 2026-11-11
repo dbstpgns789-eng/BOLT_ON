@@ -165,7 +165,7 @@ p { word-break: keep-all; }
 
 @media (max-width: 60rem) {
   .gnb { display: none; }
-  .mnav { display: block; margin-left: var(--space-md); }
+  .mnav { display: block; margin-left: auto; }
   .mnav summary { list-style: none; cursor: pointer; padding: var(--space-xs) var(--space-md); border: var(--rule-hair) solid var(--color-ink); font-weight: 600; }
   .mnav summary::-webkit-details-marker { display: none; }
   .mnav summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
@@ -770,3 +770,7 @@ aaa
 .lightbox-nav[data-step="1"] { right: 0; }
 .lightbox-nav:hover { background: var(--color-ink); }
 .lightbox-nav:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.slide-btn--icon { display: inline-grid; place-items: center; width: 44px; padding: 0; }
+.js .slide-controls { gap: var(--space-xs); }
+.mnav-when-open, .mnav[open] .mnav-when-closed { display: none; }
+.mnav[open] .mnav-when-open { display: inline; }

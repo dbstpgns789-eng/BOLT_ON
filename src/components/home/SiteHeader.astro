@@ -18,7 +18,7 @@ import { menu } from '../../data/menu';
       <div class="gnb-panel" aria-hidden="true"></div>
     </nav>
     <details class="mnav">
-      <summary aria-label="메뉴 열기">메뉴</summary>
+      <summary><span class="mnav-when-closed">메뉴</span><span class="mnav-when-open">닫기</span></summary>
       <div class="mnav-body">
         {menu.map((m) => (
           <div class="mnav-group">
