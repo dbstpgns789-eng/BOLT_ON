@@ -1,14 +1,15 @@
 ---
-// Company banner (one photo shared by both sub-pages, as wooilenc does) + the two company tabs.
+// Company banner (overview: power towers; location: a road arrow, 2026-11-11) + the two company tabs.
 // 인사말 left out: the client declined it (요청서 3-4).
 import PageBanner from '../PageBanner.astro';
-import photo from '../../assets/stock/electrician-helmet.jpg';
+import towers from '../../assets/stock/power-towers-sunset.jpg';
+import road from '../../assets/stock/road-arrow.jpg';
 
 interface Props { current: 'overview' | 'location'; title: string; lead?: string }
 const { current, title, lead } = Astro.props;
 const tabs = [['overview', '회사개요', '/company/'], ['location', '오시는 길', '/company/location/']] as const;
 ---
-<PageBanner photo={photo} title={title} lead={lead} crumbs={[['홈', '/'], ['회사소개']]} pos="40% 35%" />
+<PageBanner photo={current === 'location' ? road : towers} title={title} lead={lead} crumbs={[['홈', '/'], ['회사소개']]} pos={current === 'location' ? '30% 24%' : '50% 55%'} light={current === 'location'} />
 <nav class="svc-tabs" aria-label="회사소개">
   <div class="container">
     <ul>{tabs.map(([k, label, href]) => <li><a href={href} aria-current={k === current ? 'page' : undefined}>{label}</a></li>)}</ul>

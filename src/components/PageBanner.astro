@@ -3,10 +3,10 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-interface Props { photo: ImageMetadata; title: string; crumbs: [string, string?][]; lead?: string; pos?: string }
-const { photo, title, crumbs, lead, pos = '50% 50%' } = Astro.props;
+interface Props { photo: ImageMetadata; title: string; crumbs: [string, string?][]; lead?: string; pos?: string; light?: boolean }
+const { photo, title, crumbs, lead, pos = '50% 50%', light = false } = Astro.props;
 ---
-<section class="svc-banner" aria-labelledby="page-title">
+<section class={`svc-banner${light ? ' svc-banner--light' : ''}`} aria-labelledby="page-title">
   <Image class="svc-banner-img" src={photo} alt="" widths={[800, 1440, 2000]} sizes="100vw" loading="eager" style={`object-position: ${pos}`} />
   <div class="container svc-banner-text">
     <p class="svc-crumb">
