@@ -26,6 +26,7 @@ const area = slug ? services.find((s) => s.slug === slug)!.name : '';
             <option value="">잘 모르겠음</option>
             {services.map((s) => <option value={s.name}>{s.name}</option>)}
             <option value="한전 신청 대행">한전 신청 대행</option>
+            <option value="A/S 요청">A/S 요청 (시공한 곳의 문제)</option>
           </select>
         </div>
       )}
