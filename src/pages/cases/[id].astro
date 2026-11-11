@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 const { entry, prev, next } = Astro.props;
 ---
-<DraftLayout variant="svc">
+<DraftLayout variant="svc" title={`${entry.data.title} | 시공사례`} description={entry.data.summary}>
   <SiteHeader />
   <main id="top">
     <CaseDetail entry={entry} variant="final" listHref="/cases/" prev={prev} next={next} base="/cases/" />

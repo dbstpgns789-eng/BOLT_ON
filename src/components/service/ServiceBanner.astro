@@ -24,3 +24,9 @@ const current = services.find((s) => s.slug === slug)!;
     </ul>
   </div>
 </nav>
+<script>
+  // On narrow screens the five tabs scroll sideways; bring the current one into view so it is never hidden off-screen.
+  const ul = document.querySelector<HTMLElement>('.svc-tabs ul');
+  const cur = ul?.querySelector<HTMLElement>('[aria-current="page"]');
+  if (ul && cur && ul.scrollWidth > ul.clientWidth) ul.scrollLeft += cur.getBoundingClientRect().left - ul.getBoundingClientRect().left - (ul.clientWidth - cur.offsetWidth) / 2;
+</script>

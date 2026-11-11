@@ -13,7 +13,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 <section class={`hero hero--${variant}`} aria-roledescription="carousel" aria-label="볼트온이엔씨 소개">
   <div class="slides">
     {slides.map((s, i) => (
-      <div class={`slide${i === 0 ? ' is-active' : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} / ${slides.length}`} aria-hidden={i === 0 ? 'false' : 'true'}>
+      <div class={`slide${i === 0 ? ' is-active' : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} / ${slides.length}`} aria-hidden={i === 0 ? 'false' : 'true'} inert={i !== 0}>
         <Image src={s.img} alt={s.alt} widths={[800, 1280, 1920, 2400]} sizes="100vw" loading={i === 0 ? 'eager' : 'lazy'} style={`object-position: ${s.pos ?? '50% 50%'}`} />
         <div class="container slide-text">
           {i === 0 ? <h1 class="slide-head">{s.head}</h1> : <p class="slide-head">{s.head}</p>}
@@ -42,7 +42,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
   let timer: number | undefined;
   const show = (n: number) => {
     i = (n + slides.length) % slides.length;
-    slides.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.setAttribute('aria-hidden', String(k !== i)); });
+    slides.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.setAttribute('aria-hidden', String(k !== i)); s.toggleAttribute('inert', k !== i); });
     if (cur) cur.textContent = String(i + 1);
     if (curPad) curPad.textContent = String(i + 1).padStart(2, '0');
   };

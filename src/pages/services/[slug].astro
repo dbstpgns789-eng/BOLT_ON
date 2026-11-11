@@ -28,7 +28,7 @@ const topic = service.name.replace(/ (공사|전기공사)$/, '');
 const last = topic.charCodeAt(topic.length - 1) - 0xac00;
 const heading = `${topic}${last >= 0 && last % 28 !== 0 ? '이란' : '란'}?`;
 ---
-<DraftLayout variant="svc">
+<DraftLayout variant="svc" title={service.name} description={page.lead}>
   <SiteHeader />
   <main id="top">
     <ServiceBanner slug={slug} photo={media.banner} />

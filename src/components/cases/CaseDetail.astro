@@ -39,7 +39,7 @@ const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as 
     {variant === 'data' && before && after ? (
       <BeforeAfter before={before.src} after={after.src} beforeAlt={before.caption} afterAlt={after.caption} />
     ) : (
-      <figure class="cd-cover"><Image src={cover.src} alt={cover.caption} widths={[640, 960, 1280]} sizes="(max-width: 60rem) 100vw, 760px" loading="eager" /><figcaption>{cover.caption}</figcaption></figure>
+      <figure class="cd-cover"><a class="cd-zoom" href={cover.src.src} aria-label={`${cover.caption} 크게 보기`}><Image src={cover.src} alt={cover.caption} widths={[640, 960, 1280]} sizes="(max-width: 60rem) 100vw, 760px" loading="eager" /></a><figcaption>{cover.caption}</figcaption></figure>
     )}
 
     <div class="cd-side">
@@ -55,7 +55,7 @@ const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as 
     {stages.map(([s, ps]) => (
       <div class="cd-stage">
         <h2 class="cd-sub">{stageTitle(s)}</h2>
-        <ul>{ps.map((p) => <li><figure><Image src={p.src} alt={p.caption} widths={[360, 560]} sizes="(max-width: 60rem) 50vw, 300px" /><figcaption>{p.caption}</figcaption></figure></li>)}</ul>
+        <ul>{ps.map((p) => <li><figure><a class="cd-zoom" href={p.src.src} aria-label={`${p.caption} 크게 보기`}><Image src={p.src} alt={p.caption} widths={[360, 560]} sizes="(max-width: 60rem) 50vw, 300px" /></a><figcaption>{p.caption}</figcaption></figure></li>)}</ul>
       </div>
     ))}
   </section>
@@ -65,4 +65,25 @@ const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as 
     <a class="cd-list" href={listHref}>목록으로</a>
     {next ? <a class="cd-next" href={`${base}${next.id}/`}><span>다음 사례</span>{next.data.title}</a> : <span></span>}
   </nav>
+  <dialog class="lightbox" aria-label="사진 크게 보기">
+    <p class="lightbox-cap"></p>
+    <button type="button" class="lightbox-close">닫기</button>
+  </dialog>
 </article>
+<script>
+  // Tap a site photo to see it large; Esc, the close button or a tap outside the photo closes it.
+  const box = document.querySelector<HTMLDialogElement>('.lightbox');
+  if (box && 'showModal' in box) {
+    let img: HTMLImageElement | null = null; // made on first open, so the page has no empty <img>
+    const cap = box.querySelector('.lightbox-cap')!;
+    document.querySelectorAll<HTMLAnchorElement>('.cd-zoom').forEach((a) => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const small = a.querySelector('img');
+      if (!img) { img = new Image(); box.prepend(img); }
+      img.src = a.href; img.alt = small?.alt ?? ''; cap.textContent = small?.alt ?? '';
+      box.showModal();
+    }));
+    box.querySelector('.lightbox-close')!.addEventListener('click', () => box.close());
+    box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
+  }
+</script>

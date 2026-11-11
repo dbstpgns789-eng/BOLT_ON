@@ -13,7 +13,7 @@ for (const w of [1440, 1024, 768, 390]) {
     let n;
     while ((n = walker.nextNode())) {
       const t = n.textContent;
-      if (!t.trim() || !n.parentElement || n.parentElement.closest('script,style,[aria-hidden="true"],details:not([open]) .mnav-body')) continue;
+      if (!t.trim() || !n.parentElement || n.parentElement.closest('script,style,.slide[aria-hidden="true"],details:not([open]) .mnav-body')) continue;
       const r = document.createRange();
       let prevTop = null;
       for (let i = 0; i < t.length; i++) {
