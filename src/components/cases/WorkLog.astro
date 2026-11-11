@@ -1,0 +1,22 @@
+---
+// Work history without photos (hkinc "실적" table). Rows come from the client's cleaned work log; no names of private customers.
+interface Row { year: string; region: string; building: string; work: string; capacity?: string }
+interface Props { rows: Row[] }
+const { rows } = Astro.props;
+---
+{rows.length > 0 && (
+  <section class="section section--tint worklog" aria-labelledby="worklog-title">
+    <div class="container">
+      <div class="head head--row">
+        <div><h2 id="worklog-title">공사 이력</h2><p>사진을 남기지 못한 공사까지 포함한 최근 이력입니다.</p></div>
+        <p class="worklog-count">{rows.length}건</p>
+      </div>
+      <div class="worklog-scroll">
+        <table class="worklog-table">
+          <thead><tr><th scope="col">연도</th><th scope="col">지역</th><th scope="col">건물</th><th scope="col">공사</th><th scope="col">용량</th></tr></thead>
+          <tbody>{rows.map((r) => <tr><td>{r.year}</td><td>{r.region}</td><td>{r.building}</td><td>{r.work}</td><td>{r.capacity ?? '-'}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}
