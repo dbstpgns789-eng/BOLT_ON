@@ -1,0 +1,42 @@
+---
+// 오시는 길 (wooilenc location: map + address + route buttons; edison 오시는 길).
+// Map: Google embed needs no key; Naver/Kakao buttons open the apps most visitors use.
+// Address is the 지번 from 요청서; switch to the 도로명 address once the business registration arrives.
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import CompanyHead from '../../components/company/CompanyHead.astro';
+import { company, telHref } from '../../config/company';
+
+const q = encodeURIComponent(company.address);
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <CompanyHead current="location" title="오시는 길" />
+
+    <section class="section location" aria-labelledby="loc-title">
+      <div class="container location-row">
+        <div class="map-frame">
+          <iframe title={`${company.nameKo} 위치 지도`} src={`https://www.google.com/maps?q=${q}&output=embed`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="loc-info">
+          <h2 id="loc-title">{company.nameKo}</h2>
+          <dl class="loc-list">
+            <div><dt>주소</dt><dd>{company.address}</dd></div>
+            <div><dt>전화</dt><dd><a href={telHref}>{company.phone}</a></dd></div>
+            <div><dt>이메일</dt><dd><a href={`mailto:${company.email}`}>{company.email}</a></dd></div>
+            <div><dt>상담 시간</dt><dd>{company.hours}</dd></div>
+          </dl>
+          <div class="loc-routes">
+            <a class="btn btn--line" href={`https://map.naver.com/p/search/${q}`} target="_blank" rel="noopener">네이버 지도로 길찾기</a>
+            <a class="btn btn--line" href={`https://map.kakao.com/link/search/${q}`} target="_blank" rel="noopener">카카오맵으로 길찾기</a>
+          </div>
+          {/* CHECK with the client: field-based office, so a call before visiting */}
+          <p class="loc-note">현장 작업이 많아 사무실을 비울 때가 있습니다. 방문하시기 전에 전화 주시면 시간을 맞춰 드립니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>

@@ -529,6 +529,37 @@ p { word-break: keep-all; }
 /* ---- example banner for drafts ---- */
 .example-banner { margin: 0; padding: var(--space-sm) var(--gutter); background: var(--color-accent); color: var(--color-accent-ink); text-align: center; font-weight: 600; }
 
+/* ---- company pages ---- */
+.about-intro-row { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--space-2xl); align-items: end; }
+.about-intro h2 { font-size: var(--text-section); }
+.ways { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); }
+.ways li { padding: var(--space-xl); background: var(--color-paper); border-top: 3px solid var(--color-ink); }
+.ways-n { display: block; margin-bottom: var(--space-md); font-weight: 800; font-size: var(--text-xl); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.ways h3 { font-size: var(--text-xl); margin-bottom: var(--space-sm); }
+.ways p { color: var(--color-ink-2); }
+.license { font-size: var(--text-lg); font-weight: 600; }
+.others--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+.location-row { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-2xl); align-items: start; }
+.map-frame { aspect-ratio: 4 / 3; background: var(--color-paper-2); border: var(--rule-hair) solid var(--color-rule); }
+.map-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.loc-info h2 { font-size: var(--text-2xl); margin-bottom: var(--space-lg); }
+.loc-list { margin: 0 0 var(--space-xl); border-top: 3px solid var(--color-ink); }
+.loc-list > div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: var(--space-md); padding-block: var(--space-md); border-bottom: var(--rule-hair) solid var(--color-rule); }
+.loc-list dt { color: var(--color-muted); font-weight: 600; }
+.loc-list dd { margin: 0; }
+.loc-list a { color: var(--color-ink); }
+.loc-list a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.loc-routes { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+.loc-note { color: var(--color-ink-2); font-size: var(--text-sm); }
+
+@media (max-width: 75rem) { .others--5 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 60rem) {
+  .about-intro-row, .location-row { grid-template-columns: minmax(0, 1fr); }
+  .ways { grid-template-columns: minmax(0, 1fr); }
+  .others--5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* after the footer-info rules above, so it wins */
 @media (max-width: 75rem) { .footer-info { grid-template-columns: minmax(0, 1fr); } }
 

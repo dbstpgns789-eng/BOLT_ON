@@ -1,0 +1,70 @@
+---
+// 회사개요, all blocks in (to be trimmed): intro in the CEO's own words (요청서 3-2) · how we work, three points
+// (gesung "소개" three statements) · company facts table (wooilenc 회사개요) · license (edison, shown once issued) · areas.
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import CompanyHead from '../../components/company/CompanyHead.astro';
+import { company, telHref } from '../../config/company';
+import { companyRows } from '../../lib/company-rows';
+import { services } from '../../data/services';
+
+// From the CEO's three sentences in 요청서 3-2 (lightly split; the client checks the wording).
+const ways = [
+  { n: '01', title: '현장을 먼저 봅니다', line: '현장마다 전기 사용 환경이 다릅니다. 먼저 직접 확인하고, 필요한 용량과 공사 범위를 설명드린 뒤 시공합니다.' },
+  { n: '02', title: '한전 서류까지 함께', line: '한전 신청 서류도 함께 준비해, 처음 상담부터 준공까지 한 번에 진행합니다.' },
+  { n: '03', title: '끝난 뒤까지 책임집니다', line: '정직한 견적과 안전한 시공, 공사 후 책임 있는 A/S로 고객님의 전기가 끊김 없이 켜져 있도록 하겠습니다.' },
+];
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <CompanyHead current="overview" title="회사개요" />
+
+    <section class="section about-intro" aria-labelledby="about-title">
+      <div class="container about-intro-row">
+        <h2 id="about-title">전기 증설과 수변전설비를 전문으로 하는 전기공사 업체</h2>
+        <p class="svc-lead">볼트온이엔씨는 전기 증설과 승압, 수변전설비, 리모델링, 신·증축 전기공사를 전문으로 합니다.</p>
+      </div>
+    </section>
+
+    <section class="section section--tint" aria-labelledby="ways-title">
+      <div class="container">
+        <div class="head"><h2 id="ways-title">일하는 방식</h2></div>
+        <ol class="ways">
+          {ways.map((w) => <li><span class="ways-n">{w.n}</span><h3>{w.title}</h3><p>{w.line}</p></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="facts-title">
+      <div class="container company">
+        <div class="head">
+          <h2 id="facts-title">회사 정보</h2>
+          <p>전화로 상황을 말씀해 주시면 방문 일정을 잡아 드립니다.</p>
+          <a class="btn btn--primary" href={telHref}>{company.phone}</a>
+        </div>
+        <table class="info"><tbody>{companyRows().map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table>
+      </div>
+    </section>
+
+    {company.licenseNumber && (
+      <section class="section section--tint" aria-labelledby="license-title">
+        <div class="container">
+          <div class="head"><h2 id="license-title">면허</h2></div>
+          <p class="license">전기공사업 등록 {company.licenseNumber}</p>
+        </div>
+      </section>
+    )}
+
+    <section class="section svc-others" aria-labelledby="areas-title">
+      <div class="container">
+        <div class="head"><h2 id="areas-title">사업분야</h2></div>
+        <ul class="others others--5">
+          {services.map((s) => <li><a href={`/services/${s.slug}/`}><span class="others-name">{s.name}</span><span class="others-line">{s.tasks.slice(0, 2).join(', ')}</span></a></li>)}
+        </ul>
+      </div>
+    </section>
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>
