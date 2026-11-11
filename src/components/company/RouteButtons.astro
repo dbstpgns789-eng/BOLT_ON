@@ -1,17 +1,15 @@
 ---
-// Route buttons for 오시는 길 (2026-11-11 drafts).
-// Kakao: the official Kakao Map icon (developers.kakao.com/tool/resource/map). Its guide forbids putting the icon on a
-// similar-colour (yellow) background, so the icon always sits on white with clear space around it.
-// Naver: no public map icon exists (brand page offers the NAVER logotype and NAVER Green #03C75A only), so the N tile is ours in the official green.
-// variant: plain (white buttons, brand colour in the icons) | split (white icon cell + brand-colour label cell)
+// Route buttons for 오시는 길 (client pick B, 2026-11-11): white buttons, brand colour in the icons only.
+// Kakao: the official Kakao Map icon (developers.kakao.com/tool/resource/map); its guide forbids a similar-colour
+// (yellow) background, so it sits on white. Naver: no public map icon exists (the brand page offers the NAVER
+// logotype and NAVER Green #03C75A only), so the N tile is ours in the official green.
 import { Image } from 'astro:assets';
 import kakaoIcon from '../../assets/brand/kakaomap-icon.png';
 
-interface Props { address: string; variant?: 'plain' | 'split' }
-const { address, variant = 'split' } = Astro.props;
-const q = encodeURIComponent(address);
+interface Props { address: string }
+const q = encodeURIComponent(Astro.props.address);
 ---
-<div class={`routes routes--${variant}`}>
+<div class="routes routes--plain">
   <a class="route route--naver" href={`https://map.naver.com/p/search/${q}`} target="_blank" rel="noopener">
     <span class="route-icon"><span class="route-naver-tile" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M16.273 12.845 7.376 0H0v24h7.726V11.156L16.624 24H24V0h-7.727z"/></svg></span></span>
     <span class="route-label">네이버 지도</span>

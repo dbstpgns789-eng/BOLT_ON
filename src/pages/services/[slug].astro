@@ -34,8 +34,8 @@ const heading = `${topic}${last >= 0 && last % 28 !== 0 ? '이란' : '란'}?`;
     <ServiceBanner slug={slug} photo={media.banner} />
     <ServiceIntro page={page} heading={heading} photo={media.intro} photoAlt={media.introAlt} />
     <ServiceTasks page={page} />
-    <ServiceProcess page={page} variant="lanes" />
-    <ServiceCases slug={slug} variant="cards" />
+    <ServiceProcess page={page} />
+    <ServiceCases slug={slug} />
     <ConsultForm slug={slug} />
     <OtherAreas slug={slug} />
   </main>

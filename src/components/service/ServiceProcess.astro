@@ -1,50 +1,18 @@
 ---
-// variant: arrows (wooilenc chevrons) | owners (edison: each step says who does it) | photos (sinrok: a real photo per step where one exists)
-// | lanes (swimlane, a row per owner; chosen for the live pages 2026-11-11)
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-import { ownerLabel, type ServicePage } from '../../data/service-pages';
+// Area page 진행 순서: the owner swimlane diagram (client pick C, 2026-11-11).
 import ProcessFlow from '../ProcessFlow.astro';
+import type { ServicePage } from '../../data/service-pages';
 
-interface Props { page: ServicePage; variant?: 'arrows' | 'owners' | 'photos' | 'lanes'; photos?: (ImageMetadata | undefined)[] }
-const { page, variant = 'owners', photos = [] } = Astro.props;
-const mine = page.process.filter((s) => s.owner === 'customer').map((s) => s.name);
+interface Props { page: ServicePage }
+const { page } = Astro.props;
+const hasCustomerStep = page.process.some((s) => s.owner === 'customer');
 ---
-<section class={`section svc-process svc-process--${variant}`} aria-labelledby="process-title">
+<section class="section svc-process svc-process--lanes" aria-labelledby="process-title">
   <div class="container">
     <div class="head">
       <h2 id="process-title">진행 순서</h2>
-      {variant === 'owners' && <p>단계마다 누가 하는지 적었습니다.{mine.length > 0 && ` 고객님이 직접 하실 일은 ${mine.join(', ')}입니다.`}</p>}
-      {variant === 'lanes' && <p>왼쪽에서 오른쪽 순서로 진행합니다.{mine.length > 0 && ` 노란 줄이 고객님이 직접 하실 일입니다.`}</p>}
+      <p>왼쪽에서 오른쪽 순서로 진행합니다.{hasCustomerStep && ` 노란 줄이 고객님이 직접 하실 일입니다.`}</p>
     </div>
-    {variant === 'lanes' && <ProcessFlow steps={page.process} variant="lanes" />}
-    {variant === 'arrows' && (
-      <ol class="chevrons chevrons--6">
-        {page.process.map((s, i) => <li><span class="c-num">{i + 1}</span><h3>{s.name}</h3><p>{s.line}</p></li>)}
-      </ol>
-    )}
-    {variant === 'owners' && (
-      <ol class="owner-steps">
-        {page.process.map((s, i) => (
-          <li class={`owner-step owner-step--${s.owner}`}>
-            <span class="os-num">{String(i + 1).padStart(2, '0')}</span>
-            <div class="os-body"><h3>{s.name}</h3><p>{s.line}</p></div>
-            <span class="os-owner">{ownerLabel[s.owner]}</span>
-          </li>
-        ))}
-      </ol>
-    )}
-    {variant === 'photos' && (
-      <ol class="photo-steps photo-steps--6">
-        {page.process.map((s, i) => (
-          <li>
-            {photos[i] ? <Image src={photos[i]!} alt="" widths={[320, 480]} sizes="(max-width: 60rem) 50vw, 220px" /> : <span class="ps-blank" aria-hidden="true">{i + 1}</span>}
-            <span class="c-num">{i + 1}</span>
-            <h3>{s.name}</h3>
-            <p>{s.line}</p>
-          </li>
-        ))}
-      </ol>
-    )}
+    <ProcessFlow steps={page.process} />
   </div>
 </section>

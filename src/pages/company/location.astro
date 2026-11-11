@@ -29,7 +29,7 @@ const q = encodeURIComponent(company.address);
             <div><dt>이메일</dt><dd><a href={`mailto:${company.email}`}>{company.email}</a></dd></div>
             <div><dt>상담 시간</dt><dd>{company.hours}</dd></div>
           </dl>
-          <RouteButtons address={company.address} variant="plain" />
+          <RouteButtons address={company.address} />
           {/* CHECK with the client: field-based office, so a call before visiting */}
           <p class="loc-note">현장 작업이 많아 사무실을 비울 때가 있습니다. 방문하시기 전에 전화 주시면 시간을 맞춰 드립니다.</p>
         </div>

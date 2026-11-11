@@ -1,57 +1,28 @@
 ---
-// Process steps drawn as a diagram (2026-11-11 drafts). variant:
-// boxes (numbered boxes with chevrons, wooilenc 8-step chart) | timeline (dots on one line, colour = who) | lanes (swimlane: a row per owner)
+// Process steps as an owner swimlane (client pick C, 2026-11-11): one band per owner, each step in its owner's band,
+// order left to right. Below 75rem a long process (7+ steps) is drawn as two diagrams of four, so each box keeps a
+// readable width; below 60rem the bands give way to a list with an owner chip per step (CSS).
 import { ownerLabel, type Owner } from '../data/service-pages';
 
-interface Props { steps: { name: string; line: string; owner: Owner }[]; variant?: 'boxes' | 'timeline' | 'lanes' }
-const { steps, variant = 'boxes' } = Astro.props;
-const cols = steps.length > 6 ? 4 : 3;
+interface Props { steps: { name: string; line: string; owner: Owner }[] }
+const { steps } = Astro.props;
 const lanes: Owner[] = ['volton', 'customer', 'kepco'];
 const num = (i: number) => String(i + 1).padStart(2, '0');
-// Below 75rem a long process (7+ steps) is drawn as two diagrams of four, so each box keeps a readable width.
 const parts = steps.length > 6 ? [steps.slice(0, 4), steps.slice(4)] : [steps];
+const diagrams = [{ cls: 'lanes--full', from: 0, list: steps }, ...(parts.length > 1 ? parts.map((list, k) => ({ cls: 'lanes--part', from: k * 4, list })) : [])];
 ---
-{variant === 'boxes' && (
-  <ol class={`flow flow--${cols}`}>
-    {steps.map((s, i) => (
-      <li class={`flow-step flow-step--${s.owner}`}>
-        <span class="flow-num">{num(i)}</span>
-        <h3>{s.name}</h3>
-        <p>{s.line}</p>
-        <span class="os-owner">{ownerLabel[s.owner]}</span>
-      </li>
-    ))}
-  </ol>
-)}
-{variant === 'timeline' && (
-  <>
-    <ul class="pf-legend" aria-label="담당 표시">{lanes.map((o) => <li><span class={`tl-dot tl-dot--${o} tl-dot--key`} aria-hidden="true"></span>{ownerLabel[o]}</li>)}</ul>
-    <ol class="tl" style={`--tl-n: ${steps.length}`}>
-      {steps.map((s, i) => (
-        <li class="tl-step">
-          <span class={`tl-dot tl-dot--${s.owner}`} aria-hidden="true">{i + 1}</span>
+<div class={`lanes-wrap${parts.length > 1 ? ' lanes-wrap--split' : ''}`}>
+  {diagrams.map(({ cls, from, list }) => (
+    <ol class={`lanes ${cls}`} style={`--ln-n: ${list.length}`} start={from + 1}>
+      {lanes.map((o, r) => <li class={`ln-band ln-band--${o}`} style={`grid-row: ${r + 1}`} aria-hidden="true"><span class="ln-label">{ownerLabel[o]}</span></li>)}
+      {list.map((s, j) => (
+        <li class={`ln-step ln-step--${s.owner}`} style={`grid-column: ${j + 2}; grid-row: ${lanes.indexOf(s.owner) + 1}`}>
+          <span class="flow-num">{num(from + j)}</span>
           <h3>{s.name}</h3>
           <p>{s.line}</p>
-          <span class="tl-owner">{ownerLabel[s.owner]}</span>
+          <span class="ln-owner">{ownerLabel[s.owner]}</span>
         </li>
       ))}
     </ol>
-  </>
-)}
-{variant === 'lanes' && (
-  <div class={`lanes-wrap${parts.length > 1 ? ' lanes-wrap--split' : ''}`}>
-    {[{ cls: 'lanes--full', from: 0, list: steps }, ...(parts.length > 1 ? parts.map((list, k) => ({ cls: 'lanes--part', from: k * 4, list })) : [])].map(({ cls, from, list }) => (
-      <ol class={`lanes ${cls}`} style={`--ln-n: ${list.length}`} start={from + 1}>
-        {lanes.map((o, r) => <li class={`ln-band ln-band--${o}`} style={`grid-row: ${r + 1}`} aria-hidden="true"><span class="ln-label">{ownerLabel[o]}</span></li>)}
-        {list.map((s, j) => (
-          <li class={`ln-step ln-step--${s.owner}`} style={`grid-column: ${j + 2}; grid-row: ${lanes.indexOf(s.owner) + 1}`}>
-            <span class="flow-num">{num(from + j)}</span>
-            <h3>{s.name}</h3>
-            <p>{s.line}</p>
-            <span class="ln-owner">{ownerLabel[s.owner]}</span>
-          </li>
-        ))}
-      </ol>
-    ))}
-  </div>
-)}
+  ))}
+</div>
