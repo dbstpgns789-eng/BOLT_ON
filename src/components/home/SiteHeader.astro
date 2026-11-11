@@ -11,7 +11,7 @@ import { menu } from '../../data/menu';
         {menu.map((m) => (
           <li class="gnb-item">
             <a class="gnb-link" href={m.href}>{m.label}</a>
-            <ul class="gnb-sub">{m.sub.map(([t, h, d]) => <li><a href={h}><span class="gnb-sub-t">{t}</span>{d && <span class="gnb-sub-d">{d}</span>}</a></li>)}</ul>
+            <ul class="gnb-sub">{m.sub.map(([t, h]) => <li><a href={h}>{t}</a></li>)}</ul>
           </li>
         ))}
       </ul>
