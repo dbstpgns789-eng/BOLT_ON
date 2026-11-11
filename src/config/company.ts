@@ -19,6 +19,8 @@ export const company = {
   formAccessKey: '',
   // CHECK with the client before launch (also goes into the privacy policy page)
   formRetention: '상담이 끝난 뒤 1년',
+  // 개인정보처리방침 시행일, e.g. '2026년 12월 1일'. Set on launch day; empty shows a draft notice.
+  privacyEffective: '',
 };
 
 export const telHref = `tel:${company.phone.replace(/-/g, '')}`;

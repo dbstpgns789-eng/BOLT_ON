@@ -50,7 +50,7 @@ const area = slug ? services.find((s) => s.slug === slug)!.name : '';
       </div>
       <div class="field field--wide consent">
         <label><input type="checkbox" name="개인정보 동의" value="동의" required /> 개인정보 수집·이용에 동의합니다 (필수)</label>
-        <p>수집 항목: 이름, 연락처, 상담 내용. 목적: 상담 연락. 보관 기간: {company.formRetention}. <a href="#privacy">개인정보처리방침</a></p>
+        <p>수집 항목: 이름, 연락처, 상담 내용. 목적: 상담 연락. 보관 기간: {company.formRetention}. <a href="/privacy/">개인정보처리방침</a></p>
       </div>
       <div class="field field--wide consult-submit">
         <button class="btn btn--primary" type="submit">예약 요청 보내기</button>
