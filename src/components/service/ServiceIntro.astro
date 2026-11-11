@@ -1,21 +1,21 @@
 ---
 // Area introduction + one term box ("계약전력이란?", wooilenc footnote / sinrok "~이란?").
-// With a photo, the term box sits over the photo's lower edge so text and image read as one block.
+// The term box sits over the photo's lower edge so text and image read as one block.
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import type { ServicePage } from '../../data/service-pages';
 
-interface Props { page: ServicePage; heading?: string; photo?: ImageMetadata; photoAlt?: string }
-const { page, heading, photo, photoAlt = '' } = Astro.props;
+interface Props { page: ServicePage; heading: string; photo: ImageMetadata; photoAlt: string }
+const { page, heading, photo, photoAlt } = Astro.props;
 ---
-<section class={`section svc-intro${photo ? ' svc-intro--photo' : ''}`} aria-label="분야 소개">
+<section class="section svc-intro svc-intro--photo" aria-label="분야 소개">
   <div class="container svc-intro-row">
     <div>
-      {heading && <h2>{heading}</h2>}
+      <h2>{heading}</h2>
       <p class="svc-lead">{page.lead}</p>
     </div>
     <div class="svc-intro-side">
-      {photo && <Image class="svc-intro-img" src={photo} alt={photoAlt} widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 520px" />}
+      <Image class="svc-intro-img" src={photo} alt={photoAlt} widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 520px" />
       {page.term && (
         <aside class="term" aria-label={`${page.term.word}이란?`}>
           <p class="term-word">{page.term.word}이란?</p>

@@ -4,7 +4,7 @@
 import '../styles/site/page.css';
 import CallBar from '../components/CallBar.astro';
 import { company } from '../config/company';
-import { hero } from '../data/services';
+import { siteDescription } from '../data/services';
 
 interface Props { title?: string; description?: string; reveal?: boolean }
 const { title, description, reveal = false } = Astro.props;
@@ -16,7 +16,7 @@ const fullTitle = title ? `${title} | ${company.nameKo}` : `${company.nameKo} | 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
-  <meta name="description" content={description ?? hero.sentence} />
+  <meta name="description" content={description ?? siteDescription} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   {!company.launched && <meta name="robots" content="noindex" />}
   <script is:inline>document.documentElement.classList.add("js");</script>

@@ -12,7 +12,7 @@ import seodaemunLight from '../assets/cases/seodaemun-prison/03-sculpture-light.
 import cranes from '../assets/stock/tower-cranes.jpg';
 import apartments from '../assets/stock/apartment-construction.jpg';
 
-export const serviceMedia: Record<ServiceSlug, { banner: ImageMetadata; intro?: ImageMetadata; introAlt?: string }> = {
+export const serviceMedia: Record<ServiceSlug, { banner: ImageMetadata; intro: ImageMetadata; introAlt: string }> = {
   substation: { banner: substationStock, intro: cheongju, introAlt: '청주 식품공장에 설치한 옥외 변전설비' },
   capacity: { banner: panel, intro: dongdaemunAfter, introAlt: '증설 공사를 마친 유치원 분전반' },
   transformer: { banner: insulators, intro: substationStock, introAlt: '변전소의 대형 변압기' },
