@@ -1,0 +1,11 @@
+---
+// 고객지원 tabs (same look as the company tabs): 상담 예약 / 한전 신청 안내.
+interface Props { current: 'consult' | 'kepco' }
+const { current } = Astro.props;
+const tabs = [['consult', '상담 예약', '/consult/'], ['kepco', '한전 신청 안내', '/kepco/']] as const;
+---
+<nav class="svc-tabs" aria-label="고객지원">
+  <div class="container">
+    <ul>{tabs.map(([k, label, href]) => <li><a href={href} aria-current={k === current ? 'page' : undefined}>{label}</a></li>)}</ul>
+  </div>
+</nav>

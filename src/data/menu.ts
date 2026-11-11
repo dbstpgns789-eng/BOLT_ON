@@ -2,7 +2,6 @@ import { services } from './services';
 
 // Top navigation (2026-11-11): four groups like wooilenc/sinrok; 고객지원 after edison's support menu.
 // FAQ joins 고객지원 once the client gives Q&A.
-// 한전 신청 안내 points at the home band until its page exists.
 export type MenuItem = { label: string; href: string; sub: [string, string][] };
 
 export const menu: MenuItem[] = [
@@ -34,7 +33,7 @@ export const menu: MenuItem[] = [
     href: '/consult/',
     sub: [
       ['상담 예약', '/consult/'],
-      ['한전 신청 안내', '/#kepco'],
+      ['한전 신청 안내', '/kepco/'],
     ],
   },
 ];

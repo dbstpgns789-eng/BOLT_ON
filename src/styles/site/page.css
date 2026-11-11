@@ -614,3 +614,14 @@ aaa
 .tasks-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .tasks-grid--3 li { grid-template-columns: minmax(0, 1fr); justify-items: start; }
 @media (max-width: 60rem) { .tasks-grid--3 { grid-template-columns: minmax(0, 1fr); } .tasks-grid--3 li { grid-template-columns: 64px minmax(0, 1fr); } }
+
+/* 한전 신청 안내 (/kepco/) */
+.kinds a { white-space: nowrap; color: var(--color-ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 0.2em; }
+.kinds a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.docs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl); }
+.docs-group { border-top: 3px solid var(--color-ink); padding-top: var(--space-lg); }
+.docs-group h3 { font-size: var(--text-lg); margin-bottom: var(--space-md); }
+.docs-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+.docs-cols h4 { font-size: var(--text-sm); color: var(--color-ink-2); margin-bottom: var(--space-xs); }
+.docs-cols ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--space-2xs); }
+@media (max-width: 60rem) { .docs { grid-template-columns: minmax(0, 1fr); } }
