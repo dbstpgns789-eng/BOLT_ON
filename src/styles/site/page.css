@@ -550,7 +550,6 @@ p { word-break: keep-all; }
 .loc-list dd { margin: 0; }
 .loc-list a { color: var(--color-ink); }
 .loc-list a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-.loc-routes { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); }
 .loc-note { color: var(--color-ink-2); font-size: var(--text-sm); }
 
 @media (max-width: 75rem) { .others--5 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -575,11 +574,6 @@ p { word-break: keep-all; }
 .ways-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .ways-body { padding: var(--space-xl); }
 
-aaa
-.btn--naver, .btn--kakao { gap: var(--space-xs); border: 0; }
-.btn--naver { background: var(--color-naver); color: var(--color-on-naver); }
-.btn--kakao { background: var(--color-kakao); color: var(--color-on-kakao); }
-.btn--naver:hover, .btn--kakao:hover { filter: brightness(0.95); }
 
 @media (max-width: 60rem) {
   .about-hero-row { grid-template-columns: minmax(0, 1fr); }
