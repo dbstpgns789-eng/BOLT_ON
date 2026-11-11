@@ -1,0 +1,27 @@
+---
+// Before/after compare (edison case detail). A real range input moves the divider, so it works by keyboard;
+// without script both photos simply show side by side.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { before: ImageMetadata; after: ImageMetadata; beforeAlt: string; afterAlt: string }
+const { before, after, beforeAlt, afterAlt } = Astro.props;
+---
+<figure class="ba">
+  <div class="ba-stage">
+    <Image class="ba-after" src={after} alt={afterAlt} widths={[640, 960]} sizes="(max-width: 60rem) 100vw, 640px" />
+    <div class="ba-before-wrap"><Image class="ba-before" src={before} alt={beforeAlt} widths={[640, 960]} sizes="(max-width: 60rem) 100vw, 640px" /></div>
+    <span class="ba-label ba-label--before">공사 전</span>
+    <span class="ba-label ba-label--after">공사 후</span>
+  </div>
+  <label class="ba-control"><span class="visually-hidden">공사 전과 후 비교 위치</span><input type="range" min="0" max="100" value="50" /></label>
+  <figcaption>가운데 막대를 좌우로 움직여 공사 전과 후를 비교해 보세요.</figcaption>
+</figure>
+<script>
+  document.querySelectorAll<HTMLElement>('.ba').forEach((ba) => {
+    ba.classList.add('ba--on');
+    const input = ba.querySelector<HTMLInputElement>('input');
+    const set = () => ba.style.setProperty('--ba', `${input?.value ?? 50}%`);
+    input?.addEventListener('input', set);
+    set();
+  });
+</script>

@@ -8,6 +8,7 @@ completed: 2026-02
 duration: 4~5개월
 tags: [전시 조명, 라인 조명, 인테리어 전기]
 featured: 4
+summary: 개관을 앞둔 미술관의 전시 조명, 복도 라인 조명 등 인테리어 전기공사를 4~5개월 동안 진행했습니다.
 photos:
   - { src: ../../assets/cases/gimhae-museum/01-facade.jpg, stage: after, caption: 개관을 앞둔 미술관 외관 }
   - { src: ../../assets/cases/gimhae-museum/02-entrance.jpg, stage: after, caption: 입구 아치 간접조명 }

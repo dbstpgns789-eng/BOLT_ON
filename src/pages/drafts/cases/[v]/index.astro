@@ -1,0 +1,29 @@
+---
+// 시공사례 목록 시안 C1 (wooil·gesung grid) / C2 (edison rich cards) / C3 (haeun·sinrok rows). research/industry/CASES-PAGE.md
+import DraftLayout from '../../../../layouts/DraftLayout.astro';
+import SiteHeader from '../../../../components/home/SiteHeader.astro';
+import SiteFooter from '../../../../components/home/SiteFooter.astro';
+import CaseList from '../../../../components/cases/CaseList.astro';
+import ConsultForm from '../../../../components/service/ConsultForm.astro';
+
+export function getStaticPaths() {
+  return ['c1', 'c2', 'c3'].map((v) => ({ params: { v } }));
+}
+const { v } = Astro.params;
+const variant = ({ c1: 'grid', c2: 'rich', c3: 'rows' } as const)[v as 'c1' | 'c2' | 'c3'];
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <section class="page-head">
+      <div class="container">
+        <p class="svc-crumb"><a href="/">홈</a> <span aria-hidden="true">/</span> 시공사례</p>
+        <h1>시공사례</h1>
+        <p>볼트온이엔씨가 직접 시공한 현장입니다.</p>
+      </div>
+    </section>
+    <CaseList variant={variant} base={`/drafts/cases/${v}/`} />
+    <ConsultForm slug="capacity" />
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>

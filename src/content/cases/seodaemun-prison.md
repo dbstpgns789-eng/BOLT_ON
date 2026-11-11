@@ -8,6 +8,7 @@ completed: 2026-08
 duration: 2개월
 tags: [전시 조명, 영상 설비 전원, 인테리어 전기]
 featured: 3
+summary: 유관순 열사 옥사 전시 공간의 조명과 영상 설비 전원을 시공했습니다. 2개월 동안 전시 공사 일정에 맞춰 진행했습니다.
 photos:
   - { src: ../../assets/cases/seodaemun-prison/01-led-ceiling.jpg, stage: after, caption: 천장 미디어 전시 }
   - { src: ../../assets/cases/seodaemun-prison/02-led-hall.jpg, stage: after, caption: 복도 천장 영상 }

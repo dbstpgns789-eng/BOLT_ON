@@ -1,0 +1,66 @@
+---
+// Case detail. variant: brief (gesung: overview + key work list + photo stack) | data (edison: before/after compare + facts table + numbered work)
+// | story (haeun/sinrok: large cover + summary + photos by stage + previous/next).
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BeforeAfter from './BeforeAfter.astro';
+import { services } from '../../data/services';
+import { ym, stageKo } from '../../lib/format';
+
+interface Props { entry: CollectionEntry<'cases'>; variant?: 'brief' | 'data' | 'story'; listHref: string; prev?: CollectionEntry<'cases'>; next?: CollectionEntry<'cases'>; base: string }
+const { entry, variant = 'brief', listHref, prev, next, base } = Astro.props;
+const d = entry.data;
+const service = services.find((s) => s.slug === d.service)!;
+const before = d.photos.find((p) => p.stage === 'before');
+const after = d.photos.find((p) => p.stage === 'after');
+const cover = after ?? d.photos[0];
+const facts: [string, string | undefined][] = [
+  ['사업분야', service.name], ['현장', d.site], ['건물', d.building], ['지역', d.region],
+  ['용량', d.capacity], ['완공', ym(d.completed)], ['공사 기간', d.duration],
+];
+// brief: one photo set; data and story: grouped by stage (공사 전 / 중 / 후)
+const stages = variant === 'brief'
+  ? [['all', d.photos] as const]
+  : (['before', 'during', 'after'] as const).map((s) => [s, d.photos.filter((p) => p.stage === s)] as const).filter(([, ps]) => ps.length);
+const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as keyof typeof stageKo]);
+---
+<article class={`cd cd--${variant}`}>
+  <header class="cd-head">
+    <div class="container">
+      <p class="cd-crumb"><a href="/">홈</a> <span aria-hidden="true">/</span> <a href={listHref}>시공사례</a></p>
+      <p class="cd-area"><a href={`/services/${d.service}/`}>{service.name}</a></p>
+      <h1>{d.title}</h1>
+      <p class="cd-meta">{d.region}, {ym(d.completed)} 완공{d.duration && `, 공사 기간 ${d.duration}`}</p>
+    </div>
+  </header>
+
+  <div class="container cd-body">
+    {variant === 'data' && before && after ? (
+      <BeforeAfter before={before.src} after={after.src} beforeAlt={before.caption} afterAlt={after.caption} />
+    ) : (
+      <figure class="cd-cover"><Image src={cover.src} alt={cover.caption} widths={[640, 960, 1280]} sizes="(max-width: 60rem) 100vw, 760px" loading="eager" /><figcaption>{cover.caption}</figcaption></figure>
+    )}
+
+    <div class="cd-side">
+      {d.summary && <p class="cd-summary">{d.summary}</p>}
+      <table class="info cd-facts"><tbody>{facts.filter(([, v]) => v).map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table>
+      <h2 class="cd-sub">주요 작업</h2>
+      <ol class={`cd-work${variant === 'data' ? ' cd-work--num' : ''}`}>{d.tags.map((t) => <li>{t}</li>)}</ol>
+    </div>
+  </div>
+
+  <section class="container cd-photos" aria-label="현장 사진">
+    {stages.map(([s, ps]) => (
+      <div class="cd-stage">
+        <h2 class="cd-sub">{stageTitle(s)}</h2>
+        <ul>{ps.map((p) => <li><figure><Image src={p.src} alt={p.caption} widths={[360, 560]} sizes="(max-width: 60rem) 50vw, 300px" /><figcaption>{p.caption}</figcaption></figure></li>)}</ul>
+      </div>
+    ))}
+  </section>
+
+  <nav class="container cd-nav" aria-label="다른 시공사례">
+    {prev ? <a class="cd-prev" href={`${base}${prev.id}/`}><span>이전 사례</span>{prev.data.title}</a> : <span></span>}
+    <a class="cd-list" href={listHref}>목록으로</a>
+    {next ? <a class="cd-next" href={`${base}${next.id}/`}><span>다음 사례</span>{next.data.title}</a> : <span></span>}
+  </nav>
+</article>

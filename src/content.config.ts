@@ -15,6 +15,7 @@ const cases = defineCollection({
       completed: z.string(), // YYYY-MM
       duration: z.string().optional(),
       tags: z.array(z.string()).default([]),
+      summary: z.string().optional(), // short factual summary; client to confirm
       featured: z.number().optional(), // order on the home page
       photos: z.array(
         z.object({ src: image(), stage: z.enum(['before', 'during', 'after']), caption: z.string() }),

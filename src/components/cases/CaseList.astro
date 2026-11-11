@@ -1,0 +1,54 @@
+---
+// Case list. variant: grid (wooilenc/gesung 3-column photo cards) | rich (edison: cards carry region, month, duration, tags)
+// | rows (haeun/sinrok: photo left, text right). Area filter works without script (all shown) and filters with it.
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { services } from '../../data/services';
+import { ym } from '../../lib/format';
+
+interface Props { variant?: 'grid' | 'rich' | 'rows'; base: string }
+const { variant = 'grid', base } = Astro.props;
+const list = (await getCollection('cases')).sort((a, b) => b.data.completed.localeCompare(a.data.completed));
+const areaName = Object.fromEntries(services.map((s) => [s.slug, s.name.replace(/ (공사|전기공사)$/, '')]));
+const areas = services.filter((s) => list.some((c) => c.data.service === s.slug));
+---
+<section class="section case-list" aria-labelledby="case-list-title">
+  <div class="container">
+    <div class="head head--row">
+      <h2 id="case-list-title">시공사례 {list.length}건</h2>
+      <div class="case-filter" role="group" aria-label="사업분야로 보기">
+        <button type="button" data-filter="all" aria-pressed="true">전체</button>
+        {areas.map((a) => <button type="button" data-filter={a.slug} aria-pressed="false">{areaName[a.slug]}</button>)}
+      </div>
+    </div>
+    <ul class={`cl cl--${variant}`}>
+      {list.map((c) => {
+        const cover = c.data.photos.find((p) => p.stage === 'after') ?? c.data.photos[0];
+        return (
+          <li data-area={c.data.service}>
+            <a class="cl-card" href={`${base}${c.id}/`}>
+              <Image class="cl-img" src={cover.src} alt={cover.caption} widths={[400, 640]} sizes={variant === 'rows' ? '(max-width: 60rem) 100vw, 420px' : '(max-width: 60rem) 50vw, 400px'} />
+              <span class="cl-text">
+                <span class="cl-area">{areaName[c.data.service]}</span>
+                <span class="cl-title">{c.data.title}</span>
+                <span class="cl-meta">{c.data.region}, {ym(c.data.completed)} 완공{variant !== 'grid' && c.data.duration ? `, 공사 기간 ${c.data.duration}` : ''}</span>
+                {variant !== 'grid' && <span class="cl-tags">{c.data.tags.map((t) => <span>{t}</span>)}</span>}
+                {variant === 'rows' && c.data.summary && <span class="cl-summary">{c.data.summary}</span>}
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
+<script>
+  const group = document.querySelector('.case-filter');
+  group?.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-filter]');
+    if (!b) return;
+    const f = b.dataset.filter;
+    group.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll<HTMLElement>('.cl > li').forEach((li) => { li.hidden = f !== 'all' && li.dataset.area !== f; });
+  });
+</script>
