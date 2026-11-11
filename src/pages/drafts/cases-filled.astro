@@ -1,5 +1,5 @@
 ---
-// Draft: how the case pages look once the client sends 공사 전 상황, 용량 and a cleaned work log.
+// Draft: how a case looks once the client sends 공사 전 상황 and 용량. (Work-log table dropped 2026-11-11.)
 // EVERY value marked 예시 below is made up for layout only. Never copy it into src/content.
 import { getCollection } from 'astro:content';
 import DraftLayout from '../../layouts/DraftLayout.astro';
@@ -7,7 +7,6 @@ import SiteHeader from '../../components/home/SiteHeader.astro';
 import SiteFooter from '../../components/home/SiteFooter.astro';
 import CaseDetail from '../../components/cases/CaseDetail.astro';
 import CaseList from '../../components/cases/CaseList.astro';
-import WorkLog from '../../components/cases/WorkLog.astro';
 
 const real = (await getCollection('cases')).find((c) => c.id === 'dongdaemun-kindergarten')!;
 const example = {
@@ -19,23 +18,14 @@ const example = {
   },
 } as typeof real;
 
-const rows = [
-  { year: '2026', region: '(예시) 서울 관악구', building: '음식점', work: '전기 증설', capacity: '15kW → 30kW' },
-  { year: '2026', region: '(예시) 경기 수원시', building: '상가', work: '분전반·차단기 교체' },
-  { year: '2026', region: '(예시) 충북 청주시', building: '공장', work: '전기 증설·사용전점검', capacity: '50kW → 100kW' },
-  { year: '2026', region: '(예시) 경기 안산시', building: '사무실', work: '전기 증설', capacity: '8kW → 30kW' },
-  { year: '2026', region: '(예시) 경기 이천시', building: '농업용 시설', work: '임시전력', capacity: '10kW' },
-  { year: '2025', region: '(예시) 경기 김포시', building: '집합건물', work: '모자분리' },
-];
 ---
 <DraftLayout variant="svc">
   <SiteHeader />
   <main id="top">
-    <p class="example-banner" role="note">이 페이지는 <strong>예시 내용</strong>입니다. '공사 전 상황', '용량', '공사 이력'은 클라이언트 정보가 왔다고 가정한 가짜 값입니다.</p>
+    <p class="example-banner" role="note">이 페이지는 <strong>예시 내용</strong>입니다. '공사 전 상황'과 '용량'은 클라이언트 정보가 왔다고 가정한 가짜 값입니다.</p>
     <CaseDetail entry={example} variant="final" listHref="/cases/" base="/cases/" />
-    <section class="page-head"><div class="container"><h1>시공사례 목록 + 공사 이력 표</h1></div></section>
+    <section class="page-head"><div class="container"><h1>시공사례 목록</h1></div></section>
     <CaseList variant="rich" base="/cases/" />
-    <WorkLog rows={rows} />
   </main>
   <SiteFooter variant="haeun" dark />
 </DraftLayout>
