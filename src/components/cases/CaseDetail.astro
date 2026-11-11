@@ -66,24 +66,48 @@ const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as 
     {next ? <a class="cd-next" href={`${base}${next.id}/`}><span>다음 사례</span>{next.data.title}</a> : <span></span>}
   </nav>
   <dialog class="lightbox" aria-label="사진 크게 보기">
+    <div class="lightbox-bar">
+      <span class="lightbox-count" aria-live="polite"></span>
+      <button type="button" class="lightbox-close">닫기</button>
+    </div>
+    <div class="lightbox-stage">
+      <button type="button" class="lightbox-nav" data-step="-1" aria-label="이전 사진">이전</button>
+      <button type="button" class="lightbox-nav" data-step="1" aria-label="다음 사진">다음</button>
+    </div>
     <p class="lightbox-cap"></p>
-    <button type="button" class="lightbox-close">닫기</button>
   </dialog>
 </article>
 <script>
-  // Tap a site photo to see it large; Esc, the close button or a tap outside the photo closes it.
+  // Tap a site photo to see it large. Previous/next buttons, arrow keys or a swipe move through the site photos;
+  // Esc, the close button or a tap outside the photo closes it. Without script the photo link opens the file.
   const box = document.querySelector<HTMLDialogElement>('.lightbox');
   if (box && 'showModal' in box) {
-    let img: HTMLImageElement | null = null; // made on first open, so the page has no empty <img>
+    const list = [...document.querySelectorAll<HTMLAnchorElement>('.cd-photos .cd-zoom')];
+    const stage = box.querySelector('.lightbox-stage')!;
     const cap = box.querySelector('.lightbox-cap')!;
+    const count = box.querySelector('.lightbox-count')!;
+    let img: HTMLImageElement | null = null; // made on first open, so the page has no empty <img>
+    let at = 0;
+    const show = (n: number) => {
+      at = (n + list.length) % list.length;
+      const a = list[at];
+      const alt = a.querySelector('img')?.alt ?? '';
+      if (!img) { img = new Image(); stage.prepend(img); }
+      img.src = a.href; img.alt = alt; cap.textContent = alt;
+      count.textContent = `${at + 1} / ${list.length}`;
+    };
     document.querySelectorAll<HTMLAnchorElement>('.cd-zoom').forEach((a) => a.addEventListener('click', (e) => {
       e.preventDefault();
-      const small = a.querySelector('img');
-      if (!img) { img = new Image(); box.prepend(img); }
-      img.src = a.href; img.alt = small?.alt ?? ''; cap.textContent = small?.alt ?? '';
+      const k = list.findIndex((x) => x.href === a.href);
+      show(k < 0 ? 0 : k);
       box.showModal();
     }));
+    box.querySelectorAll<HTMLButtonElement>('.lightbox-nav').forEach((b) => b.addEventListener('click', () => show(at + Number(b.dataset.step))));
     box.querySelector('.lightbox-close')!.addEventListener('click', () => box.close());
     box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
+    box.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(at - 1); if (e.key === 'ArrowRight') show(at + 1); });
+    let x0 = 0;
+    stage.addEventListener('touchstart', (e) => { x0 = (e as TouchEvent).touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', (e) => { const dx = (e as TouchEvent).changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(at + (dx < 0 ? 1 : -1)); });
   }
 </script>

@@ -3,7 +3,6 @@
 // variant: overlay (text left on a navy fade) | woil (big 01 / 03 counter and arrows, after wooilenc.com) | center (one centred line, sinrok-like) | short (60vh, leaves room for the case strip)
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { telHref } from '../../config/company';
 
 interface Slide { img: ImageMetadata; alt: string; head: string; line: string; pos?: string }
 interface Props { slides: Slide[]; variant?: 'overlay' | 'woil' | 'center' | 'short' }
@@ -19,7 +18,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
           {i === 0 ? <h1 class="slide-head">{s.head}</h1> : <p class="slide-head">{s.head}</p>}
           <p class="lead">{s.line}</p>
           <div class="actions">
-            <a class="btn btn--primary" href={telHref}>전화 상담</a>
+            <a class="btn btn--primary" href="/consult/">상담 예약</a>
             <a class="btn btn--ghost" href="/cases/">시공사례 보기</a>
           </div>
         </div>
