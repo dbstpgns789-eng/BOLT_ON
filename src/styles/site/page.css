@@ -775,3 +775,18 @@ aaa
 .mnav-when-open, .mnav[open] .mnav-when-closed { display: none; }
 .mnav[open] .mnav-when-open { display: inline; }
 .mnav:not([open]) .mnav-body { display: none; }
+
+/* route buttons (오시는 길): official Kakao Map icon kept on white with clear space; brand colours on the label cell (split) or only in the icons (plain) */
+.routes { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+.route { display: inline-flex; align-items: stretch; min-height: 60px; font-weight: 700; text-decoration: none; color: var(--color-ink); background: var(--color-paper); border: var(--rule-hair) solid var(--color-rule); }
+.route:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.route-icon { display: grid; place-items: center; padding-inline: var(--space-md); }
+.route-icon img { display: block; width: 30px; height: 30px; }
+.route-naver-tile { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 7px; background: var(--color-naver); color: var(--color-paper); }
+.route-label { display: flex; align-items: center; padding-inline: var(--space-lg); }
+.routes--split .route--naver .route-label { background: var(--color-naver); color: var(--color-on-naver); }
+.routes--split .route--kakao .route-label { background: var(--color-kakao); color: var(--color-on-kakao); }
+.routes--split .route:hover .route-label { filter: brightness(0.95); }
+.routes--plain .route-label { padding-left: 0; }
+.routes--plain .route--naver:hover { border-color: var(--color-naver); }
+.routes--plain .route--kakao:hover { border-color: var(--color-on-kakao); }
