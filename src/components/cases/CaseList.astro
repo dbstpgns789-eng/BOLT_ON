@@ -44,6 +44,12 @@ const areas = services.filter((s) => list.some((c) => c.data.service === s.slug)
 </section>
 <script>
   const group = document.querySelector('.case-filter');
+  const pick = (f: string) => {
+    group?.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.filter === f)));
+    document.querySelectorAll<HTMLElement>('.cl > li').forEach((li) => { li.hidden = f !== 'all' && li.dataset.area !== f; });
+  };
+  const want = new URLSearchParams(location.search).get('area');
+  if (want && group?.querySelector(`[data-filter="${want}"]`)) pick(want);
   group?.addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-filter]');
     if (!b) return;

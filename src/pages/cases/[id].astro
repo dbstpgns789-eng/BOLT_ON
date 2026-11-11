@@ -1,0 +1,24 @@
+---
+// Case detail, fixed 2026-11-11: large cover (no compare slider) · summary · 공사 전 상황 (when the client gives it)
+// · facts table · numbered key work · one set of site photos · previous / list / next · callback form.
+import { getCollection } from 'astro:content';
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import CaseDetail from '../../components/cases/CaseDetail.astro';
+import ConsultForm from '../../components/service/ConsultForm.astro';
+
+export async function getStaticPaths() {
+  const list = (await getCollection('cases')).sort((a, b) => b.data.completed.localeCompare(a.data.completed));
+  return list.map((entry, i) => ({ params: { id: entry.id }, props: { entry, prev: list[i - 1], next: list[i + 1] } }));
+}
+const { entry, prev, next } = Astro.props;
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <CaseDetail entry={entry} variant="final" listHref="/cases/" prev={prev} next={next} base="/cases/" />
+    <ConsultForm slug={entry.data.service} />
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>

@@ -13,7 +13,7 @@ const list = (await getCollection('cases')).filter((c) => c.data.service === slu
 {list.length > 0 && (
   <section class="section svc-cases" aria-labelledby="svc-cases-title">
     <div class="container">
-      <div class="head head--row"><h2 id="svc-cases-title">이 분야 시공사례</h2><a class="more" href="/#cases">전체 시공사례</a></div>
+      <div class="head head--row"><h2 id="svc-cases-title">이 분야 시공사례</h2><a class="more" href={`/cases/?area=${slug}`}>전체 시공사례</a></div>
       {variant === 'grid' ? (
         <ul class="svc-photo-grid">
           {list.flatMap((c) => c.data.photos.map((p) => (
@@ -25,7 +25,7 @@ const list = (await getCollection('cases')).filter((c) => c.data.service === slu
           {list.map((c) => {
             const cover = c.data.photos.find((p) => p.stage === 'after') ?? c.data.photos[0];
             return (
-              <li><a class="case-card" href="/#cases">
+              <li><a class="case-card" href={`/cases/${c.id}/`}>
                 <Image src={cover.src} alt={cover.caption} widths={[400, 640]} sizes="(max-width: 60rem) 50vw, 360px" />
                 <span class="case-card-title">{c.data.title}</span>
                 <span class="case-card-meta">{c.data.region}, {ym(c.data.completed)} 완공{c.data.duration && `, ${c.data.duration}`}</span>

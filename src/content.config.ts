@@ -16,6 +16,7 @@ const cases = defineCollection({
       duration: z.string().optional(),
       tags: z.array(z.string()).default([]),
       summary: z.string().optional(), // short factual summary; client to confirm
+      problem: z.string().optional(), // 공사 전 상황, from the client only (never invented)
       featured: z.number().optional(), // order on the home page
       photos: z.array(
         z.object({ src: image(), stage: z.enum(['before', 'during', 'after']), caption: z.string() }),

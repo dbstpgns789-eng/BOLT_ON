@@ -7,7 +7,7 @@ import BeforeAfter from './BeforeAfter.astro';
 import { services } from '../../data/services';
 import { ym, stageKo } from '../../lib/format';
 
-interface Props { entry: CollectionEntry<'cases'>; variant?: 'brief' | 'data' | 'story'; listHref: string; prev?: CollectionEntry<'cases'>; next?: CollectionEntry<'cases'>; base: string }
+interface Props { entry: CollectionEntry<'cases'>; variant?: 'brief' | 'data' | 'story' | 'final'; listHref: string; prev?: CollectionEntry<'cases'>; next?: CollectionEntry<'cases'>; base: string }
 const { entry, variant = 'brief', listHref, prev, next, base } = Astro.props;
 const d = entry.data;
 const service = services.find((s) => s.slug === d.service)!;
@@ -19,7 +19,7 @@ const facts: [string, string | undefined][] = [
   ['용량', d.capacity], ['완공', ym(d.completed)], ['공사 기간', d.duration],
 ];
 // brief: one photo set; data and story: grouped by stage (공사 전 / 중 / 후)
-const stages = variant === 'brief'
+const stages = variant === 'brief' || variant === 'final'
   ? [['all', d.photos] as const]
   : (['before', 'during', 'after'] as const).map((s) => [s, d.photos.filter((p) => p.stage === s)] as const).filter(([, ps]) => ps.length);
 const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as keyof typeof stageKo]);
@@ -43,9 +43,10 @@ const stageTitle = (s: string) => (s === 'all' ? '현장 사진' : stageKo[s as 
 
     <div class="cd-side">
       {d.summary && <p class="cd-summary">{d.summary}</p>}
+      {d.problem && <div class="cd-problem"><h2 class="cd-sub">공사 전 상황</h2><p>{d.problem}</p></div>}
       <table class="info cd-facts"><tbody>{facts.filter(([, v]) => v).map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table>
       <h2 class="cd-sub">주요 작업</h2>
-      <ol class={`cd-work${variant === 'data' ? ' cd-work--num' : ''}`}>{d.tags.map((t) => <li>{t}</li>)}</ol>
+      <ol class={`cd-work${variant === 'data' || variant === 'final' ? ' cd-work--num' : ''}`}>{d.tags.map((t) => <li>{t}</li>)}</ol>
     </div>
   </div>
 

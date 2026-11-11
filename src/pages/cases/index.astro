@@ -1,0 +1,23 @@
+---
+// Case list, fixed from draft C2 (2026-11-11): cards with region, month, duration and work tags; area filter (?area= preselects).
+import DraftLayout from '../../layouts/DraftLayout.astro';
+import SiteHeader from '../../components/home/SiteHeader.astro';
+import SiteFooter from '../../components/home/SiteFooter.astro';
+import CaseList from '../../components/cases/CaseList.astro';
+import ConsultForm from '../../components/service/ConsultForm.astro';
+---
+<DraftLayout variant="svc">
+  <SiteHeader />
+  <main id="top">
+    <section class="page-head">
+      <div class="container">
+        <p class="svc-crumb"><a href="/">홈</a> <span aria-hidden="true">/</span> 시공사례</p>
+        <h1>시공사례</h1>
+        <p>볼트온이엔씨가 직접 시공한 현장입니다.</p>
+      </div>
+    </section>
+    <CaseList variant="rich" base="/cases/" />
+    <ConsultForm slug="capacity" />
+  </main>
+  <SiteFooter variant="haeun" dark />
+</DraftLayout>
