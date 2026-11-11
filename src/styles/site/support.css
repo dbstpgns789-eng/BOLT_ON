@@ -1,0 +1,39 @@
+/* 고객지원 and legal pages: 한전 신청 안내 (kinds, documents), privacy policy, 404. */
+.needs { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-sm); }
+.needs li { position: relative; padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-2xl); background: var(--color-paper); border: var(--rule-hair) solid var(--color-rule); }
+.needs li::before { content: ""; position: absolute; left: var(--space-lg); top: calc(50% - var(--space-2xs)); width: var(--space-xs); height: var(--space-xs); background: var(--color-accent); }
+.kinds a { white-space: nowrap; color: var(--color-ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 0.2em; }
+.kinds a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.docs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl); }
+.docs-group { border-top: 3px solid var(--color-ink); padding-top: var(--space-lg); }
+.docs-group h3 { font-size: var(--text-lg); margin-bottom: var(--space-md); }
+.docs-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+.docs-cols h4 { font-size: var(--text-sm); color: var(--color-ink-2); margin-bottom: var(--space-xs); }
+.docs-cols ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--space-2xs); }
+.docs-common { margin-top: var(--space-2xl); padding: var(--space-lg) var(--space-xl); background: color-mix(in oklab, var(--color-accent) 14%, var(--color-paper)); border: var(--rule-hair) solid var(--color-accent); }
+.docs-common h3 { font-size: var(--text-lg); margin-bottom: var(--space-xs); }
+.docs-common p { color: var(--color-ink-2); margin-bottom: var(--space-md); }
+.docs-common ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.docs-common li { padding: var(--space-2xs) var(--space-md); background: var(--color-paper); border: var(--rule-hair) solid var(--color-rule); font-weight: 600; }
+.legal-body { max-width: 52rem; }
+.legal h1 { font-size: var(--text-section); margin-bottom: var(--space-md); }
+.legal-lead { font-size: var(--text-lg); color: var(--color-ink-2); }
+.legal h2 { font-size: var(--text-lg); margin: var(--space-2xl) 0 var(--space-sm); }
+.legal p + p, .legal .info + p { margin-top: var(--space-sm); }
+.legal p a, .legal td a, .legal li a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 0.2em; }
+.legal p a:focus-visible, .legal td a:focus-visible, .legal li a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.legal .info { margin-top: var(--space-sm); }
+.legal-list { margin: var(--space-sm) 0 0; padding-left: 1.2em; display: grid; gap: var(--space-2xs); }
+.legal-date { margin-top: var(--space-xl) !important; color: var(--color-muted); font-size: var(--text-sm); }
+.notfound { padding-block: var(--space-4xl); }
+.notfound h1 { font-size: var(--text-section); margin-bottom: var(--space-md); }
+.notfound p { font-size: var(--text-lg); color: var(--color-ink-2); }
+.notfound-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-xl); }
+.notfound-links { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin: var(--space-2xl) 0 0; padding: var(--space-lg) 0 0; list-style: none; border-top: var(--rule-hair) solid var(--color-rule); }
+.notfound-links a { color: var(--color-ink); font-weight: 600; text-decoration: none; }
+.notfound-links a:hover { text-decoration: underline; text-decoration-color: var(--color-accent); }
+.notfound-links a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+@media (max-width: 60rem) {
+  .docs { grid-template-columns: minmax(0, 1fr); }
+}

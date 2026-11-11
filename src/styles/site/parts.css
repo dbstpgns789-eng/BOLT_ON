@@ -1,0 +1,36 @@
+/* Parts used on several pages: photo page banner and tabs, case cards, closing CTA band. */
+.case-row { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); }
+.case-card { display: grid; gap: var(--space-2xs); color: var(--color-ink); text-decoration: none; }
+.case-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; margin-bottom: var(--space-sm); transition: opacity var(--dur-short) var(--ease-out); }
+.case-card:hover img { opacity: 0.88; }
+.case-card:hover .case-card-title { text-decoration: underline; text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; }
+.case-card:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }
+.case-card-area { font-size: var(--text-sm); font-weight: 600; color: var(--color-muted); }
+.case-card-title { font-size: var(--text-lg); font-weight: 800; line-height: 1.35; word-break: keep-all; }
+.case-card-meta { font-size: var(--text-sm); color: var(--color-ink-2); }
+.svc-banner { position: relative; min-height: 280px; display: grid; align-items: end; color: var(--color-on-navy); overflow: clip; }
+.svc-banner-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.svc-banner::after { content: ""; position: absolute; inset: 0; background: color-mix(in oklab, var(--color-navy-band) 72%, transparent); }
+.svc-banner-text { position: relative; z-index: 1; padding-block: var(--space-2xl) var(--space-xl); }
+.svc-banner h1 { color: var(--color-on-navy); font-size: var(--text-section); max-width: none; }
+.svc-crumb { margin-bottom: var(--space-sm); font-size: var(--text-sm); color: color-mix(in oklab, var(--color-on-navy) 80%, transparent); }
+.svc-crumb a { color: inherit; text-decoration: none; }
+.svc-crumb a:hover { text-decoration: underline; }
+.svc-crumb a:focus-visible, .svc-tabs a:focus-visible, .others a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.svc-tabs { border-bottom: var(--rule-hair) solid var(--color-rule); background: var(--color-paper); }
+.svc-tabs ul { display: flex; gap: 0; margin: 0; padding: 0; list-style: none; overflow-x: auto; }
+.svc-tabs a { display: block; padding: var(--space-md) var(--space-lg); white-space: nowrap; color: var(--color-ink-2); text-decoration: none; font-weight: 600; border-bottom: 3px solid transparent; }
+.svc-tabs a:hover { color: var(--color-ink); }
+.svc-tabs a[aria-current="page"] { color: var(--color-ink); border-bottom-color: var(--color-accent); }
+.svc-banner--light::after { background: linear-gradient(90deg, color-mix(in oklab, var(--color-navy-band) 80%, transparent) 0%, color-mix(in oklab, var(--color-navy-band) 35%, transparent) 70%); }
+.svc-banner-lead { margin-top: var(--space-sm); color: color-mix(in oklab, var(--color-on-navy) 86%, transparent); }
+.cta-band { background: var(--color-navy-band); color: var(--color-on-navy); padding-block: var(--space-3xl); }
+.cta-band-inner { display: grid; justify-items: center; text-align: center; gap: var(--space-md); }
+.cta-band h2 { color: var(--color-on-navy); font-size: var(--text-section); max-width: none; }
+.cta-band p { color: color-mix(in oklab, var(--color-on-navy) 80%, transparent); font-size: var(--text-lg); }
+.cta-band-btn { margin-top: var(--space-md); min-height: 56px; padding-inline: var(--space-2xl); font-size: var(--text-lg); }
+.cta-band-btn:focus-visible { outline-color: var(--color-on-navy); }
+
+@media (max-width: 60rem) {
+  .case-row, .case-strip .case-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
