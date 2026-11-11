@@ -774,3 +774,4 @@ aaa
 .js .slide-controls { gap: var(--space-xs); }
 .mnav-when-open, .mnav[open] .mnav-when-closed { display: none; }
 .mnav[open] .mnav-when-open { display: inline; }
+.mnav:not([open]) .mnav-body { display: none; }
