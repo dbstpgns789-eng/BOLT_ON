@@ -1,6 +1,6 @@
 ---
 // 한전 신청 안내 (고객지원). Sections after wooilenc 한전서류 절차: kinds → steps (edison owner rows) → documents → temporary power.
-// Copy and lists in src/data/kepco.ts; no fees, deposits or lead times until the client gives them.
+// Copy and lists in src/data/kepco.ts (steps and documents from web research, client to confirm).
 import DraftLayout from '../layouts/DraftLayout.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
@@ -8,7 +8,7 @@ import PageBanner from '../components/PageBanner.astro';
 import SupportTabs from '../components/support/SupportTabs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { ownerLabel } from '../data/service-pages';
-import { kinds, steps, docs } from '../data/kepco';
+import { kinds, steps, docs, common } from '../data/kepco';
 import photo from '../assets/stock/substation-transformer.jpg';
 ---
 <DraftLayout variant="svc">
@@ -21,7 +21,7 @@ import photo from '../assets/stock/substation-transformer.jpg';
       <div class="container">
         <div class="head">
           <h2 id="kinds-title">신청 종류</h2>
-          <p>무엇을 바꾸려는지에 따라 신청 종류가 나뉩니다.</p>
+          <p>신청 내용과 현장 조건에 따라 필요한 서류와 진행 기간이 달라질 수 있습니다.</p>
         </div>
         <table class="info kinds"><tbody>
           {kinds.map((k) => <tr><th scope="row">{k.name}</th><td>{k.line} <a href={k.href}>관련 공사 보기</a></td></tr>)}
@@ -33,7 +33,7 @@ import photo from '../assets/stock/substation-transformer.jpg';
       <div class="container">
         <div class="head">
           <h2 id="steps-title">진행 순서</h2>
-          <p>고객님이 직접 하실 일은 서류 보내기와 시설부담금 납부입니다.</p>
+          <p>고객님이 직접 하실 일은 서류 준비 하나입니다. 나머지는 저희가 진행합니다.</p>
         </div>
         <ol class="owner-steps">
           {steps.map((s, i) => (
@@ -51,7 +51,7 @@ import photo from '../assets/stock/substation-transformer.jpg';
       <div class="container">
         <div class="head">
           <h2 id="docs-title">준비 서류</h2>
-          <p>개인인지 법인인지에 따라 서류가 다릅니다. 건물과 신청 종류에 따라 더 필요한 서류는 상담 때 알려 드립니다.</p>
+          <p>개인인지 법인인지에 따라 서류가 다릅니다. 신청 종류에 따라 더 필요한 서류는 상담 때 알려 드립니다.</p>
         </div>
         <div class="docs">
           {docs.map((d) => (
@@ -63,6 +63,11 @@ import photo from '../assets/stock/substation-transformer.jpg';
               </div>
             </div>
           ))}
+        </div>
+        <div class="docs-common">
+          <h3>상담 전에 미리 준비해 주시면 좋은 것</h3>
+          <p>전기요금 고지서나 한전 고객번호와 함께 아래 내용을 알려 주시면 더 빨리 안내해 드립니다.</p>
+          <ul>{common.map((x) => <li>{x}</li>)}</ul>
         </div>
       </div>
     </section>
