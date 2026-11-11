@@ -1,6 +1,6 @@
 ---
 // Home. Fixed from draft D4 (client pick, 2026-11-10) with the F3 layout / F1 colour footer.
-import DraftLayout from '../layouts/DraftLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import HeroCarousel from '../components/home/HeroCarousel.astro';
 import ServiceCards from '../components/home/ServiceCards.astro';
@@ -10,7 +10,7 @@ import Kepco from '../components/home/Kepco.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
 import { slides } from '../data/slides';
 ---
-<DraftLayout variant="d4" reveal>
+<BaseLayout reveal>
   <SiteHeader />
   <main id="top">
     <HeroCarousel slides={slides} />
@@ -20,4 +20,4 @@ import { slides } from '../data/slides';
     <Kepco />
   </main>
   <SiteFooter />
-</DraftLayout>
+</BaseLayout>

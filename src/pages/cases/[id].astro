@@ -2,7 +2,7 @@
 // Case detail, fixed 2026-11-11: large cover (no compare slider) · summary · 공사 전 상황 (when the client gives it)
 // · facts table · numbered key work · one set of site photos · previous / list / next · CTA band to /consult/ (option B).
 import { getCollection } from 'astro:content';
-import DraftLayout from '../../layouts/DraftLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/home/SiteHeader.astro';
 import SiteFooter from '../../components/home/SiteFooter.astro';
 import CaseDetail from '../../components/cases/CaseDetail.astro';
@@ -14,11 +14,11 @@ export async function getStaticPaths() {
 }
 const { entry, prev, next } = Astro.props;
 ---
-<DraftLayout variant="svc" title={`${entry.data.title} | 시공사례`} description={entry.data.summary}>
+<BaseLayout title={`${entry.data.title} | 시공사례`} description={entry.data.summary}>
   <SiteHeader />
   <main id="top">
     <CaseDetail entry={entry} prev={prev} next={next} />
     <CtaBand />
   </main>
   <SiteFooter />
-</DraftLayout>
+</BaseLayout>

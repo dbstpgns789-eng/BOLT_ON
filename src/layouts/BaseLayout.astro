@@ -1,11 +1,13 @@
 ---
+// Every page's shell: head (title, description, fonts, icon), skip link, mobile call bar, and on the home page the
+// one-time section reveal. Search engines are kept out until company.launched is set to true on launch day.
 import '../styles/site/page.css';
 import CallBar from '../components/CallBar.astro';
 import { company } from '../config/company';
 import { hero } from '../data/services';
 
-interface Props { variant: string; reveal?: boolean; noto?: boolean; title?: string; description?: string }
-const { variant, reveal = false, noto = false, title, description } = Astro.props;
+interface Props { title?: string; description?: string; reveal?: boolean }
+const { title, description, reveal = false } = Astro.props;
 const fullTitle = title ? `${title} | ${company.nameKo}` : `${company.nameKo} | 전기 증설·고압 수변전설비 전기공사`;
 ---
 <!doctype html>
@@ -16,14 +18,14 @@ const fullTitle = title ? `${title} | ${company.nameKo}` : `${company.nameKo} | 
   <title>{fullTitle}</title>
   <meta name="description" content={description ?? hero.sentence} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <meta name="robots" content="noindex" />
+  {!company.launched && <meta name="robots" content="noindex" />}
   <script is:inline>document.documentElement.classList.add("js");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href={`https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@87.5,500;87.5,700;100,800${noto ? '&family=Noto+Sans+KR:wght@400;600;800' : ''}&display=swap`} rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@87.5,500;87.5,700;100,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 </head>
-<body class={`v-${variant}${noto ? ' f-noto' : ''}${reveal ? ' has-reveal' : ''}`}>
+<body class={reveal ? 'has-reveal' : undefined}>
   <a class="skip" href="#top">본문 바로가기</a>
   <slot />
   <CallBar />

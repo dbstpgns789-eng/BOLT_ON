@@ -2,6 +2,8 @@
 // Fill the empty ones when the corporation, business registration and license are issued
 // (docs/PLAN.md §0), then the site can open.
 export const company = {
+  // false = preview: every page carries noindex. Set true on launch day (with the real domain and form key).
+  launched: false,
   nameKo: '볼트온이엔씨',
   nameEn: 'VOLT ON E&C',
   legalName: '', // e.g. 주식회사 볼트온이엔씨, after incorporation

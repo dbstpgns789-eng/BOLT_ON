@@ -4,7 +4,7 @@
 // · how we work, with site photos (gesung three points + sinrok photo steps)
 // · company facts table (wooilenc 회사개요) · license (edison, shown once issued) · areas. No CEO greeting: client declined (요청서 3-4).
 import { Image } from 'astro:assets';
-import DraftLayout from '../../layouts/DraftLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/home/SiteHeader.astro';
 import SiteFooter from '../../components/home/SiteFooter.astro';
 import CompanyHead from '../../components/company/CompanyHead.astro';
@@ -25,7 +25,7 @@ const ways = [
   { n: '03', title: '끝난 뒤까지 책임집니다', line: '정직한 견적과 안전한 시공, 공사 후 책임 있는 A/S로 끝까지 책임집니다.', img: wayPhoto3, alt: '공사를 마친 분전반' },
 ];
 ---
-<DraftLayout variant="svc" title="회사개요">
+<BaseLayout title="회사개요">
   <SiteHeader />
   <main id="top">
     <CompanyHead current="overview" title="회사개요" />
@@ -91,4 +91,4 @@ const ways = [
     <CtaBand />
   </main>
   <SiteFooter />
-</DraftLayout>
+</BaseLayout>

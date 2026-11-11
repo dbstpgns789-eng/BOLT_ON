@@ -1,6 +1,6 @@
 ---
 // Case list, fixed from draft C2 (2026-11-11): cards with region, month, duration and work tags; area filter (?area= preselects).
-import DraftLayout from '../../layouts/DraftLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/home/SiteHeader.astro';
 import SiteFooter from '../../components/home/SiteFooter.astro';
 import CaseList from '../../components/cases/CaseList.astro';
@@ -8,7 +8,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import photo from '../../assets/stock/panel-testing.jpg';
 ---
-<DraftLayout variant="svc" title="시공사례" description="볼트온이엔씨가 직접 시공한 전기공사 현장 기록입니다.">
+<BaseLayout title="시공사례" description="볼트온이엔씨가 직접 시공한 전기공사 현장 기록입니다.">
   <SiteHeader />
   <main id="top">
     <PageBanner photo={photo} title="시공사례" lead="볼트온이엔씨가 직접 시공한 현장입니다." crumbs={[['홈', '/'], ['시공사례']]} />
@@ -16,4 +16,4 @@ import photo from '../../assets/stock/panel-testing.jpg';
     <CtaBand />
   </main>
   <SiteFooter />
-</DraftLayout>
+</BaseLayout>

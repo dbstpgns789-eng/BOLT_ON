@@ -1,11 +1,11 @@
 ---
 // Not found (Cloudflare Pages serves dist/404.html). Without it Pages falls back to the home page for unknown paths.
-import DraftLayout from '../layouts/DraftLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
 import { menu } from '../data/menu';
 ---
-<DraftLayout variant="svc" title="페이지를 찾을 수 없습니다">
+<BaseLayout title="페이지를 찾을 수 없습니다">
   <SiteHeader />
   <main id="top">
     <section class="section notfound" aria-labelledby="nf-title">
@@ -21,4 +21,4 @@ import { menu } from '../data/menu';
     </section>
   </main>
   <SiteFooter />
-</DraftLayout>
+</BaseLayout>

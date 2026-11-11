@@ -1,7 +1,7 @@
 ---
 // Business-area pages, fixed from draft S4 (2026-11-11): intro with photo · sub-tasks · steps with owners
 // · this area's cases (hidden when none) · callback request form · other areas. No FAQ (client decision).
-import DraftLayout from '../../layouts/DraftLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/home/SiteHeader.astro';
 import SiteFooter from '../../components/home/SiteFooter.astro';
 import ServiceBanner from '../../components/service/ServiceBanner.astro';
@@ -28,7 +28,7 @@ const topic = service.name.replace(/ (공사|전기공사)$/, '');
 const last = topic.charCodeAt(topic.length - 1) - 0xac00;
 const heading = `${topic}${last >= 0 && last % 28 !== 0 ? '이란' : '란'}?`;
 ---
-<DraftLayout variant="svc" title={service.name} description={page.lead}>
+<BaseLayout title={service.name} description={page.lead}>
   <SiteHeader />
   <main id="top">
     <ServiceBanner slug={slug} photo={media.banner} />
@@ -40,4 +40,4 @@ const heading = `${topic}${last >= 0 && last % 28 !== 0 ? '이란' : '란'}?`;
     <OtherAreas slug={slug} />
   </main>
   <SiteFooter />
-</DraftLayout>
+</BaseLayout>
