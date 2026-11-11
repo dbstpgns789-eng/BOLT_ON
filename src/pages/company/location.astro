@@ -29,8 +29,8 @@ const q = encodeURIComponent(company.address);
             <div><dt>상담 시간</dt><dd>{company.hours}</dd></div>
           </dl>
           <div class="loc-routes">
-            <a class="btn btn--line" href={`https://map.naver.com/p/search/${q}`} target="_blank" rel="noopener">네이버 지도로 길찾기</a>
-            <a class="btn btn--line" href={`https://map.kakao.com/link/search/${q}`} target="_blank" rel="noopener">카카오맵으로 길찾기</a>
+            <a class="btn btn--naver" href={`https://map.naver.com/p/search/${q}`} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M16.273 12.845 7.376 0H0v24h7.726V11.156L16.624 24H24V0h-7.727z"/></svg> 네이버 지도</a>
+            <a class="btn btn--kakao" href={`https://map.kakao.com/link/search/${q}`} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg> 카카오맵</a>
           </div>
           {/* CHECK with the client: field-based office, so a call before visiting */}
           <p class="loc-note">현장 작업이 많아 사무실을 비울 때가 있습니다. 방문하시기 전에 전화 주시면 시간을 맞춰 드립니다.</p>
