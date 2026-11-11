@@ -630,3 +630,22 @@ aaa
 .docs-common p { color: var(--color-ink-2); margin-bottom: var(--space-md); }
 .docs-common ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
 .docs-common li { padding: var(--space-2xs) var(--space-md); background: var(--color-paper); border: var(--rule-hair) solid var(--color-rule); font-weight: 600; }
+/* kepco steps as a flow chart: 4 × 2 on desktop, 2 × 4 below 60rem; a chevron between boxes in the same row */
+.flow { --flow-gap: var(--space-xl); margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-lg) var(--flow-gap); }
+.flow-step { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: var(--space-xs); padding: var(--space-lg); background: var(--color-paper); border: var(--rule-hair) solid var(--color-rule); border-top: 3px solid var(--color-ink); }
+.flow-step h3 { font-size: var(--text-lg); }
+.flow-step p { color: var(--color-ink-2); font-size: var(--text-sm); }
+.flow-step .os-owner { grid-column: auto; justify-self: start; }
+.flow-num { font: 800 var(--text-xl)/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--color-muted); }
+.flow-step--customer { background: color-mix(in oklab, var(--color-accent) 14%, var(--color-paper)); border-top-color: var(--color-accent); }
+.flow-step--customer .flow-num { color: var(--color-ink); }
+.flow-step--customer .os-owner { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-accent-ink); }
+.flow-step--kepco .os-owner { border-style: dashed; }
+.flow-step::after { content: ""; position: absolute; top: 50%; right: calc(var(--flow-gap) / -2 - 5px); width: 10px; height: 10px; border-top: 2px solid var(--color-ink); border-right: 2px solid var(--color-ink); transform: translateY(-50%) rotate(45deg); }
+.flow-step:nth-child(4n)::after, .flow-step:last-child::after { display: none; }
+@media (max-width: 60rem) {
+  .flow { --flow-gap: var(--space-lg); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flow-step { padding: var(--space-md); }
+  .flow-step:nth-child(4n)::after { display: block; }
+  .flow-step:nth-child(2n)::after { display: none; }
+}
