@@ -1,20 +1,17 @@
 ---
-// Cases as image cards in a row. variant: cards (3 large, after sinrok) | strip (all, compact, right under the hero, after gesung)
+// Every case as a compact image card, right under the hero (after gesung).
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { services } from '../../data/services';
 import { ym } from '../../lib/format';
 
-interface Props { variant?: 'cards' | 'strip' }
-const { variant = 'cards' } = Astro.props;
-const all = (await getCollection('cases')).sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
-const list = variant === 'cards' ? all.slice(0, 3) : all;
+const list = (await getCollection('cases')).sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
 const serviceName = Object.fromEntries(services.map((s) => [s.slug, s.name]));
 ---
-<section class={`section case-${variant}`} id="cases" aria-labelledby="cases-title" data-reveal>
+<section class="section case-strip" id="cases" aria-labelledby="cases-title" data-reveal>
   <div class="container">
     <div class="head head--row">
-      <div><h2 id="cases-title">{variant === 'strip' ? '최근 시공 현장' : '시공사례'}</h2></div>
+      <div><h2 id="cases-title">최근 시공 현장</h2></div>
       <a class="more" href="/cases/">전체 보기</a>
     </div>
     <ul class="case-row">

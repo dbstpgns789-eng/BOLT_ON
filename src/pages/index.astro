@@ -5,7 +5,6 @@ import SiteHeader from '../components/home/SiteHeader.astro';
 import HeroCarousel from '../components/home/HeroCarousel.astro';
 import ServiceCards from '../components/home/ServiceCards.astro';
 import Steps from '../components/home/Steps.astro';
-import CaseFeature from '../components/home/CaseFeature.astro';
 import CaseStrip from '../components/home/CaseStrip.astro';
 import Kepco from '../components/home/Kepco.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
@@ -14,11 +13,11 @@ import { slides } from '../data/slides';
 <DraftLayout variant="d4" reveal>
   <SiteHeader />
   <main id="top">
-    <HeroCarousel slides={slides} variant="short" />
-    <CaseStrip variant="strip" />
-    <ServiceCards variant="fade" />
-    <Steps variant="chevrons" />
+    <HeroCarousel slides={slides} />
+    <CaseStrip />
+    <ServiceCards />
+    <Steps />
     <Kepco />
   </main>
-  <SiteFooter variant="haeun" dark />
+  <SiteFooter />
 </DraftLayout>

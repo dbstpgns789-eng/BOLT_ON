@@ -1,86 +1,28 @@
 ---
-// Footer variants. Company facts come from company.ts; empty ones (not issued yet) are hidden.
-// default: navy, short paragraph | full: navy, facts as a grid (D2, D3, D4)
-// woil: dark slate, three columns (wooilenc.com) | sinrok: dark grey, one fact per line (sinrok.co.kr)
-// haeun: light, a rule on top, one fact per line and the phone set large (haeunelectric.com)
+// Site footer (after haeunelectric.com, slate colours): company facts, phone set large, menu, privacy link.
+// Company facts come from company.ts; empty ones (not issued yet) are hidden.
 import Logo from '../Logo.astro';
 import { company, telHref } from '../../config/company';
 import { menu } from '../../data/menu';
 import { companyRows } from '../../lib/company-rows';
 
-interface Props { full?: boolean; variant?: 'default' | 'full' | 'woil' | 'sinrok' | 'haeun'; dark?: boolean }
-const { full = false, variant = full ? 'full' : 'default', dark = false } = Astro.props;
 const facts = companyRows().filter(([k]) => !['전화', '이메일', '상담 시간'].includes(k));
-const copy = `© 2026 ${company.nameEn}. All rights reserved.`;
 ---
-{variant === 'woil' ? (
-  <footer class="footer footer--woil" id="company">
-    <div class="container footer-row">
-      <div class="f-col">
+<footer class="footer footer--haeun footer--slate" id="company">
+  <div class="container">
+    <div class="footer-row">
+      <div class="f-col f-col--facts">
         <Logo variant="horizontal" onDark class="footer-logo" />
-        {facts.map(([k, v]) => <p class="f-line"><span class="f-k">{k}</span> {v}</p>)}
-        <p class="f-copy">{copy}</p>
+        {facts.map(([k, v]) => <p class="f-line"><span class="f-k">{k}</span>{v}</p>)}
       </div>
       <div class="f-col">
-        <p class="f-title">연락처</p>
-        <p class="f-line"><span class="f-k">전화</span> <a href={telHref}>{company.phone}</a></p>
-        <p class="f-line"><span class="f-k">이메일</span> <a href={`mailto:${company.email}`}>{company.email}</a></p>
-        <p class="f-line"><span class="f-k">상담 시간</span> {company.hours}</p>
+        <p class="f-title">상담 전화</p>
+        <a class="f-phone" href={telHref}>{company.phone}</a>
+        <p class="f-line">{company.hours}</p>
+        <p class="f-line"><a href={`mailto:${company.email}`}>{company.email}</a></p>
       </div>
       <nav class="f-col f-links" aria-label="바닥글 메뉴">{menu.map((m) => <a href={m.href}>{m.label}</a>)}</nav>
     </div>
-  </footer>
-) : variant === 'sinrok' ? (
-  <footer class="footer footer--sinrok" id="company">
-    <div class="container">
-      <div class="f-top">
-        <Logo variant="horizontal" onDark class="footer-logo" />
-        <div class="f-lines">
-          <p class="f-name">{company.legalName || company.nameKo}</p>
-          {facts.filter(([k]) => k !== '상호' && k !== '법인명').map(([k, v]) => <p class="f-line">{k} : {v}</p>)}
-          <p class="f-line">전화 : <a href={telHref}>{company.phone}</a> &nbsp;|&nbsp; 이메일 : <a href={`mailto:${company.email}`}>{company.email}</a></p>
-          <p class="f-line">상담 시간 : {company.hours}</p>
-        </div>
-      </div>
-      <div class="f-bottom">
-        <nav class="f-links" aria-label="바닥글 메뉴">{menu.map((m) => <a href={m.href}>{m.label}</a>)}</nav>
-        <p class="f-copy">Copyright {copy}</p>
-      </div>
-    </div>
-  </footer>
-) : variant === 'haeun' ? (
-  <footer class={`footer footer--haeun${dark ? ' footer--slate' : ''}`} id="company">
-    <div class="container">
-      <div class="footer-row">
-        <div class="f-col f-col--facts">
-          <Logo variant="horizontal" onDark={dark} class="footer-logo" />
-          {facts.map(([k, v]) => <p class="f-line"><span class="f-k">{k}</span> {v}</p>)}
-        </div>
-        <div class="f-col">
-          <p class="f-title">상담 전화</p>
-          <a class="f-phone" href={telHref}>{company.phone}</a>
-          <p class="f-line">{company.hours}</p>
-          <p class="f-line"><a href={`mailto:${company.email}`}>{company.email}</a></p>
-        </div>
-        <nav class="f-col f-links" aria-label="바닥글 메뉴">{menu.map((m) => <a href={m.href}>{m.label}</a>)}</nav>
-      </div>
-      <p class="f-copy"><a class="f-privacy" href="/privacy/">개인정보처리방침</a> Copyright {copy}</p>
-    </div>
-  </footer>
-) : (
-  <footer class={`footer${variant === 'full' ? ' footer--full' : ''}`} id={variant === 'full' ? 'company' : undefined}>
-    <div class="container footer-row">
-      <div>
-        <Logo variant="horizontal" onDark class="footer-logo" />
-        {variant === 'full' && <a class="btn btn--primary footer-call" href={telHref}>전화 상담 {company.phone}</a>}
-        <p class="footer-small">{`© 2026 ${company.nameEn}`}</p>
-      </div>
-      {variant === 'full' ? (
-        <dl class="footer-info">{companyRows().map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-      ) : (
-        <p>{company.nameKo}, 대표 {company.ceo}<br />{company.address}<br />전화 {company.phone}, 이메일 {company.email}{company.bizNumber && <><br />사업자등록번호 {company.bizNumber}</>}{company.licenseNumber && <><br />전기공사업 {company.licenseNumber}</>}</p>
-      )}
-      <nav class="footer-links" aria-label="바닥글 메뉴">{menu.map((m) => <a href={m.href}>{m.label}</a>)}</nav>
-    </div>
-  </footer>
-)}
+    <p class="f-copy"><a class="f-privacy" href="/privacy/">개인정보처리방침</a> Copyright © 2026 {company.nameEn}. All rights reserved.</p>
+  </div>
+</footer>

@@ -1,5 +1,5 @@
 ---
-// variant: fade (photo fades in from the right) | navy (all navy panels, after wooilenc) | alt (navy and grey alternating, after sinrok)
+// Home business areas: five grey cards with the photo fading in from the right, then a navy 한전 신청 card.
 import { Image } from 'astro:assets';
 import { services } from '../../data/services';
 import substation from '../../assets/stock/substation-transformer.jpg';
@@ -8,21 +8,16 @@ import panel from '../../assets/stock/distribution-panel.jpg';
 import studs from '../../assets/stock/remodeling-studs.jpg';
 import gimhaeFacade from '../../assets/cases/gimhae-museum/01-facade.jpg';
 
-interface Props { variant?: 'fade' | 'navy' | 'alt'; intro?: string }
-const { variant = 'fade', intro } = Astro.props;
 const img = { substation, capacity: panel, transformer: insulators, wiring: studs, newbuild: gimhaeFacade } as const;
-const tone = (i: number) => (variant === 'navy' ? 'navy' : variant === 'alt' ? (i < 2 ? 'navy' : 'grey') : 'grey');
-const plainTone = variant === 'alt' ? 'grey' : 'navy';
 ---
-<section class={`section services services--${variant}`} id="services" aria-labelledby="services-title" data-reveal>
+<section class="section services services--fade" id="services" aria-labelledby="services-title" data-reveal>
   <div class="container">
     <div class="head">
       <h2 id="services-title">사업분야</h2>
-      {intro && <p>{intro}</p>}
     </div>
     <ul class="cards">
-      {services.map((s, i) => (
-        <li class={`card card--${tone(i)}`}>
+      {services.map((s) => (
+        <li class="card card--grey">
           <a class="card-link" href={`/services/${s.slug}/`}>
             <span class="card-text">
               <span class="card-title">{s.name}</span>
@@ -33,7 +28,7 @@ const plainTone = variant === 'alt' ? 'grey' : 'navy';
           </a>
         </li>
       ))}
-      <li class={`card card--${plainTone} card--plain`}>
+      <li class="card card--navy card--plain">
         <a class="card-link" href="/kepco/">
           <span class="card-text">
             <span class="card-title">한전 신청 대행</span>
