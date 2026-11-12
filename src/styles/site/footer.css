@@ -2,7 +2,7 @@
 .footer { background: var(--color-navy-band); color: color-mix(in oklab, var(--color-on-navy) 78%, transparent); padding-block: var(--space-2xl); font-size: var(--text-sm); }
 .footer-row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 3fr); gap: var(--space-2xl); align-items: start; }
 .footer-logo { width: 190px; margin-bottom: var(--space-md); }
-.f-line { margin: 0; font-size: var(--text-sm); line-height: 1.8; word-break: keep-all; }
+.f-line { margin: 0; font-size: var(--text-sm); line-height: 1.8; }
 .f-line a, .f-links a { color: inherit; text-decoration: none; }
 .f-line a:hover, .f-links a:hover { text-decoration: underline; text-decoration-color: var(--color-accent); }
 .f-line a:focus-visible, .f-links a:focus-visible, .f-phone:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }

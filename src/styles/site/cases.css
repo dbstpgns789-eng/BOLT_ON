@@ -1,4 +1,5 @@
 /* Case list (filter, cards) and case detail (head, facts, photos, previous/next, photo viewer). */
+.head--row > .case-filter { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-xs); flex: 1 1 auto; }
 .case-list .head--row { align-items: center; flex-wrap: wrap; }
 .case-list h2 { font-size: var(--text-2xl); }
 .case-filter button { min-height: 44px; padding: 0 var(--space-md); background: var(--color-paper); color: var(--color-ink-2); border: var(--rule-hair) solid var(--color-rule); font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }

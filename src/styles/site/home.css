@@ -20,7 +20,7 @@
 .slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in oklab, var(--color-navy-band) 78%, transparent) 0%, color-mix(in oklab, var(--color-navy-band) 40%, transparent) 50%, transparent 80%); }
 .slide-text { position: relative; z-index: 1; height: 100%; display: grid; align-content: center; justify-items: start; gap: var(--space-lg); }
-.slide-head { margin: 0; max-width: 16ch; color: var(--color-on-navy); font-size: clamp(2.5rem, 4.4vw + 0.4rem, 4.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.025em; word-break: keep-all; }
+.slide-head { margin: 0; max-width: 16ch; color: var(--color-on-navy); font-size: clamp(2.5rem, 4.4vw + 0.4rem, 4.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.025em; }
 .slide-text .lead { color: color-mix(in oklab, var(--color-on-navy) 86%, transparent); max-width: 32ch; }
 .slide .btn:focus-visible { outline-color: var(--color-on-navy); }
 .js .slide-controls { position: absolute; left: 0; right: 0; bottom: var(--space-lg); z-index: 2; align-items: center; gap: var(--space-md); color: var(--color-on-navy); font-variant-numeric: tabular-nums; }
@@ -32,9 +32,9 @@
 .card-link:hover { background: var(--color-paper-3); }
 .card-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; transition: none; }
 .card-text { position: relative; z-index: 1; display: grid; align-content: center; gap: var(--space-xs); padding: var(--space-xl); max-width: 70%; }
-.card-title { font-size: var(--text-xl); font-weight: 800; letter-spacing: -0.02em; word-break: keep-all; line-height: 1.25; }
+.card-title { font-size: var(--text-xl); font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; }
 .card-line { font-size: var(--text-sm); color: var(--color-ink-2); }
-.card-go { justify-self: start; margin-top: var(--space-md); padding: var(--space-2xs) var(--space-md); background: var(--color-accent); color: var(--color-accent-ink); font-size: var(--text-sm); font-weight: 600; }
+.card-go { justify-self: start; white-space: nowrap; margin-top: var(--space-md); padding: var(--space-2xs) var(--space-md); background: var(--color-accent); color: var(--color-accent-ink); font-size: var(--text-sm); font-weight: 600; }
 .card-img { position: absolute; top: 0; right: 0; width: 48%; height: 100%; object-fit: cover; -webkit-mask-image: linear-gradient(90deg, transparent 0%, var(--color-ink) 45%); mask-image: linear-gradient(90deg, transparent 0%, var(--color-ink) 45%); transition: scale var(--dur-long) var(--ease-out); }
 .card-link:hover .card-img { scale: 1.04; }
 .card--navy .card-link { background: var(--color-navy-band); color: var(--color-on-navy); }

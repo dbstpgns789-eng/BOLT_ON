@@ -1,18 +1,19 @@
-/* Shared basics: headings, sections and their heads, buttons, the info table, skip link, reveal motion. */
+/* Shared basics: Korean line breaks, headings, buttons, section heads, "more" links, the info table, skip link, reveal motion. */
+/* Korean: never break inside a word, anywhere on the page (client complaint: 인테/리어, 승/압). Every element inherits this. */
 body { word-break: keep-all; overflow-wrap: break-word; }
-.btn, .card-go, .slide-btn, .gnb-link, .more { white-space: nowrap; }
-:root { --display-weight: 800; }
 h3 { font-weight: 600; }
-h1, h2, h3 { word-break: keep-all; letter-spacing: -0.025em; }
-p { word-break: keep-all; }
+
 .btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 var(--space-xl); font-weight: 600; text-decoration: none; border: var(--rule-hair) solid transparent; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
 .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
 .btn--primary:hover { background: color-mix(in oklab, var(--color-accent) 88%, var(--color-ink)); }
 .btn--line { border-color: var(--color-ink); color: var(--color-ink); }
 .btn--line:hover { background: var(--color-ink); color: var(--color-on-navy); }
+.btn--ghost { border-color: var(--color-on-navy); color: var(--color-on-navy); }
+.btn--ghost:hover { background: var(--color-on-navy); color: var(--color-ink); }
 .btn:active { translate: 0 1px; }
 .btn:focus-visible, .brand:focus-visible, .more:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; transition: none; }
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
 .section { padding-block: var(--section-gap-s); }
 .section--tint { background: var(--color-paper-2); }
 .head { display: grid; gap: var(--space-sm); margin-bottom: var(--space-2xl); }
@@ -21,17 +22,19 @@ p { word-break: keep-all; }
 .head--row { display: flex; justify-content: space-between; align-items: end; gap: var(--space-lg); }
 .head--row > div { display: grid; gap: var(--space-sm); }
 .more { white-space: nowrap; font-weight: 600; color: var(--color-ink); text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; }
+
 .info { width: 100%; border-collapse: collapse; border-top: 3px solid var(--color-ink); }
 .info th { width: 11rem; text-align: left; font-weight: 600; background: var(--color-paper-2); padding: var(--space-md) var(--space-lg); vertical-align: top; font-size: var(--text-sm); }
-.info td { padding: var(--space-md) var(--space-lg); word-break: keep-all; }
+.info td { padding: var(--space-md) var(--space-lg); }
 .info tr { border-bottom: var(--rule-hair) solid var(--color-rule); }
-.btn--ghost { border-color: var(--color-on-navy); color: var(--color-on-navy); }
-.btn--ghost:hover { background: var(--color-on-navy); color: var(--color-ink); }
-.js .will-reveal { opacity: 0; translate: 0 28px; transition: opacity var(--dur-long) var(--ease-out), translate var(--dur-long) var(--ease-out); }
-.js .will-reveal.is-in { opacity: 1; translate: 0 0; }
-.head--row > .case-filter, .case-filter { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-xs); flex: 1 1 auto; }
+
 .skip { position: absolute; left: var(--space-md); top: -10rem; z-index: 100; padding: var(--space-sm) var(--space-md); background: var(--color-ink); color: var(--color-on-navy); font-weight: 600; text-decoration: none; }
 .skip:focus-visible { top: var(--space-md); outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* Home sections fade up once as they enter (the layout script adds .will-reveal, so content shows without it). */
+.js .will-reveal { opacity: 0; translate: 0 28px; transition: opacity var(--dur-long) var(--ease-out), translate var(--dur-long) var(--ease-out); }
+.js .will-reveal.is-in { opacity: 1; translate: 0 0; }
+@keyframes rise { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
 
 @media (max-width: 40rem) {
   .info th { width: 7rem; padding-inline: var(--space-sm); }
@@ -39,4 +42,3 @@ p { word-break: keep-all; }
   .more { display: inline-block; padding-block: var(--space-sm); }
   .info td a, dd > a { display: inline-block; padding-block: var(--space-xs); }
 }
-@keyframes rise { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }

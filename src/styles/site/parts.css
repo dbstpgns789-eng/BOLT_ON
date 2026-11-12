@@ -6,7 +6,7 @@
 .case-card:hover .case-card-title { text-decoration: underline; text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; }
 .case-card:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }
 .case-card-area { font-size: var(--text-sm); font-weight: 600; color: var(--color-muted); }
-.case-card-title { font-size: var(--text-lg); font-weight: 800; line-height: 1.35; word-break: keep-all; }
+.case-card-title { font-size: var(--text-lg); font-weight: 800; line-height: 1.35; }
 .case-card-meta { font-size: var(--text-sm); color: var(--color-ink-2); }
 .svc-banner { position: relative; min-height: 280px; display: grid; align-items: end; color: var(--color-on-navy); overflow: clip; }
 .svc-banner-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
