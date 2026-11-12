@@ -19,7 +19,7 @@ export const company = {
   domain: 'voltonenc.com',
   // Callback-request form: Web3Forms access key issued to the company email (free). Empty = form shows a 'not connected' notice.
   formAccessKey: '',
-  // CHECK with the client before launch (also goes into the privacy policy page)
+  // Shown on the form and in the privacy policy. The maintainer deletes older Web3Forms submissions once a year.
   formRetention: '상담이 끝난 뒤 1년',
   // 개인정보처리방침 시행일, e.g. '2026년 12월 1일'. Set on launch day; empty shows a draft notice.
   privacyEffective: '',

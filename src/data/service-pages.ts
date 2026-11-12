@@ -1,5 +1,6 @@
 // Business-area page content (research/industry/SERVICE-PAGE.md).
-// Written new for this site (ADR 0002). Lines marked CHECK need the client's confirmation before launch.
+// Written new for this site (ADR 0002). Facts checked 2026-11-12 against KEPCO's supply terms and the
+// 전기안전관리법 시행규칙 [별표 1]; the client reviews the whole page in the feedback round.
 import type { ServiceSlug } from './services';
 
 export type Owner = 'volton' | 'customer' | 'kepco';
@@ -42,8 +43,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     process: [
       { name: '상담과 현장 확인', line: '쓰는 장비와 늘릴 계획을 듣고 필요한 용량과 설비 구성을 정합니다.', owner: 'volton' },
       { name: '한전 고압 수전 신청', line: '신청 서류를 준비해 한전에 접수합니다. 한전은 건물 가까이까지 고압 선로 공사를 합니다.', owner: 'volton' },
-      // CHECK: facility charge payer
-      { name: '시설부담금 납부', line: '한전이 고압 선로 공사에 따라 부과하는 비용으로, 고객님이 한전에 납부합니다.', owner: 'customer' },
+      // KEPCO's supply terms (기본공급약관) charge the facility charge to the applicant; if Volt On pays it, it bills the customer.
+      { name: '시설부담금 납부', line: '한전이 고압 선로 공사에 따라 부과하는 비용으로, 신청한 고객님이 부담합니다.', owner: 'customer' },
       { name: '수변전설비 설치', line: '기초를 다지고 큐비클, 수전반, 변압기, 배전반을 설치해 결선합니다.', owner: 'volton' },
       { name: '사용전검사', line: '한국전기안전공사의 검사를 받습니다. 일정과 입회는 저희가 맡습니다.', owner: 'kepco' },
       { name: '수전과 사용 시작', line: '검사에 합격하면 한전이 고압 전기를 보내고, 건물에서 전기를 씁니다.', owner: 'kepco' },
@@ -77,8 +78,9 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
       { name: '용량 계산과 교체 계획', line: '알맞은 용량을 정하고, 정전 시간을 줄이는 작업 순서를 짭니다.', owner: 'volton' },
       { name: '정전 일정 정하기', line: '영업이나 생산에 지장이 적은 날과 시간을 고객님과 함께 정합니다.', owner: 'customer' },
       { name: '변압기 교체', line: '정한 시간에 기존 변압기를 빼고 새 변압기를 설치해 결선합니다.', owner: 'volton' },
-      // CHECK: whether a 사용전검사 is needed depends on the capacity change
-      { name: '시험과 점검', line: '절연과 동작을 시험하고, 필요하면 사용전검사를 받습니다.', owner: 'volton' },
+      // 시행규칙 [별표 1] 2.나.2): replacing a transformer of 특고압 up to 200 kV (22.9 kV buildings) needs a 공사계획 신고,
+      // so it is followed by a 사용전검사 even at the same capacity.
+      { name: '시험과 사용전검사', line: '절연과 동작을 시험하고, 공사계획 신고에 따라 한국전기안전공사의 사용전검사를 받습니다.', owner: 'kepco' },
       { name: '전기 다시 공급', line: '점검을 마치고 전기를 다시 보냅니다.', owner: 'volton' },
     ],
     faq: [],
@@ -142,8 +144,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     process: [
       { name: '도면 검토와 협의', line: '설계 도면과 공정표를 보고 전기공사 범위와 일정을 맞춥니다.', owner: 'volton' },
       { name: '한전 신청과 임시전력', line: '공사에 쓸 임시전력과 준공 뒤 쓸 전기를 한전에 신청합니다.', owner: 'volton' },
-      // CHECK: facility charge payer
-      { name: '시설부담금 납부', line: '한전이 새 전기 공급에 따라 부과하는 비용으로, 고객님이 한전에 납부합니다.', owner: 'customer' },
+      // KEPCO's supply terms (기본공급약관) charge the facility charge to the applicant; if Volt On pays it, it bills the customer.
+      { name: '시설부담금 납부', line: '한전이 새 전기 공급에 따라 부과하는 비용으로, 신청한 고객님이 부담합니다.', owner: 'customer' },
       { name: '전기설비 공사', line: '공정에 맞춰 배관·배선, 간선, 동력·전등 설비를 시공합니다.', owner: 'volton' },
       { name: '사용전검사', line: '한국전기안전공사의 검사를 받습니다. 일정과 입회는 저희가 맡습니다.', owner: 'kepco' },
       { name: '준공과 사용 시작', line: '준공 서류를 정리해 드리고, 한전 계량기가 달리면 전기를 씁니다.', owner: 'volton' },
@@ -179,8 +181,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     process: [
       { name: '상담과 현장 확인', line: '지금 쓰는 전기와 늘릴 장비를 보고 필요한 용량을 계산합니다.', owner: 'volton' },
       { name: '한전 증설 신청', line: '신청 서류를 준비해 한전에 접수합니다. 고객님께는 필요한 서류만 요청드립니다.', owner: 'volton' },
-      // CHECK: who pays the facility charge (공사 이력에 "고객 납부"와 "자사 납부"가 모두 있음)
-      { name: '시설부담금 납부', line: '한전이 늘린 용량에 따라 부과하는 비용으로, 고객님이 한전에 납부합니다.', owner: 'customer' },
+      // KEPCO's supply terms (기본공급약관) charge the facility charge to the applicant; if Volt On pays it, it bills the customer.
+      { name: '시설부담금 납부', line: '한전이 늘린 용량에 따라 부과하는 비용으로, 신청한 고객님이 부담합니다.', owner: 'customer' },
       { name: '증설·승압 공사', line: '분전반과 차단기, 배선을 늘린 용량에 맞게 바꿉니다.', owner: 'volton' },
       { name: '사용전 점검', line: '한국전기안전공사의 점검을 받습니다. 점검 일정과 입회는 저희가 맡습니다.', owner: 'kepco' },
       { name: '계량기 설치와 사용 시작', line: '한전이 계량기를 바꾸면 늘린 용량으로 전기를 씁니다.', owner: 'kepco' },
@@ -188,7 +190,6 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     faq: [
       { q: '차단기가 자꾸 떨어지는데 꼭 증설해야 하나요?', a: '용량이 부족해서일 수도 있지만, 누전이나 낡은 차단기 때문일 수도 있습니다. 현장을 먼저 확인하고 증설이 필요한지 말씀드립니다.' },
       { q: '한전 서류는 제가 준비해야 하나요?', a: '신청 서류는 저희가 준비해서 접수합니다. 신분증이나 건물 관련 서류처럼 고객님만 줄 수 있는 서류만 요청드립니다.' },
-      // CHECK
       { q: '시설부담금은 얼마나 나오나요?', a: '한전이 늘리는 용량과 건물 여건에 따라 정합니다. 신청 후 한전이 금액을 알려 주면 바로 안내드립니다.' },
     ],
   },

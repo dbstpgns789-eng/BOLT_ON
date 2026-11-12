@@ -1,13 +1,12 @@
 // 한전 신청 안내 (/kepco/). Steps, documents and the common checklist come from web research (not the client), 2026-11-11;
-// the page layout follows wooilenc 한전서류 절차. No fees, deposits or lead times: nobody has confirmed them.
-// CHECK: the client confirms steps, documents and the checklist before launch.
+// the page layout follows wooilenc 한전서류 절차. Deposit options checked against KEPCO's published guidance (2026-11-12).
+// No fees, deposits or lead times: they change with KEPCO's rules, so the page says they are given at the consultation.
 import type { Owner } from './service-pages';
 
 export const kinds: { name: string; line: string; href: string }[] = [
   { name: '신설', line: '새로 지은 건물이나 전기가 없던 곳에서 처음으로 전기를 받습니다.', href: '/services/newbuild/' },
   { name: '증설', line: '쓰는 전기가 한전과 계약한 용량을 넘을 때 계약전력을 늘립니다.', href: '/services/capacity/' },
   { name: '승압', line: '단상으로 받던 전기를 3상으로 바꿉니다. 동력 장비를 들일 때 필요합니다.', href: '/services/capacity/' },
-  // CHECK: client confirms the 계약전력 변경 line
   { name: '계약전력 변경', line: '실제로 쓰는 전기에 맞게 한전과 계약한 용량을 조정합니다.', href: '/services/capacity/' },
   { name: '임시전력', line: '공사 기간에만 쓰는 전기입니다. 공사가 끝나면 계량기를 반납합니다.', href: '/services/newbuild/' },
 ];
