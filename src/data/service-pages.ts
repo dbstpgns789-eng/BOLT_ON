@@ -44,7 +44,7 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
       { name: '한전 고압 수전 신청', line: '신청 서류를 준비해 한전에 접수합니다. 한전은 건물 가까이까지 고압 선로 공사를 합니다.', owner: 'volton' },
       // CHECK: facility charge payer
       { name: '시설부담금 납부', line: '한전이 고압 선로 공사에 따라 부과하는 비용으로, 고객님이 한전에 납부합니다.', owner: 'customer' },
-      { name: '수변전설비 설치', line: '기초를 다지고 큐비클과 수전반·변압기·배전반을 설치해 결선합니다.', owner: 'volton' },
+      { name: '수변전설비 설치', line: '기초를 다지고 큐비클, 수전반, 변압기, 배전반을 설치해 결선합니다.', owner: 'volton' },
       { name: '사용전검사', line: '한국전기안전공사의 검사를 받습니다. 일정과 입회는 저희가 맡습니다.', owner: 'kepco' },
       { name: '수전과 사용 시작', line: '검사에 합격하면 한전이 고압 전기를 보내고, 건물에서 전기를 씁니다.', owner: 'kepco' },
     ],

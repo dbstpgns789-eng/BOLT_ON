@@ -1,5 +1,6 @@
 // Usage: replace __URL__ with a page URL, then: aside repl --file <copy>. Prints mid-word Hangul line breaks per viewport.
-// Finds lines that break between two Hangul syllables (mid-word) in visible text.
+// Finds lines that break inside a word in visible text: between two Hangul syllables, or right after a middle dot
+// joining two words (신·/증축), or with the dot starting the new line (배관/·배선). The build's word joiners are skipped.
 const pk = await openTab('about:blank');
 const out = [];
 for (const w of [1440, 1024, 768, 390]) {
@@ -20,7 +21,8 @@ for (const w of [1440, 1024, 768, 390]) {
         r.setStart(n, i); r.setEnd(n, i + 1);
         const rect = r.getClientRects()[0];
         if (!rect || rect.width === 0) continue;
-        if (prevTop !== null && rect.top > prevTop + 4 && isH(t[i]) && isH(t[i - 1])) {
+        const prev = t[i - 1] === '\u2060' ? t[i - 2] : t[i - 1];
+        if (prevTop !== null && rect.top > prevTop + 4 && ((isH(t[i]) && (isH(prev) || prev === '·')) || (t[i] === '·' && isH(prev)))) {
           res.push(t.slice(Math.max(0, i - 6), i) + '/' + t.slice(i, i + 6) + '  <' + n.parentElement.className + '>');
         }
         prevTop = rect.top;
