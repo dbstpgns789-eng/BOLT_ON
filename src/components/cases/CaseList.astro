@@ -19,7 +19,7 @@ const areas = services.filter((s) => list.some((c) => c.data.service === s.slug)
         {areas.map((a) => <button type="button" data-filter={a.slug} aria-pressed="false">{areaName[a.slug]}</button>)}
       </div>
     </div>
-    <ul class="cl cl--rich">
+    <ul class="cl">
       {list.map((c) => {
         const cover = c.data.photos.find((p) => p.stage === 'after') ?? c.data.photos[0];
         return (
