@@ -1,8 +1,4 @@
-/* Shared basics: Korean line breaks, headings, buttons, section heads, "more" links, the info table, skip link, reveal motion. */
-/* Korean: never break inside a word, anywhere on the page (client complaint: 인테/리어, 승/압). Every element inherits this. */
-body { word-break: keep-all; overflow-wrap: break-word; }
-h3 { font-weight: 600; }
-
+/* Shared basics: buttons, section heads, "more" links, the info table, skip link, reveal motion. */
 .btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 var(--space-xl); font-weight: 600; text-decoration: none; border: var(--rule-hair) solid transparent; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
 .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
 .btn--primary:hover { background: color-mix(in oklab, var(--color-accent) 88%, var(--color-ink)); }

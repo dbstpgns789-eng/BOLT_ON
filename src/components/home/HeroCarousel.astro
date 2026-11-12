@@ -8,7 +8,7 @@ interface Slide { img: ImageMetadata; alt: string; head: string; line: string; p
 interface Props { slides: Slide[] }
 const { slides } = Astro.props;
 ---
-<section class="hero hero--short" aria-roledescription="carousel" aria-label="볼트온이엔씨 소개">
+<section class="hero" aria-roledescription="carousel" aria-label="볼트온이엔씨 소개">
   <div class="slides">
     {slides.map((s, i) => (
       <div class={`slide${i === 0 ? ' is-active' : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} / ${slides.length}`} aria-hidden={i === 0 ? 'false' : 'true'} inert={i !== 0}>

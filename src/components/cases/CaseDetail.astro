@@ -33,7 +33,7 @@ const facts: [string, string | undefined][] = [
     <div class="cd-side">
       {d.summary && <p class="cd-summary">{d.summary}</p>}
       {d.problem && <div class="cd-problem"><h2 class="cd-sub">공사 전 상황</h2><p>{d.problem}</p></div>}
-      <table class="info cd-facts"><tbody>{facts.filter(([, v]) => v).map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table>
+      <table class="info"><tbody>{facts.filter(([, v]) => v).map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody></table>
       <h2 class="cd-sub">주요 작업</h2>
       <ol class="cd-work">{d.tags.map((t) => <li>{t}</li>)}</ol>
     </div>

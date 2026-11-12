@@ -11,7 +11,7 @@ const facts = companyRows().filter(([k]) => !['전화', '이메일', '상담 시
 <footer class="footer">
   <div class="container">
     <div class="footer-row">
-      <div class="f-col f-col--facts">
+      <div class="f-col">
         <Logo onDark class="footer-logo" />
         {facts.map(([k, v]) => <p class="f-line"><span class="f-k">{k}</span>{v}</p>)}
       </div>

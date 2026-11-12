@@ -32,7 +32,7 @@ const ways = [
 
     <section class="section about-hero" aria-labelledby="about-title">
       <div class="container about-hero-row">
-        <div class="about-hero-text">
+        <div>
           <h2 id="about-title">전기 증설과 수변전설비를 전문으로 하는 전기공사 업체</h2>
           <p class="svc-lead">볼트온이엔씨는 전기 증설과 승압, 수변전설비, 리모델링, 신·증축 전기공사를 전문으로 합니다.</p>
         </div>
@@ -48,7 +48,7 @@ const ways = [
     <section class="section section--tint" aria-labelledby="ways-title">
       <div class="container">
         <div class="head"><h2 id="ways-title">일하는 방식</h2></div>
-        <ol class="ways ways--photo">
+        <ol class="ways">
           {ways.map((w) => (
             <li>
               <Image class="ways-img" src={w.img} alt={w.alt} widths={[400, 600]} sizes="(max-width: 60rem) 100vw, 380px" />

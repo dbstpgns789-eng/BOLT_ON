@@ -7,7 +7,7 @@ interface Props { page: ServicePage }
 const { page } = Astro.props;
 const hasCustomerStep = page.process.some((s) => s.owner === 'customer');
 ---
-<section class="section svc-process svc-process--lanes" aria-labelledby="process-title">
+<section class="section svc-process" aria-labelledby="process-title">
   <div class="container">
     <div class="head">
       <h2 id="process-title">진행 순서</h2>

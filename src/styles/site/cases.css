@@ -32,8 +32,7 @@
 .cd-side { display: grid; gap: var(--space-lg); }
 .cd-summary { font-size: var(--text-lead); line-height: 1.6; }
 .cd-sub { font-size: var(--text-xl); }
-.cd-work { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-xs); }
-.cd-work { counter-reset: w; }
+.cd-work { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-xs); counter-reset: w; }
 .cd-work li { counter-increment: w; display: grid; grid-template-columns: var(--space-xl) minmax(0, 1fr); padding: var(--space-sm) var(--space-md); background: var(--color-paper-2); }
 .cd-work li::before { content: counter(w, decimal-leading-zero); font-weight: 800; color: var(--color-muted); font-variant-numeric: tabular-nums; }
 .cd-photos { display: grid; gap: var(--space-xl); padding-bottom: var(--space-2xl); }

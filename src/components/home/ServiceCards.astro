@@ -10,14 +10,14 @@ import gimhaeFacade from '../../assets/cases/gimhae-museum/01-facade.jpg';
 
 const img = { substation, capacity: panel, transformer: insulators, wiring: studs, newbuild: gimhaeFacade } as const;
 ---
-<section class="section services services--fade" id="services" aria-labelledby="services-title" data-reveal>
+<section class="section services" id="services" aria-labelledby="services-title" data-reveal>
   <div class="container">
     <div class="head">
       <h2 id="services-title">사업분야</h2>
     </div>
     <ul class="cards">
       {services.map((s) => (
-        <li class="card card--grey">
+        <li class="card">
           <a class="card-link" href={`/services/${s.slug}/`}>
             <span class="card-text">
               <span class="card-title">{s.name}</span>
