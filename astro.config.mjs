@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import { readFile, writeFile, glob } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -34,5 +35,5 @@ const keepMiddotWords = {
 
 export default defineConfig({
   site: 'https://voltonenc.com',
-  integrations: [keepMiddotWords],
+  integrations: [sitemap(), keepMiddotWords],
 });

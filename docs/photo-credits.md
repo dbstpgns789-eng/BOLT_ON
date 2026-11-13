@@ -26,3 +26,5 @@
 2026-11-11 추가분도 같은 방식으로 라이선스를 확인했다. 후보로 받았지만 쓰지 않은 것: _2AlIm-F6pw(교체), X1P1_EDNnok, pb2rODOfXz8, 1deQbU6DhBg, q6n8nIrDQHE, QPRAhc5AqXg, N_nAAwnBDy8, sF4IFKDa3Tg, 1NkGDSpQJok(흑백), u719UbWj0us(어두움), U3GiK1u5j24.
 
 2026-11-13 추가분(태양광·전기차 4장)도 각 사진 페이지에서 "Unsplash 라이선스하에서 무료로 사용 가능" 표기를 확인했다. 원본은 `_client/4차/stock/`.
+
+`public/og-image.jpg`(공유 미리보기)는 substation-transformer.jpg를 1200×630으로 자른 것이다.
