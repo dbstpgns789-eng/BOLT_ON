@@ -7,7 +7,6 @@ service: capacity
 completed: 2026-09
 duration: 2주
 tags: [계약전력 증설, 분전반 교체, 한전 신청]
-featured: 1
 summary: 유치원의 계약전력을 늘리고 분전반을 새것으로 바꿨습니다. 한전 증설 신청부터 공사까지 2주 동안 진행했습니다.
 photos:
   - { src: ../../assets/cases/dongdaemun-kindergarten/01-before.jpg, stage: before, caption: 공사 전 분전반 }

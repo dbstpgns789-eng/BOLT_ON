@@ -10,14 +10,13 @@ const cases = defineCollection({
       site: z.string(), // shown name: 실명 for public sites, 익명 for private (ADR 0003)
       region: z.string(),
       building: z.string(),
-      service: z.enum(['substation', 'capacity', 'transformer', 'wiring', 'newbuild']),
+      service: z.enum(['substation', 'capacity', 'transformer', 'wiring', 'newbuild', 'solar', 'ev']),
       capacity: z.string().optional(),
       completed: z.string(), // YYYY-MM
       duration: z.string().optional(),
       tags: z.array(z.string()).default([]),
       summary: z.string().optional(), // short factual summary; client to confirm
       problem: z.string().optional(), // 공사 전 상황, from the client only (never invented)
-      featured: z.number().optional(), // order on the home page
       photos: z.array(
         z.object({ src: image(), stage: z.enum(['before', 'during', 'after']), caption: z.string() }),
       ),

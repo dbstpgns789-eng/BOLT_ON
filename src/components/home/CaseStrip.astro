@@ -1,11 +1,11 @@
 ---
-// Every case as a compact image card, right under the hero (after gesung).
+// Every case as a compact image card, newest first, right under the hero (after gesung).
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { services } from '../../data/services';
 import { ym } from '../../lib/format';
 
-const list = (await getCollection('cases')).sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
+const list = (await getCollection('cases')).sort((a, b) => b.data.completed.localeCompare(a.data.completed));
 const serviceName = Object.fromEntries(services.map((s) => [s.slug, s.name]));
 ---
 <section class="section case-strip" id="cases" aria-labelledby="cases-title" data-reveal>

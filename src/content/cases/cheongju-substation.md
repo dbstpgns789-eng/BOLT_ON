@@ -7,7 +7,6 @@ service: substation
 completed: 2026-02
 duration: 4~5개월
 tags: [고압 수변전설비, 저압 설비, 변전실 설치]
-featured: 2
 summary: 식품공장에 고압·저압 수변전설비를 갖춘 변전실을 새로 놓았습니다. 기초 공사부터 설비 설치와 결선까지 맡았습니다.
 photos:
   - { src: ../../assets/cases/cheongju-substation/01-substation.jpg, stage: after, caption: 설치를 마친 옥외 변전설비 }

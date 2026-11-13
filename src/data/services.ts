@@ -25,6 +25,16 @@ export const services = [
     name: '신·증축 전기공사',
     tasks: ['인입·간선 공사', '동력·전등 설비', '준공 서류'],
   },
+  {
+    slug: 'solar',
+    name: '태양광 설치 공사',
+    tasks: ['지붕 태양광 설치', '인버터·배선 결선', '한전 연계 신청'],
+  },
+  {
+    slug: 'ev',
+    name: '전기차 충전소 설치 공사',
+    tasks: ['완속·급속 충전기 설치', '충전용 전기 증설', '한전 전기 신청'],
+  },
 ] as const;
 
 export type ServiceSlug = (typeof services)[number]['slug'];

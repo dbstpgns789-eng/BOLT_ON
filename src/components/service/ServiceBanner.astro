@@ -1,5 +1,5 @@
 ---
-// Page banner with the five area tabs (wooilenc and sinrok sub-page pattern).
+// Page banner with the area tabs (wooilenc and sinrok sub-page pattern).
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { services, type ServiceSlug } from '../../data/services';
@@ -25,7 +25,7 @@ const current = services.find((s) => s.slug === slug)!;
   </div>
 </nav>
 <script>
-  // On narrow screens the five tabs scroll sideways; bring the current one into view so it is never hidden off-screen.
+  // On narrow screens the tabs scroll sideways; bring the current one into view so it is never hidden off-screen.
   const ul = document.querySelector<HTMLElement>('.svc-tabs ul');
   const cur = ul?.querySelector<HTMLElement>('[aria-current="page"]');
   if (ul && cur && ul.scrollWidth > ul.clientWidth) ul.scrollLeft += cur.getBoundingClientRect().left - ul.getBoundingClientRect().left - (ul.clientWidth - cur.offsetWidth) / 2;

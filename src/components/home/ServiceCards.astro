@@ -1,5 +1,5 @@
 ---
-// Home business areas: five grey cards with the photo fading in from the right, then a navy 한전 신청 card.
+// Home business areas: seven grey cards with the photo fading in from the right, then a navy 한전 신청 card.
 import { Image } from 'astro:assets';
 import { services } from '../../data/services';
 import substation from '../../assets/stock/substation-transformer.jpg';
@@ -7,8 +7,10 @@ import insulators from '../../assets/stock/transformer-insulators.jpg';
 import panel from '../../assets/stock/distribution-panel.jpg';
 import studs from '../../assets/stock/remodeling-studs.jpg';
 import gimhaeFacade from '../../assets/cases/gimhae-museum/01-facade.jpg';
+import solar from '../../assets/stock/solar-install-work.jpg';
+import ev from '../../assets/stock/ev-garage-charger.jpg';
 
-const img = { substation, capacity: panel, transformer: insulators, wiring: studs, newbuild: gimhaeFacade } as const;
+const img = { substation, capacity: panel, transformer: insulators, wiring: studs, newbuild: gimhaeFacade, solar, ev } as const;
 ---
 <section class="section services" id="services" aria-labelledby="services-title" data-reveal>
   <div class="container">

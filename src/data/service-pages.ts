@@ -11,7 +11,7 @@ export interface ServicePage {
   term?: { word: string; meaning: string };
   needs: string[];
   scope: string[];
-  tasks?: { name: string; line: string; icon: 'up' | 'phase' | 'plus' | 'split' | 'divide' | 'clock' | 'box' | 'panel' | 'cable' | 'swap' | 'check' | 'light' | 'plug' | 'bolt' | 'doc' }[];
+  tasks?: { name: string; line: string; icon: 'up' | 'phase' | 'plus' | 'split' | 'divide' | 'clock' | 'box' | 'panel' | 'cable' | 'swap' | 'check' | 'light' | 'plug' | 'bolt' | 'doc' | 'sun' | 'car' }[];
   process: { name: string; line: string; owner: Owner }[];
   faq: { q: string; a: string }[];
 }
@@ -153,6 +153,75 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     faq: [],
   },
 
+  // Added 2026-11-13 at the client's request (수정사항.docx); no Volt On case yet, photos come later.
+  // Sources: 신재생에너지 클라우드 행정절차 (recloud.energy.or.kr), KEPCO distributed-generation interconnection steps.
+  solar: {
+    lead: '공장, 창고, 상가 지붕에 태양광 발전설비를 놓습니다. 지붕과 쓰는 전기를 보고 설치 용량을 정하고, 한전 연계 신청부터 사용전검사까지 함께 진행합니다.',
+    term: { word: '계통연계', meaning: '태양광에서 만든 전기를 한전 선로와 이어 함께 쓰는 것입니다. 연결하기 전에 한전에 신청해 기술검토를 받습니다.' },
+    needs: [
+      '공장이나 창고 지붕을 활용해 전기요금을 줄이고 싶습니다',
+      '태양광으로 만든 전기를 팔고 싶습니다',
+      '건물에 태양광 설비를 새로 놓아야 합니다',
+      '설치한 태양광의 인버터나 배선을 손봐야 합니다',
+    ],
+    scope: [
+      '설치 위치와 용량 검토',
+      '한전 계통연계 신청 서류 준비',
+      '구조물과 모듈 설치',
+      '인버터·접속반 설치와 결선',
+      '사용전검사 입회',
+      '공사 후 A/S',
+    ],
+    tasks: [
+      { name: '지붕 태양광', line: '공장·창고·상가 지붕에 모듈을 놓을 때', icon: 'sun' },
+      { name: '인버터·결선', line: '만든 전기를 건물 전기와 한전 선로에 이을 때', icon: 'cable' },
+      { name: '연계 신청', line: '한전 선로에 연결하는 신청 서류가 필요할 때', icon: 'doc' },
+    ],
+    process: [
+      { name: '상담과 현장 확인', line: '지붕의 면적과 상태, 지금 쓰는 전기를 보고 설치 용량을 정합니다.', owner: 'volton' },
+      { name: '한전 연계 신청', line: '한전 선로에 연결할 수 있는지 기술검토를 받습니다. 전기를 파는 발전사업은 지자체의 발전사업허가가 먼저 필요합니다.', owner: 'volton' },
+      { name: '설치 일정 정하기', line: '영업이나 생산에 지장이 적은 날을 고객님과 함께 정합니다.', owner: 'customer' },
+      { name: '태양광 설비 설치', line: '구조물을 고정하고 모듈을 올린 뒤, 인버터와 접속반을 설치해 결선합니다.', owner: 'volton' },
+      { name: '사용전검사', line: '한국전기안전공사의 검사를 받습니다. 일정과 입회는 저희가 맡습니다.', owner: 'kepco' },
+      { name: '계량기 설치와 발전 시작', line: '검사를 마치면 한전이 계량기를 달고, 그때부터 만든 전기를 쓰거나 팝니다.', owner: 'kepco' },
+    ],
+    faq: [],
+  },
+  // Added 2026-11-13 (수정사항.docx). Whether a low-voltage charger gets a 사용전검사 or a 사용전점검 was not settled
+  // from sources, so the copy says 검사·점검.
+  ev: {
+    lead: '상가, 공장, 사무실 주차장에 전기차 충전기를 놓습니다. 남은 전기 용량을 먼저 확인하고, 모자라면 증설까지 함께 계획합니다.',
+    term: { word: '완속·급속 충전기', meaning: '완속 충전기는 몇 시간에 걸쳐 충전하고, 급속 충전기는 짧은 시간에 충전하는 대신 훨씬 큰 전기 용량이 필요합니다.' },
+    needs: [
+      '주차장에 전기차 충전기를 놓아야 합니다',
+      '손님이나 직원이 쓸 충전기를 들이려 합니다',
+      '충전기를 달기에 전기 용량이 모자랍니다',
+      '급속 충전기 설치를 알아보고 있습니다',
+    ],
+    scope: [
+      '충전기 대수와 설치 위치 검토',
+      '남은 전기 용량 확인과 필요한 증설',
+      '한전 전기 사용 신청',
+      '배관·배선과 충전기 설치',
+      '검사·점검 입회',
+      '공사 후 A/S',
+    ],
+    tasks: [
+      { name: '완속 충전기', line: '주차면마다 여러 대를 놓을 때', icon: 'car' },
+      { name: '급속 충전기', line: '짧은 시간에 충전해야 하는 곳에 놓을 때', icon: 'bolt' },
+      { name: '충전용 전기 증설', line: '충전기를 달 전기 용량이 모자랄 때', icon: 'up' },
+    ],
+    process: [
+      { name: '상담과 현장 확인', line: '충전기 종류와 대수, 주차면 위치를 듣고 지금 받는 전기 용량을 확인합니다.', owner: 'volton' },
+      { name: '위치와 일정 정하기', line: '충전기를 놓을 주차면과 공사 날짜를 고객님과 함께 정합니다. 용량이 모자라면 증설도 함께 계획합니다.', owner: 'customer' },
+      { name: '한전 전기 신청', line: '충전기에 쓸 전기를 한전에 신청합니다. 고객님께는 필요한 서류만 요청드립니다.', owner: 'volton' },
+      { name: '배선과 충전기 설치', line: '분전반에서 주차면까지 배관·배선을 하고, 충전기를 고정해 결선합니다.', owner: 'volton' },
+      { name: '검사·점검', line: '한국전기안전공사의 검사나 점검을 받습니다. 일정과 입회는 저희가 맡습니다.', owner: 'kepco' },
+      { name: '계량기 설치와 충전 시작', line: '한전이 계량기를 달면 충전기를 쓸 수 있습니다.', owner: 'kepco' },
+    ],
+    faq: [],
+  },
+
   capacity: {
     lead: '쓰는 전기가 계약전력을 넘으면 차단기가 자주 떨어지고 설비에 무리가 갑니다. 필요한 용량을 계산해 계약전력을 늘리고, 그에 맞게 설비를 바꿉니다.',
     term: { word: '계약전력', meaning: '한전과 계약한, 한 번에 쓸 수 있는 최대 전력(kW)입니다. 이보다 많이 쓰면 차단기가 떨어집니다.' },
@@ -166,6 +235,7 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
       '현장 점검과 필요 용량 계산',
       '한전 증설 신청 서류 준비와 접수',
       '분전반·차단기·인입 배선 교체',
+      '증설 관로 공사와 케이블 포설',
       '단상에서 3상으로 승압 공사',
       '사용전 점검 입회',
       '공사 후 A/S',
@@ -177,6 +247,7 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
       { name: '모자분리', line: '고압 건물에서 세대별 한전 계량기를 따로 달 때', icon: 'split' },
       { name: '구좌분할', line: '한 계량기의 계약전력을 여러 계량기로 나눌 때', icon: 'divide' },
       { name: '임시전력', line: '공사 현장처럼 잠깐 동안만 전기가 필요할 때', icon: 'clock' },
+      { name: '증설 관로·케이블 포설', line: '늘린 용량에 맞춰 관로를 묻고 케이블을 새로 깔 때', icon: 'cable' },
     ],
     process: [
       { name: '상담과 현장 확인', line: '지금 쓰는 전기와 늘릴 장비를 보고 필요한 용량을 계산합니다.', owner: 'volton' },

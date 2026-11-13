@@ -81,7 +81,7 @@ const ways = [
     <section class="section svc-others" aria-labelledby="areas-title">
       <div class="container">
         <div class="head"><h2 id="areas-title">사업분야</h2></div>
-        <ul class="others others--5">
+        <ul class="others others--all">
           {services.map((s) => <li><a href={`/services/${s.slug}/`}><span class="others-name">{s.name}</span><span class="others-line">{s.tasks.slice(0, 2).join(', ')}</span></a></li>)}
         </ul>
       </div>
