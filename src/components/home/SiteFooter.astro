@@ -20,6 +20,7 @@ const facts = companyRows().filter(([k]) => !['전화', '이메일', '상담 시
         <a class="f-phone" href={telHref}>{company.phone}</a>
         <p class="f-line">{company.hours}</p>
         <p class="f-line"><a href={`mailto:${company.email}`}>{company.email}</a></p>
+        {company.kakaoChannelUrl && <p class="f-line"><a class="f-kakao" href={company.kakaoChannelUrl}>카카오톡 채널 상담</a></p>}
       </div>
       <nav class="f-col f-links" aria-label="바닥글 메뉴">{menu.map((m) => <a href={m.href}>{m.label}</a>)}</nav>
     </div>

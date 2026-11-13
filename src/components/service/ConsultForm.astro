@@ -15,6 +15,7 @@ const area = slug ? services.find((s) => s.slug === slug)!.name : '';
       <h2 id="consult-title">상담 전화 예약</h2>
       <p>번호와 편한 시간을 남겨 주시면, 그 시간에 맞춰 저희가 먼저 전화드립니다.</p>
       <p class="consult-hours">{company.hours}</p>
+      {company.kakaoChannelUrl && <a class="btn btn--line consult-kakao" href={company.kakaoChannelUrl}>카카오톡 채널 상담</a>}
     </div>
     <form class="consult-form" method="post" action="https://api.web3forms.com/submit" data-key={company.formAccessKey}>
       <input type="hidden" name="access_key" value={company.formAccessKey} />
